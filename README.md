@@ -3,3 +3,4 @@ Trabajo Practico de la asignatura "Programación C" sobre el desarrollo de un so
 
 # Autores
 - Paniagua, Lucas
+- Zuviría, Nicolás
