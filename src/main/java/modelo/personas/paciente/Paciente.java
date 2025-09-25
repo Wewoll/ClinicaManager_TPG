@@ -4,6 +4,7 @@ import modelo.personas.Persona;
 
 public abstract class Paciente extends Persona {
     private final String nroHistoriaMedica;
+    private int diasInternado; //TODO inicializar
 
     public Paciente(String nombre, String apellido, String dni, util.Domicilio domicilio,String telefono, String nroHistoriaMedica) {
         super(nombre, apellido, dni, domicilio, telefono);
@@ -11,6 +12,10 @@ public abstract class Paciente extends Persona {
     }
     public String getNroHistoriaMedica() {
         return nroHistoriaMedica;
+    }
+
+    public int getDiasInternado() {
+        return diasInternado;
     }
 
     @Override
