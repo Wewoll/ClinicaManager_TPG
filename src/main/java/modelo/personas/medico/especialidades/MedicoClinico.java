@@ -1,8 +1,9 @@
-package modelo.personas.medico;
+package modelo.personas.medico.especialidades;
 
+import modelo.personas.medico.Medico;
 import util.Domicilio;
 
-public class MedicoClinico extends Medico{
+public class MedicoClinico extends Medico {
     // atributos para el calculo de honorarios
 
     public MedicoClinico(String nombre, String apellido, String dni , Domicilio domicilio,String telefono, String nroMatricula){
