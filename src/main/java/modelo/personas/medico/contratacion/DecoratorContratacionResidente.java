@@ -1,20 +1,15 @@
 package modelo.personas.medico.contratacion;
 
 import modelo.personas.medico.Medico;
+import modelo.personas.medico.postgrado.DecoratorPostgrado;
 
 public class DecoratorContratacionResidente extends DecoratorContratacion {
-
-    public DecoratorContratacionResidente(Medico medico) {
+    private static final double INCREMENTO = 1.05;
+    public DecoratorContratacionResidente(DecoratorPostgrado medico) {
         super(medico);
     }
-
-//    @Override
-//    public double calcularSueldo() {
-//        return Medico.getSueldoBase() * 0.8; // Sueldo base reducido en un 20% para medicos residentes
-//    }
-//
-//    @Override
-//    public String getTipoContratacion() {
-//        return "Residente";
-//    }
+    @Override
+    public double getSueldo() {
+        return this.encapsulado.getSueldo() * INCREMENTO;
+    }
 }

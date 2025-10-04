@@ -4,10 +4,16 @@ import modelo.personas.medico.Medico;
 import util.Domicilio;
 
 public class MedicoCirugia extends Medico {
-    // atributos para el calculo de honorarios
+    private static final double INCREMENTO = 1.1;
 
     public MedicoCirugia(String nombre, String apellido, String dni , Domicilio domicilio,String telefono, String nroMatricula){
         super(nombre, apellido, dni, domicilio, telefono, nroMatricula);
+    }
+
+
+    @Override
+    public double getSueldo(){
+        return Medico.getSueldoBase() *  INCREMENTO;
     }
 
     @Override
