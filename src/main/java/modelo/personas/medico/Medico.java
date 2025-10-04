@@ -1,6 +1,7 @@
 package modelo.personas.medico;
 
 import modelo.personas.Persona;
+import modelo.personas.paciente.Paciente;
 import util.Domicilio;
 
 public abstract class Medico extends Persona implements IMedico{
