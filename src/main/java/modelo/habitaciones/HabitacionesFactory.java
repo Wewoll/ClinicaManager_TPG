@@ -2,7 +2,8 @@ package modelo.habitaciones;
 
 public class HabitacionesFactory {
 
-    public static Habitacion crearHabitacion(String tipo) {
+    public static Habitacion crearHabitacion(String tipo) throws TipoDesconocidoException
+    {
         switch (tipo.toLowerCase()) {
             case "privada":
                 return new HabitacionPrivada();
@@ -11,7 +12,7 @@ public class HabitacionesFactory {
             case "terapia intensiva":
                 return new HabitacionTerapiaIntensiva();
             default:
-                throw new IllegalArgumentException("Tipo de habitacion desconocido: " + tipo);
+                throw new TipoDesconocidoException("Tipo de habitacion desconocido: " + tipo);
         }
     }
 }
