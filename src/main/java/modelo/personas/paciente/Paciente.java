@@ -18,6 +18,11 @@ public abstract class Paciente extends Persona {
         return diasInternado;
     }
 
+    public abstract boolean prioridad(Paciente paciente);
+    public abstract boolean prioridadConJoven();
+    public abstract boolean prioridadConMayor();
+    public abstract boolean prioridadConNino();
+
     @Override
     public String toString() {
         return "Paciente{" +
