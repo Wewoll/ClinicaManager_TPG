@@ -37,10 +37,13 @@ public class Clinica implements Cloneable{
 
     public void atenderPaciente(Medico medico,Paciente paciente)
     {
-        boolean analisis;
-        this.salaDeEspera.sacarPaciente(paciente);
-        listaAtencion.add(paciente);
-        this.registro.agregarRegistro(medico, paciente);
-        paciente.setInternado(analisis);
+        boolean analisis = false, derivado = false;
+        do {
+            this.salaDeEspera.sacarPaciente(paciente);
+            listaAtencion.add(paciente);
+            this.registro.agregarRegistro(medico, paciente);
+            paciente.setInternado(analisis);
+            if ()
+        }while (derivado = true)
     }
 }
