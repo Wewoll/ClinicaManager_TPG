@@ -30,4 +30,9 @@ public class HabitacionPrivada extends Habitacion{
                 arancel = COSTO * cantdias * 2;
         return arancel;
     }
+
+    @Override
+    public String toString() {
+        return "Privada";
+    }
 }

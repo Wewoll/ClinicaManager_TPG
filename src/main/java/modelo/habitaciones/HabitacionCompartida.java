@@ -48,4 +48,9 @@ public class HabitacionCompartida extends Habitacion{
         cantact--;
         this.setCantPacientes(cantact);
     }
+
+    @Override
+    public String toString() {
+        return "Compartida";
+    }
 }

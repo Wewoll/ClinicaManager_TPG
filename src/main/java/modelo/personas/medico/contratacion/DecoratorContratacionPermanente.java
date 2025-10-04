@@ -1,11 +1,10 @@
 package modelo.personas.medico.contratacion;
 
-import modelo.personas.medico.Medico;
-import modelo.personas.medico.postgrado.DecoratorPostgrado;
+import modelo.personas.medico.posgrado.DecoratorPosgrado;
 
 public class DecoratorContratacionPermanente extends DecoratorContratacion {
     private final static double INCREMENTO = 1.1;
-    public DecoratorContratacionPermanente(DecoratorPostgrado medico) {
+    public DecoratorContratacionPermanente(DecoratorPosgrado medico) {
         super(medico);
     }
 

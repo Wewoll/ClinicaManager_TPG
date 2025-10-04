@@ -1,12 +1,12 @@
 package modelo.personas.medico.contratacion;
 
 import modelo.personas.medico.IMedico;
-import modelo.personas.medico.postgrado.DecoratorPostgrado;
+import modelo.personas.medico.posgrado.DecoratorPosgrado;
 
 public abstract class DecoratorContratacion implements IMedico {
-    protected DecoratorPostgrado encapsulado;
+    protected DecoratorPosgrado encapsulado;
 
-    public DecoratorContratacion(DecoratorPostgrado medico) {
+    public DecoratorContratacion(DecoratorPosgrado medico) {
         this.encapsulado = medico;
     }
 }
