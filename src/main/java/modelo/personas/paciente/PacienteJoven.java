@@ -7,7 +7,7 @@ public class PacienteJoven extends Paciente{
     }
     @Override
     public boolean prioridad(Paciente paciente){
-        return paciente.prioridad(this);
+        return paciente.prioridadConJoven();
     }
     @Override
     public boolean prioridadConJoven(){
