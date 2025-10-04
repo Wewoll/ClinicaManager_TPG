@@ -1,11 +1,11 @@
-package modelo.personas.medico.postgrado;
+package modelo.personas.medico.posgrado;
 
 import modelo.personas.medico.Medico;
 
-public class DecoratorPostgradoMagister extends DecoratorPostgrado {
+public class DecoratorPosgradoMagister extends DecoratorPosgrado {
     private static final double INCREMENTO = 1.05;
 
-    public DecoratorPostgradoMagister(Medico medico) {
+    public DecoratorPosgradoMagister(Medico medico) {
         super(medico);
     }
     @Override

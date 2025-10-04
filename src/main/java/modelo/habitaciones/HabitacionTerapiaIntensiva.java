@@ -28,4 +28,9 @@ public class HabitacionTerapiaIntensiva extends Habitacion{
         double arancel = Math.pow(COSTO,cantdias);
         return arancel;
     }
+
+    @Override
+    public String toString() {
+        return "Terapia Intensiva";
+    }
 }
