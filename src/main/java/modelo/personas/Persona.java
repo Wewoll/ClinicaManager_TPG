@@ -48,4 +48,12 @@ public abstract class Persona {
     public void setDomicilio(Domicilio domicilio) {
         this.domicilio = domicilio;
     }
+
+    public String getTelefono() {
+        return telefono;
+    }
+
+    public void setTelefono(String telefono) {
+        this.telefono = telefono;
+    }
 }
