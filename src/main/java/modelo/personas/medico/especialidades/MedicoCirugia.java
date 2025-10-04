@@ -14,8 +14,4 @@ public class MedicoCirugia extends Medico {
     public String toString() {
         return super.toString()+"Especialidad: Medico cirugia";
     }
-
-    public double getSueldo() {
-        return getSueldoBase() * 1.1;
-    }
 }
