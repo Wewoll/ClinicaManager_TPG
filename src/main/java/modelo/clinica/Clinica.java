@@ -34,4 +34,13 @@ public class Clinica implements Cloneable{
     public Object clone() throws CloneNotSupportedException {
         throw new CloneNotSupportedException();
     }
+
+    public void atenderPaciente(Medico medico,Paciente paciente)
+    {
+        boolean analisis;
+        this.salaDeEspera.sacarPaciente(paciente);
+        listaAtencion.add(paciente);
+        this.registro.agregarRegistro(medico, paciente);
+        paciente.setInternado(analisis);
+    }
 }
