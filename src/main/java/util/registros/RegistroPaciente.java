@@ -1,19 +1,20 @@
 package util.registros;
 
+import modelo.personas.medico.IMedico;
 import modelo.personas.medico.Medico;
 
 import java.time.LocalDate;
 
 public class RegistroPaciente {
-    private Medico medico;
+    private IMedico medico;
     private LocalDate fecha;
 
-    public RegistroPaciente(Medico medico, LocalDate fecha) {
+    public RegistroPaciente(IMedico medico, LocalDate fecha) {
         this.medico = medico;
         this.fecha = fecha;
     }
 
-    public Medico getMedico() {
+    public IMedico getMedico() {
         return medico;
     }
 

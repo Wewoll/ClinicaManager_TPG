@@ -1,5 +1,6 @@
 package util.registros;
 
+import modelo.personas.medico.IMedico;
 import modelo.personas.medico.Medico;
 import modelo.personas.paciente.Paciente;
 
@@ -15,7 +16,7 @@ public class ConsultasMedicas {
         medicos = new HashMap<>();
         pacientes = new HashMap<>();
     }
-    public void agregarRegistro(Medico m, Paciente p, LocalDate fecha){
+    public void agregarRegistro(IMedico m, Paciente p, LocalDate fecha){
         RegistroMedico rMedico = new RegistroMedico(p,fecha);
         RegistroPaciente rPaciente = new RegistroPaciente(m,fecha);
 
@@ -26,5 +27,13 @@ public class ConsultasMedicas {
         ArrayList<RegistroPaciente> listaPaciente = this.pacientes.get(p.getNroHistoriaMedica());
         listaPaciente.add(rPaciente);
         this.pacientes.put(p.getNroHistoriaMedica(), listaPaciente);
+    }
+    public ArrayList<RegistroPaciente> obtenerRegistrosPorPaciente(Paciente p){
+        return this.pacientes.get(p.getNroHistoriaMedica());
+    }
+
+    public ArrayList<RegistroMedico> obtenerRegistrosPorMedico(IMedico m)
+    {
+        return this.medicos.get(m.getNroMatricula());
     }
 }

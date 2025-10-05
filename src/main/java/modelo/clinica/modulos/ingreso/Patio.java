@@ -1,4 +1,4 @@
-package modelo.clinica.salas;
+package modelo.clinica.modulos.ingreso;
 
 import modelo.personas.paciente.Paciente;
 

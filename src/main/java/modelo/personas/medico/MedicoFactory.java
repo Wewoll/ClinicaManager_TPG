@@ -6,7 +6,7 @@ import modelo.personas.medico.posgrado.*;
 
 public class MedicoFactory{
 
-    public DecoratorContratacion crearMedico(String dni, String nroMatricula, String nombre, String apellido, Domicilio domicilio, String ciudad, String telefono, String especialidad, String contratacion, String titulo) throws EspecialidadNoExistenteException, ContratacionNoExistenteException, TituloNoExistenteException {
+    public DecoratorContratacion crearMedico(String dni, String nroMatricula, String nombre, String apellido, Domicilio domicilio, String telefono, String especialidad, String contratacion, String titulo) throws EspecialidadNoExistenteException, ContratacionNoExistenteException, TituloNoExistenteException {
         Medico medico = null;
         if(especialidad.equalsIgnoreCase("clinica")){
             medico = new MedicoClinico(nombre, apellido, dni, domicilio, telefono, nroMatricula);
@@ -30,7 +30,7 @@ public class MedicoFactory{
             }
             else
                 throw new TituloNoExistenteException("El tipo de postgrado ingresado no existe");
-        
+
         DecoratorContratacion decorator = null;
         if(contratacion.equalsIgnoreCase("permanente")){
             decorator = new DecoratorContratacionPermanente(decoratorPosgrado);

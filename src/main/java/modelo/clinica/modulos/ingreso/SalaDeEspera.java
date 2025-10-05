@@ -1,8 +1,6 @@
-package modelo.clinica.salas;
+package modelo.clinica.modulos.ingreso;
 
 import modelo.personas.paciente.Paciente;
-
-import java.util.ArrayList;
 
 public class SalaDeEspera {
     Patio patio;
