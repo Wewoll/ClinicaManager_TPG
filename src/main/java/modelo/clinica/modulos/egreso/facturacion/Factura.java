@@ -2,7 +2,6 @@ package modelo.clinica.modulos.egreso.facturacion;
 
 import java.util.ArrayList;
 
-import modelo.habitaciones.Habitacion;
 import modelo.personas.paciente.*;
 import util.registros.*;
 

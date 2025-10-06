@@ -1,4 +1,4 @@
-package modelo.clinica.modulos.ingreso;
+package util.Excepciones;
 
 import modelo.personas.paciente.Paciente;
 
