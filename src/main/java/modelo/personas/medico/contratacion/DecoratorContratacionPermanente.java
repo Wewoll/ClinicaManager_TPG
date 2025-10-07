@@ -8,6 +8,8 @@ public class DecoratorContratacionPermanente extends DecoratorContratacion {
         super(medico);
     }
 
+
+
     @Override
     public double getSueldo(){
         return this.encapsulado.getSueldo() *  INCREMENTO;

@@ -9,4 +9,18 @@ public abstract class DecoratorPosgrado implements IMedico {
     public DecoratorPosgrado(Medico medico) {
         this.encapsulado = medico;
     }
+
+    @Override
+    public String getNroMatricula() {
+        return this.encapsulado.getNroMatricula();
+    }
+    @Override
+    public String getNombre() {
+        return this.encapsulado.getNombre();
+    }
+    @Override
+    public String getApellido() {
+        return this.encapsulado.getApellido();
+    }
+
 }
