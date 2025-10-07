@@ -5,7 +5,6 @@ public interface IMedico {
     String getNroMatricula();
     String getNombre();
     String getApellido();
-    boolean internarPaciente();
     static double getSueldoBase() {
         return Medico.sueldoBase;
     }

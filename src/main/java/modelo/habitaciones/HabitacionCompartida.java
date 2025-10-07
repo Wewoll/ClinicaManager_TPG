@@ -1,7 +1,9 @@
 package modelo.habitaciones;
 
 import modelo.personas.paciente.Paciente;
-    /**
+import util.Excepciones.HabitacionOcupadaException;
+
+/**
     * Clase especifica HabitacionCompartida que extiende Habitacion
     */
 public class HabitacionCompartida extends Habitacion{
@@ -27,13 +29,14 @@ public class HabitacionCompartida extends Habitacion{
      * Metodo void sobreescrito para ocupar la habitacion compartida
      */
     @Override
-    public void ocupar(){
-        int cantact = this.getCantidadPacientes();
-        if (cantact < this.getMaximoPacientes()){
-            cantact++;
-            this.ocupada = cantact == this.getMaximoPacientes();
-            this.setCantPacientes(cantact);
-        }
+    public void ocupar() throws HabitacionOcupadaException {
+        int cantAct = this.getCantidadPacientes();
+        if (cantAct < this.getMaximoPacientes()){
+            cantAct++;
+            this.ocupada = cantAct == this.getMaximoPacientes();
+            this.setCantPacientes(cantAct);
+        }else
+            throw new HabitacionOcupadaException(this);
     }
 
         /**

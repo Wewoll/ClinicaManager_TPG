@@ -4,6 +4,7 @@ import modelo.clinica.modulos.egreso.SistemaDeEgreso;
 import modelo.clinica.modulos.egreso.facturacion.Factura;
 import modelo.clinica.modulos.reportes.SistemaDeReportes;
 import modelo.clinica.modulos.ingreso.SistemaIngreso;
+import modelo.habitaciones.Habitacion;
 import modelo.personas.medico.IMedico;
 import modelo.personas.paciente.Paciente;
 import util.registros.RegistroMedico;
@@ -164,7 +165,7 @@ public class Clinica
             }
         }
         this.sistemaDeReportes.agregarRegistro(medico, paciente, paciente.getFechaIngreso());
-        paciente.setInternado(medico.internarPaciente());
+
     }
 
     public String reportesMedicos(IMedico medico)
@@ -176,5 +177,19 @@ public class Clinica
             sb.append(registro).append("\n");
         }
         return sb.toString();
+    }
+    public void internarPaciente(Paciente paciente, Habitacion h) throws PacienteNoRegistradoException, PacienteNoIngresadoException, PacienteYaInternado, HabitacionOcupadaException
+    {
+        if (!this.pacientesRegistrados.containsKey(paciente.getNroHistoriaMedica()))
+            throw new PacienteNoRegistradoException(paciente);
+        if (!this.listaAtencion.contains(paciente))
+            throw new PacienteNoIngresadoException(paciente);
+        if (paciente.isInternado())
+            throw new PacienteYaInternado(paciente);
+
+        h.ocupar();
+        paciente.setInternado(true);
+        paciente.setHabitacion(h);
+        this.listaAtencion.remove(paciente);
     }
 }

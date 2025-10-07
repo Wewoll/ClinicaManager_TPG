@@ -29,9 +29,5 @@ public abstract class Medico extends Persona implements IMedico
 //    public static void setSueldoBase(double sueldoBase) {
 //        Medico.sueldoBase = sueldoBase;
 //    }
-    public boolean internarPaciente(){
-        Random random = new Random();
-        return  random.nextBoolean();
-    };
 
 }
