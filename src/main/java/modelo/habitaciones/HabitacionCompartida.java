@@ -27,6 +27,8 @@ public class HabitacionCompartida extends Habitacion{
 
     /**
      * Metodo void sobreescrito para ocupar la habitacion compartida
+     * @throws HabitacionOcupadaException si la habitacion ya esta ocupada, es decir, si la cantidad actual de pacientes es igual al maximo
+     * <b>post:</b> la habitacion queda ocupada si la cantidad actual igual al maximo de pacientes
      */
     @Override
     public void ocupar() throws HabitacionOcupadaException {
@@ -41,7 +43,7 @@ public class HabitacionCompartida extends Habitacion{
 
         /**
          * Metodo void sobreescrito para desocupar la habitacion compartida
-         * pre: cantidad actual de pacientes en la habitacion mayor o igual a 0
+         * <b>post:</b> la habitacion queda desocupada si la cantidad actual de pacientes es distinta al maximo de pacientes.
          */
     @Override
     public void desocupar(){
@@ -51,7 +53,10 @@ public class HabitacionCompartida extends Habitacion{
         cantact--;
         this.setCantPacientes(cantact);
     }
-
+    /**
+     * Metodo toString sobreescrito para representar la habitacion compartida
+     * @return "Compartida" como tipo de habitacion
+     */
     @Override
     public String toString() {
         return "Compartida";

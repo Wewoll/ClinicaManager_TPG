@@ -16,9 +16,9 @@ public abstract class Habitacion
 
     /**
      * Constructor de habitacion
-     *
-     * @param maximoPacientes parametro para setear el maximo de pacientes en la habitacion
-     *                        pre: maximoPaciente mayor o igual a 1
+     * <b>pre:</b> maximoPacientes debe ser mayor o igual a 1.
+     * <b>post:</b> se crea una habitacion con un numero unico, no ocupada, con 0 pacientes y un maximo de pacientes segun el parametro.
+     * @param maximoPacientes parametro para setear el maximo de pacientes en la habitacion.
      */
     public Habitacion(int maximoPacientes)
     {
@@ -30,7 +30,7 @@ public abstract class Habitacion
     }
 
     /**
-     * Metodo publico int para preguntar cual es el numero de la habitacion
+     * Metodo publico int para preguntar cual es el numero de la habitacion.
      *
      * @return numero de la habitacion
      */
@@ -40,7 +40,7 @@ public abstract class Habitacion
     }
 
     /**
-     * Metodo publico boolean para preguntar si la habitacion esta ocupada
+     * Metodo publico boolean para preguntar si la habitacion esta ocupada.
      *
      * @return boolean ocupada
      */
@@ -50,7 +50,7 @@ public abstract class Habitacion
     }
 
     /**
-     * Metodo publico int que pregunta cual es el maximo de pacientes que puede tener la habitacion
+     * Metodo publico int que pregunta cual es el maximo de pacientes que puede tener la habitacion.
      *
      * @return el maximo de la habitacion
      */
@@ -60,7 +60,7 @@ public abstract class Habitacion
     }
 
     /**
-     * Metodo publico int que pregunta la cantidad de pacientes actuales en la habitacion
+     * Metodo publico int que pregunta la cantidad de pacientes actuales en la habitacion.
      *
      * @return la cantidad actual de pacientes
      */
@@ -70,8 +70,9 @@ public abstract class Habitacion
     }
 
     /**
-     * Metodo protected void que setea la cantidad de pacientes
-     *
+     * Metodo protected void que setea la cantidad de pacientes.
+     *  <b>pre:</b> cantidadPacientes debe ser mayor o igual a 0 y menor o igual al maximo de pacientes.
+     *  <b>post:</b> se setea la cantidad de pacientes.
      * @param cantidadPacientes valor incrementado/decrementado de pacientes
      */
     protected void setCantPacientes(int cantidadPacientes)
@@ -81,7 +82,8 @@ public abstract class Habitacion
 
     /**
      * Metodo publico void para ocupa la habitacion
-     *
+     * @throws HabitacionOcupadaException si la habitacion ya esta ocupada
+     * <b>post:</b> la habitacion queda ocupada y con 1 paciente
      */
     public void ocupar() throws HabitacionOcupadaException
     {
@@ -95,6 +97,7 @@ public abstract class Habitacion
 
     /**
      * Metodo publico void para desocupar la habitacion
+     * <b>post:</b> la habitacion queda desocupada y con 0 pacientes
      */
     public void desocupar()
     {
