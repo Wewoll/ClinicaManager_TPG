@@ -7,8 +7,28 @@ import util.Excepciones.ContratacionNoExistenteException;
 import util.Excepciones.EspecialidadNoExistenteException;
 import util.Excepciones.TituloNoExistenteException;
 
+/**
+ * Clase MedicoFactory que crea medicos segun su especialidad, tipo de contratacion y titulo de posgrado
+ */
 public class MedicoFactory{
-
+    /**
+     * Metodo que crea un medico segun su especialidad, tipo de contratacion y titulo de posgrado
+     * <b>pre:</b> especialidad, contratacion y titulo no deben ser nulos ni vacios
+     * <b>post:</b> se retorna una instancia de Medico con los decoradores correspondientes
+     * @param dni
+     * @param nroMatricula
+     * @param nombre
+     * @param apellido
+     * @param domicilio
+     * @param telefono
+     * @param especialidad
+     * @param contratacion
+     * @param titulo
+     * @return medico de tipo DecoratorContratacion (Medico con los decoradores correspondientes)
+     * @throws EspecialidadNoExistenteException
+     * @throws ContratacionNoExistenteException
+     * @throws TituloNoExistenteException
+     */
     public DecoratorContratacion crearMedico(String dni, String nroMatricula, String nombre, String apellido, Domicilio domicilio, String telefono, String especialidad, String contratacion, String titulo) throws EspecialidadNoExistenteException, ContratacionNoExistenteException, TituloNoExistenteException
     {
         Medico medico = null;

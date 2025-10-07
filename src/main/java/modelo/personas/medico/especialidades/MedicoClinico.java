@@ -1,5 +1,6 @@
 package modelo.personas.medico.especialidades;
 
+import modelo.personas.medico.IMedico;
 import modelo.personas.medico.Medico;
 import util.Domicilio;
 
@@ -11,7 +12,7 @@ public class MedicoClinico extends Medico {
     }
     @Override
     public double getSueldo(){
-        return Medico.getSueldoBase() *  INCREMENTO;
+        return IMedico.getSueldoBase() *  INCREMENTO;
     }
     @Override
     public String toString() {
