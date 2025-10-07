@@ -1,4 +1,4 @@
-package modelo.habitaciones;
+package util.Excepciones;
 
 public class TipoDesconocidoException extends Exception {
     public TipoDesconocidoException(String message) {

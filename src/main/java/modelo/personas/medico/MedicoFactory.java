@@ -3,10 +3,14 @@ import util.Domicilio;
 import modelo.personas.medico.especialidades.*;
 import modelo.personas.medico.contratacion.*;
 import modelo.personas.medico.posgrado.*;
+import util.Excepciones.ContratacionNoExistenteException;
+import util.Excepciones.EspecialidadNoExistenteException;
+import util.Excepciones.TituloNoExistenteException;
 
 public class MedicoFactory{
 
-    public DecoratorContratacion crearMedico(String dni, String nroMatricula, String nombre, String apellido, Domicilio domicilio, String telefono, String especialidad, String contratacion, String titulo) throws EspecialidadNoExistenteException, ContratacionNoExistenteException, TituloNoExistenteException {
+    public DecoratorContratacion crearMedico(String dni, String nroMatricula, String nombre, String apellido, Domicilio domicilio, String telefono, String especialidad, String contratacion, String titulo) throws EspecialidadNoExistenteException, ContratacionNoExistenteException, TituloNoExistenteException
+    {
         Medico medico = null;
         if(especialidad.equalsIgnoreCase("clinica")){
             medico = new MedicoClinico(nombre, apellido, dni, domicilio, telefono, nroMatricula);

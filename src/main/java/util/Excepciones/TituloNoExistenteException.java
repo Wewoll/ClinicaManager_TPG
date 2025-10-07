@@ -1,4 +1,4 @@
-package modelo.personas.medico;
+package util.Excepciones;
 
 public class TituloNoExistenteException extends Exception {
     public TituloNoExistenteException(String mensaje) {
