@@ -26,7 +26,7 @@ public class Clinica
     private SistemaIngreso sistemaDeIngreso;
     private SistemaDeReportes sistemaDeReportes;
     private SistemaDeEgreso sistemaDeEgreso;
-
+    private ArrayList<Paciente> listaAtencion;
 
     /**
      * Constructor privado para el patrón Singleton
@@ -34,7 +34,7 @@ public class Clinica
      * <b>Pre</b>: Los parámetros no deben ser nulos o vacíos.
      * <b>Post</b>: Se crea una instancia de Clinica con los datos proporcionados.
      *
-     * @param nombre   Nombre de la clínica.
+     * @param nombre    Nombre de la clínica.
      * @param direccion Dirección de la clínica.
      * @param telefono  Teléfono de contacto de la clínica.
      * @param ciudad    Ciudad donde se encuentra la clínica.
@@ -58,6 +58,7 @@ public class Clinica
             instancia.sistemaDeIngreso = new SistemaIngreso();
             instancia.sistemaDeReportes = new SistemaDeReportes();
             instancia.sistemaDeEgreso = new SistemaDeEgreso();
+            instancia.listaAtencion = new ArrayList<>();
         }
         return instancia;
     }
@@ -72,6 +73,7 @@ public class Clinica
      * Registra un nuevo médico en la clínica.
      * <b>Pre</b>: El médico no debe ser nulo y en caso de que ya exista, se sobreescribe.
      * <b>Post</b>: El médico se agrega al registro de médicos de la clínica.
+     *
      * @param medico El médico a registrar.
      */
     public void registrarMedico(IMedico medico)
@@ -83,6 +85,7 @@ public class Clinica
      * Registra un nuevo paciente en la clínica.
      * <b>Pre</b>: El paciente no debe ser nulo y en caso de que ya exista, se sobreescribe.
      * <b>Post</b>: El paciente se agrega al registro de pacientes de la clínica.
+     *
      * @param paciente El paciente a registrar.
      */
     public void registrarPaciente(Paciente paciente)
@@ -94,12 +97,13 @@ public class Clinica
      * Ingresa un paciente a la clínica.
      * En caso de que el paciente no esté registrado, lanza una excepción PacienteNoRegistradoException.
      * Si el paciente está registrado, se procede a ingresarlo al sistema de ingreso
+     *
      * @param paciente
      * @throws PacienteNoRegistradoException
      */
     public void ingresarPaciente(Paciente paciente) throws PacienteNoRegistradoException
     {
-        if(pacientesRegistrados.containsKey(paciente.getNroHistoriaMedica()))
+        if (pacientesRegistrados.containsKey(paciente.getNroHistoriaMedica()))
             this.sistemaDeIngreso.ingresaPaciente(paciente);
         else
             throw new PacienteNoRegistradoException(paciente);
@@ -109,6 +113,7 @@ public class Clinica
      * Egresar un paciente de la clínica.
      * <b>Pre</b>: El paciente debe estar registrado en la clínica.
      * <b>Post</b>: Se genera una factura para el paciente egresado
+     *
      * @param paciente
      * @return Factura generada al egresar el paciente
      * @throws PacienteSinConsultasMedicasException Si el paciente no tiene consultas méd
@@ -125,6 +130,7 @@ public class Clinica
     /**
      * Egresar un paciente de la clínica con días internado.
      * <b>Post</b> : Se genera una factura para el paciente egresado, incluyendo los días internado.
+     *
      * @param paciente
      * @param diasInternado
      * @return
@@ -140,20 +146,25 @@ public class Clinica
         paciente.setDiasInternado(diasInternado);
         if (consultasMedicas == null)
             throw new PacienteSinConsultasMedicasException("El paciente no tiene consultas médicas registradas.");
-        return sistemaDeEgreso.egresarPaciente(paciente, consultasMedicas);
+        Factura factura = sistemaDeEgreso.egresarPaciente(paciente, consultasMedicas);
+        sistemaDeReportes.limpiarRegistrosPaciente(paciente);
+        return factura;
     }
 
-    public void atenderPaciente(IMedico medico, Paciente paciente)
+    public void atenderPaciente(IMedico medico, Paciente paciente) throws PacienteNoIngresadoException
     {
-        boolean analisis = false, derivado = false;
-        do
+        if (this.sistemaDeIngreso.sacarPacienteSalaDeEspera(paciente))
         {
-            this.sistemaDeIngreso.sacarPacienteSalaDeEspera(paciente);
             listaAtencion.add(paciente);
-            this.sistemaDeReportes.agregarRegistro(medico, paciente, LocalDate.now()); // debe ir fecha
-            paciente.setInternado(analisis);
-            if ()
-        } while (derivado = true);
+        } else
+        {
+            if (!listaAtencion.contains(paciente))
+            {
+                throw new PacienteNoIngresadoException(paciente);
+            }
+        }
+        this.sistemaDeReportes.agregarRegistro(medico, paciente, paciente.getFechaIngreso());
+        paciente.setInternado(medico.internarPaciente());
     }
 
     public String reportesMedicos(IMedico medico)

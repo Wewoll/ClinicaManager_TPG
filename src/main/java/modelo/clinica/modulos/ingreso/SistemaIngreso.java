@@ -13,7 +13,7 @@ public class SistemaIngreso
     public void ingresaPaciente(Paciente p){
         salaDeEspera.ingresaPaciente(p);
     }
-    public void sacarPacienteSalaDeEspera(Paciente p){
-        salaDeEspera.sacarPaciente(p);
+    public boolean sacarPacienteSalaDeEspera(Paciente p){
+        return salaDeEspera.sacarPaciente(p);
     }
 }

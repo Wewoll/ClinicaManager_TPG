@@ -19,7 +19,7 @@ public class Patio {
     public void addPaciente(Paciente paciente){
         this.listaEspera.add(paciente);
     }
-    public void sacarPaciente(Paciente paciente){
-        this.listaEspera.remove(paciente);
+    public boolean sacarPaciente(Paciente paciente){
+        return this.listaEspera.remove(paciente);
     }
 }

@@ -23,8 +23,14 @@ public class SalaDeEspera {
             }
         }
     }
-    public void sacarPaciente(Paciente p){
-         this.patio.sacarPaciente(p);
-         this.salaPrivada.setPaciente(null);
+    public boolean sacarPaciente(Paciente p){
+         boolean res = this.patio.sacarPaciente(p);
+         if (!res){
+             if (this.salaPrivada.isOcupado() && this.salaPrivada.getPaciente().equals(p)){
+                this.salaPrivada.setPaciente(null);
+                res = true;
+             }
+         }
+         return res;
     }
 }

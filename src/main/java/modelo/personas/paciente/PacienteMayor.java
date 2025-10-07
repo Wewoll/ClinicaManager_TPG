@@ -1,9 +1,12 @@
 package modelo.personas.paciente;
 
+import java.time.LocalDate;
+
 public class PacienteMayor extends Paciente{
 
-    public PacienteMayor(String nombre, String apellido, String dni , util.Domicilio domicilio, String telefono, String nroHistoriaMedica){
-        super(nombre, apellido, dni, domicilio, telefono, nroHistoriaMedica);
+    public PacienteMayor(String nombre, String apellido, String dni, util.Domicilio domicilio, String telefono, String nroHistoriaMedica, LocalDate fechaIngreso)
+    {
+        super(nombre, apellido, dni, domicilio, telefono, nroHistoriaMedica, fechaIngreso);
     }
     @Override
     public boolean prioridad(Paciente paciente){
