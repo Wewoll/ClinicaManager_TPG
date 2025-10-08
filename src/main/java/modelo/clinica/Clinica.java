@@ -79,7 +79,7 @@ public class Clinica
     /**
      * Método para evitar la clonación de la instancia Singleton.
      *
-     * @throws CloneNotSupportedException
+     * @throws CloneNotSupportedException Siempre lanzada para evitar la clonación.
      */
     @Override
     public Object clone() throws CloneNotSupportedException
@@ -116,8 +116,8 @@ public class Clinica
      * En caso de que el paciente no esté registrado, lanza una excepción PacienteNoRegistradoException.
      * Si el paciente está registrado, se procede a ingresarlo al sistema de ingreso
      *
-     * @param paciente
-     * @throws PacienteNoRegistradoException
+     * @param paciente El paciente a ingresar.
+     * @throws PacienteNoRegistradoException Si el paciente no está registrado en la clínica.
      */
     public void ingresarPaciente(Paciente paciente) throws PacienteNoRegistradoException
     {
@@ -132,7 +132,7 @@ public class Clinica
      * <b>Pre</b>: El paciente debe estar registrado en la clínica.
      * <b>Post</b>: Se genera una factura para el paciente egresado
      *
-     * @param paciente
+     * @param paciente El paciente a egresar.
      * @return Factura generada al egresar el paciente
      * @throws PacienteSinConsultasMedicasException Si el paciente no tiene consultas méd
      */
@@ -152,8 +152,8 @@ public class Clinica
      * @param paciente
      * @param diasInternado
      * @return Factura generada al egresar el paciente
-     * @throws PacienteNoRegistradoException
-     * @throws PacienteSinConsultasMedicasException
+     * @throws PacienteNoRegistradoException Si el paciente no está registrado en la clínica.
+     * @throws PacienteSinConsultasMedicasException Si el paciente no tiene consultas médicas registradas.
      */
     public Factura egresarPaciente(Paciente paciente, int diasInternado) throws PacienteNoRegistradoException, PacienteSinConsultasMedicasException
     {
