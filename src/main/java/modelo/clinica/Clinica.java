@@ -160,7 +160,7 @@ public class Clinica
         ArrayList<RegistroPaciente> consultasMedicas = this.sistemaDeReportes.obtenerRegistrosPorPaciente(paciente);
         Paciente p = this.pacientesRegistrados.get(paciente.getNroHistoriaMedica());
         if (p == null)
-            throw new PacienteNoRegistradoException(p);
+            throw new PacienteNoRegistradoException(paciente);
         paciente.setDiasInternado(diasInternado);
         if (consultasMedicas == null)
             throw new PacienteSinConsultasMedicasException("El paciente no tiene consultas médicas registradas.");
