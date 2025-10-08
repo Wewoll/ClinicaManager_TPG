@@ -14,7 +14,12 @@ import util.Excepciones.*;
 import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.ArrayList;
-
+/**
+ * Clase Clinica que representa una clinica medica.
+ * Implementa el patrón Singleton para asegurar que solo exista una instancia de la clinica.
+ * Contiene atributos como nombre, direccion, telefono, ciudad, medicos registrados, pacientes registrados,
+ * y sistemas de ingreso, egreso y reportes.
+ */
 public class Clinica
 {
     private static Clinica instancia = null;
@@ -49,6 +54,13 @@ public class Clinica
         this.ciudad = ciudad;
     }
 
+    /**
+     * Método estático para obtener la única instancia de Clinica.
+     * Si la instancia no existe, se crea una nueva con datos predeterminados.
+     * <b>Pre</b>: Ninguna.
+     * <b>Post</b>: Se retorna la única instancia de Clinica.
+     * @return Instancia única de Clinica.
+     */
     public static Clinica getInstancia()
     {
         if (instancia == null)
@@ -64,6 +76,11 @@ public class Clinica
         return instancia;
     }
 
+    /**
+     * Método para evitar la clonación de la instancia Singleton.
+     *
+     * @throws CloneNotSupportedException
+     */
     @Override
     public Object clone() throws CloneNotSupportedException
     {
@@ -152,6 +169,15 @@ public class Clinica
         return factura;
     }
 
+    /**
+     * Atender a un paciente por un médico.
+     * <b>Pre</b>: El médico y el paciente no deben ser nulos.
+     * <b>Post</b>: Se registra la atención del paciente por el médico en el sistema de reportes.
+     *
+     * @param medico  El médico que atiende al paciente.
+     * @param paciente El paciente que es atendido.
+     * @throws PacienteNoIngresadoException Si el paciente no ha sido ingresado previamente.
+     */
     public void atenderPaciente(IMedico medico, Paciente paciente) throws PacienteNoIngresadoException
     {
         if (this.sistemaDeIngreso.sacarPacienteSalaDeEspera(paciente))
@@ -168,6 +194,13 @@ public class Clinica
 
     }
 
+    /**
+     * Genera un reporte de todas las consultas médicas realizadas por un medico específico.
+     * <b>Pre</b>: El medico no debe ser nulo.
+     * <b>Post</b>: Se retorna un String con el reporte de las consultas médicas del medico.
+     * @param medico El medico del cual se desea generar el reporte.
+     * @return String con el reporte de las consultas médicas del medico.
+     */
     public String reportesMedicos(IMedico medico)
     {
         StringBuilder sb = new StringBuilder();
@@ -178,6 +211,18 @@ public class Clinica
         }
         return sb.toString();
     }
+
+    /**
+     * Interna a un paciente en una habitación específica.
+     * <b>Post</b>: El paciente es internado en la habitación especificada.
+     *
+     * @param paciente El paciente a internar.
+     * @param h        La habitación donde se internará al paciente.
+     * @throws PacienteNoRegistradoException Si el paciente no está registrado en la clínica.
+     * @throws PacienteNoIngresadoException  Si el paciente no ha sido ingresado previamente.
+     * @throws PacienteYaInternado          Si el paciente ya está internado.
+     * @throws HabitacionOcupadaException    Si la habitación ya está ocupada.
+     */
     public void internarPaciente(Paciente paciente, Habitacion h) throws PacienteNoRegistradoException, PacienteNoIngresadoException, PacienteYaInternado, HabitacionOcupadaException
     {
         if (!this.pacientesRegistrados.containsKey(paciente.getNroHistoriaMedica()))
