@@ -151,7 +151,7 @@ public class Clinica
      *
      * @param paciente
      * @param diasInternado
-     * @return
+     * @return Factura generada al egresar el paciente
      * @throws PacienteNoRegistradoException
      * @throws PacienteSinConsultasMedicasException
      */
