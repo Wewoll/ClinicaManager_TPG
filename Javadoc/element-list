@@ -1,0 +1,16 @@
+app
+modelo.clinica
+modelo.clinica.modulos.egreso
+modelo.clinica.modulos.egreso.facturacion
+modelo.clinica.modulos.ingreso
+modelo.clinica.modulos.reportes
+modelo.habitaciones
+modelo.personas
+modelo.personas.medico
+modelo.personas.medico.contratacion
+modelo.personas.medico.especialidades
+modelo.personas.medico.posgrado
+modelo.personas.paciente
+util
+util.Excepciones
+util.registros

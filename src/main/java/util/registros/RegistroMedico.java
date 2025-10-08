@@ -14,7 +14,7 @@ public class RegistroMedico {
 
     /**
      * Constructor de la clase RegistroMedico.
-     * <b>pre:</b> p != null && fecha != null
+     * <b>pre:</b> p != null y fecha != null
      * <b>post:</b> Crea un nuevo registro médico con el paciente y la fecha proporcionados.
      * @param p Paciente asociado al registro.
      * @param fecha Fecha del registro.

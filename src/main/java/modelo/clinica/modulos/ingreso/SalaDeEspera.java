@@ -23,7 +23,6 @@ public class SalaDeEspera {
 
     /**
      * Metodo publico Patio para preguntar cual es el patio de la sala de espera.
-     * @return patio de la sala de espera.
      */
     public void ingresaPaciente(Paciente p){
         Paciente pacienteSalaPrivada = salaPrivada.getPaciente();

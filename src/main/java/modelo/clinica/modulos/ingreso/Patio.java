@@ -19,7 +19,7 @@ public class Patio {
     }
 
     /**
-     * Metodo publico ArrayList<Paciente> para preguntar cual es la lista de espera de pacientes.
+     * Metodo publico para preguntar cual es la lista de espera de pacientes.
      * @return listaEspera de pacientes.
      */
     public ArrayList<Paciente> getListaEspera() {
