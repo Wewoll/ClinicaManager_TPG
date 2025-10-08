@@ -4,7 +4,10 @@ import java.util.ArrayList;
 
 import modelo.personas.paciente.*;
 import util.registros.*;
-
+/**
+ * Clase Factura que representa una factura generada para un paciente.
+ * Contiene como atributos el numero de factura, paciente asociado, el detalle de la factura, y un contador estatico para llevar el control de las facturas generadas.
+ */
 public class Factura
 {
     private static int contadorFacturas = 0;
@@ -13,23 +16,41 @@ public class Factura
     private final static double INCREMENTO = 1.20;
     private String detalle;
 
+    /**
+     * Constructor de Factura
+     * <b>pre:</b> paciente no debe ser nulo.
+     * <b>post:</b> se crea una factura con un numero unico y el
+     * @param paciente Paciente al que se le genera la factura.
+     */
     public Factura(Paciente paciente)
     {
         this.numeroFactura = ++Factura.contadorFacturas;
         this.paciente = paciente;
     }
 
+    /**
+     * Metodo publico int para preguntar cual es el numero de factura.
+     * @return numeroFactura de la factura.
+     */
     public int getNumeroFactura()
     {
         return numeroFactura;
     }
-
+    /**
+     * Metodo publico Paciente para preguntar cual es el paciente asociado a la factura.
+     * @return paciente asociado a la factura.
+     */
     public Paciente getPaciente()
     {
         return paciente;
     }
 
-
+    /**
+     * Metodo publico void para setear el detalle de la factura.
+     * <b>pre:</b> consultasMedicas no debe ser nulo.
+     * <b>post:</b> se setea el detalle de la factura con la informacion de las consultas medicas.
+     * @param consultasMedicas Lista de registros de consultas medicas del paciente.
+     */
     public void setDetalle(ArrayList<RegistroPaciente> consultasMedicas)
     {
         StringBuilder aux = new StringBuilder();
@@ -49,7 +70,10 @@ public class Factura
         aux.append("\t \t Total: $").append(total).append("\n");
         this.detalle = aux.toString();
     }
-
+    /**
+     * Metodo publico String para preguntar cual es el detalle de la factura.
+     * @return detalle de la factura.
+     */
     public String getDetalle()
     {
         return this.detalle;
