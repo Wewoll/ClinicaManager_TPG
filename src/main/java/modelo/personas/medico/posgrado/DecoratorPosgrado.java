@@ -46,5 +46,9 @@ public abstract class DecoratorPosgrado implements IMedico {
     public String getApellido() {
         return this.encapsulado.getApellido();
     }
-
+    @Override
+    public String toString()
+    {
+        return  this.encapsulado.toString();
+    }
 }

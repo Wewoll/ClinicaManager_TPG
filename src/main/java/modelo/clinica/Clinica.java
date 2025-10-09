@@ -14,6 +14,7 @@ import util.Excepciones.*;
 import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.ArrayList;
+
 /**
  * Clase Clinica que representa una clinica medica.
  * Implementa el patrón Singleton para asegurar que solo exista una instancia de la clinica.
@@ -59,6 +60,7 @@ public class Clinica
      * Si la instancia no existe, se crea una nueva con datos predeterminados.
      * <b>Pre</b>: Ninguna.
      * <b>Post</b>: Se retorna la única instancia de Clinica.
+     *
      * @return Instancia única de Clinica.
      */
     public static Clinica getInstancia()
@@ -136,13 +138,14 @@ public class Clinica
      * @return Factura generada al egresar el paciente
      * @throws PacienteSinConsultasMedicasException Si el paciente no tiene consultas méd
      */
-    public Factura egresarPaciente(Paciente paciente) throws PacienteNoRegistradoException, PacienteSinConsultasMedicasException
+    public Factura egresarPaciente(Paciente paciente) throws PacienteSinConsultasMedicasException
     {
         ArrayList<RegistroPaciente> consultasMedicas = this.sistemaDeReportes.obtenerRegistrosPorPaciente(paciente);
         if (consultasMedicas == null)
             throw new PacienteSinConsultasMedicasException("El paciente no tiene consultas médicas registradas.");
         return sistemaDeEgreso.egresarPaciente(paciente, consultasMedicas);
     }
+
 
 
     /**
@@ -152,7 +155,7 @@ public class Clinica
      * @param paciente
      * @param diasInternado
      * @return Factura generada al egresar el paciente
-     * @throws PacienteNoRegistradoException Si el paciente no está registrado en la clínica.
+     * @throws PacienteNoRegistradoException        Si el paciente no está registrado en la clínica.
      * @throws PacienteSinConsultasMedicasException Si el paciente no tiene consultas médicas registradas.
      */
     public Factura egresarPaciente(Paciente paciente, int diasInternado) throws PacienteNoRegistradoException, PacienteSinConsultasMedicasException
@@ -174,7 +177,7 @@ public class Clinica
      * <b>Pre</b>: El médico y el paciente no deben ser nulos.
      * <b>Post</b>: Se registra la atención del paciente por el médico en el sistema de reportes.
      *
-     * @param medico  El médico que atiende al paciente.
+     * @param medico   El médico que atiende al paciente.
      * @param paciente El paciente que es atendido.
      * @throws PacienteNoIngresadoException Si el paciente no ha sido ingresado previamente.
      */
@@ -198,6 +201,7 @@ public class Clinica
      * Genera un reporte de todas las consultas médicas realizadas por un medico específico.
      * <b>Pre</b>: El medico no debe ser nulo.
      * <b>Post</b>: Se retorna un String con el reporte de las consultas médicas del medico.
+     *
      * @param medico El medico del cual se desea generar el reporte.
      * @return String con el reporte de las consultas médicas del medico.
      */
@@ -220,7 +224,7 @@ public class Clinica
      * @param h        La habitación donde se internará al paciente.
      * @throws PacienteNoRegistradoException Si el paciente no está registrado en la clínica.
      * @throws PacienteNoIngresadoException  Si el paciente no ha sido ingresado previamente.
-     * @throws PacienteYaInternado          Si el paciente ya está internado.
+     * @throws PacienteYaInternado           Si el paciente ya está internado.
      * @throws HabitacionOcupadaException    Si la habitación ya está ocupada.
      */
     public void internarPaciente(Paciente paciente, Habitacion h) throws PacienteNoRegistradoException, PacienteNoIngresadoException, PacienteYaInternado, HabitacionOcupadaException

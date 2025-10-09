@@ -40,4 +40,13 @@ public class RegistroPaciente {
     public LocalDate getFecha() {
         return fecha;
     }
+
+    @Override
+    public String toString()
+    {
+        return "RegistroPaciente{" +
+                "medico=" + medico +
+                ", fecha=" + fecha +
+                '}';
+    }
 }

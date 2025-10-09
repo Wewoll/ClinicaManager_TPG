@@ -49,4 +49,12 @@ public abstract class Medico extends Persona implements IMedico
 //        Medico.sueldoBase = sueldoBase;
 //    }
 
+
+    @Override
+    public String toString()
+    {
+        return "Medico{" +
+                "nroMatricula='" + nroMatricula + '\'' +
+                '}';
+    }
 }

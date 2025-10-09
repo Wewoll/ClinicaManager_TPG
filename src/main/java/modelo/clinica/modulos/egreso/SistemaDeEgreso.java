@@ -24,7 +24,7 @@ public class SistemaDeEgreso
     {
         Factura f = new Factura(p);
         f.setDetalle(consultasMedicas);
-        return new Factura(p);
+        return f;
     }
 
 }
