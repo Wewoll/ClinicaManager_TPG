@@ -32,7 +32,7 @@ public class MedicoFactory
      * @throws ContratacionNoExistenteException
      * @throws TituloNoExistenteException
      */
-    public DecoratorContratacion crearMedico(String dni, String nroMatricula, String nombre, String apellido, Domicilio domicilio, String telefono, String especialidad, String contratacion, String titulo) throws EspecialidadNoExistenteException, ContratacionNoExistenteException, TituloNoExistenteException
+    public static DecoratorContratacion crearMedico(String dni, String nroMatricula, String nombre, String apellido, Domicilio domicilio, String telefono, String especialidad, String contratacion, String titulo) throws EspecialidadNoExistenteException, ContratacionNoExistenteException, TituloNoExistenteException
     {
         Medico medico = null;
         if (especialidad.equalsIgnoreCase("clinica"))

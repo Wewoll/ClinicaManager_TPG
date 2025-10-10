@@ -23,7 +23,7 @@ public class PacienteFactory
      * @param fechaIngreso
      * @return Paciente (PacienteNino, PacienteJoven o PacienteMayor)
      */
-    public Paciente crearPaciente(String dni, String nombre, String apellido, Domicilio domicilio, String telefono, String nroHistoriaMedica, int edad, LocalDate fechaIngreso)
+    public static Paciente crearPaciente(String dni, String nombre, String apellido, Domicilio domicilio, String telefono, String nroHistoriaMedica, int edad, LocalDate fechaIngreso)
     {
         if (edad < 15)
         {

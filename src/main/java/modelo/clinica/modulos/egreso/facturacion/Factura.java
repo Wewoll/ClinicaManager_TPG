@@ -73,6 +73,8 @@ public class Factura
             aux.append("\tNombre medico: ").append(consultasMedicas.get(i).getMedico().getNombre()).append("\t").append("Especialidad: ").append(consultasMedicas.get(i).getMedico().toString()).append("\t").append("Subtotal: $").append(consultasMedicas.get(i).getMedico().getSueldo() * INCREMENTO).append("\n");
             total += consultasMedicas.get(i).getMedico().getSueldo() * INCREMENTO;
         }
+        if (this.paciente.getDiasInternado() > 0)
+            total += this.paciente.getHabitacion().calcularArancelInternacion(this.paciente);
         aux.append("\t \t Total: $").append(total).append("\n");
         this.detalle = aux.toString();
     }

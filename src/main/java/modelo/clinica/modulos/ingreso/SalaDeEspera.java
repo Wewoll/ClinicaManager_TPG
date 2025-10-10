@@ -64,6 +64,7 @@ public class SalaDeEspera
             if (this.salaPrivada.isOcupado() && this.salaPrivada.getPaciente().equals(p))
             {
                 this.salaPrivada.setPaciente(null);
+                this.salaPrivada.setOcupado(false);
                 res = true;
             }
         }

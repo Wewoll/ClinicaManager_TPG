@@ -34,7 +34,7 @@ public class Clinica
     private SistemaDeReportes sistemaDeReportes;
     private SistemaDeEgreso sistemaDeEgreso;
     private ArrayList<Paciente> listaAtencion;
-
+    private ArrayList<Habitacion> listaHabitaciones;
     /**
      * Constructor privado para el patrón Singleton
      *
@@ -74,6 +74,7 @@ public class Clinica
             instancia.sistemaDeReportes = new SistemaDeReportes();
             instancia.sistemaDeEgreso = new SistemaDeEgreso();
             instancia.listaAtencion = new ArrayList<>();
+            instancia.listaHabitaciones = new ArrayList<>();
         }
         return instancia;
     }
@@ -112,6 +113,14 @@ public class Clinica
     {
         pacientesRegistrados.put(paciente.getNroHistoriaMedica(), paciente);
     }
+    /**
+     * Agrega una habitacion a la clinica.
+     * <b>Pre</b>: La habitacion no debe ser nula y en caso de que ya exista, se sobreescribe.
+     * <b>Post</b>: La habitacion se agrega al registro de habitaciones de la clínica.
+     *
+     * @param h La habitacion a registrar.
+     */
+    public void agregarHabitacion(Habitacion h) { this.listaHabitaciones.add(h); }
 
     /**
      * Ingresa un paciente a la clínica.
@@ -143,6 +152,7 @@ public class Clinica
         ArrayList<RegistroPaciente> consultasMedicas = this.sistemaDeReportes.obtenerRegistrosPorPaciente(paciente);
         if (consultasMedicas == null)
             throw new PacienteSinConsultasMedicasException("El paciente no tiene consultas médicas registradas.");
+        listaAtencion.remove(paciente);
         return sistemaDeEgreso.egresarPaciente(paciente, consultasMedicas);
     }
 
@@ -169,6 +179,7 @@ public class Clinica
             throw new PacienteSinConsultasMedicasException("El paciente no tiene consultas médicas registradas.");
         Factura factura = sistemaDeEgreso.egresarPaciente(paciente, consultasMedicas);
         sistemaDeReportes.limpiarRegistrosPaciente(paciente);
+        listaAtencion.remove(paciente);
         return factura;
     }
 
