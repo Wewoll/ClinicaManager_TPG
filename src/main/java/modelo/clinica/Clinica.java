@@ -12,6 +12,8 @@ import util.registros.RegistroPaciente;
 import util.Excepciones.*;
 
 import java.time.LocalDate;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.ArrayList;
 
@@ -128,12 +130,16 @@ public class Clinica
      * Si el paciente está registrado, se procede a ingresarlo al sistema de ingreso
      *
      * @param paciente El paciente a ingresar.
+     * @param fecha   La fecha de ingreso del paciente.
+     *<b>Pre</b>: El paciente debe estar registrado en la clínica.
      * @throws PacienteNoRegistradoException Si el paciente no está registrado en la clínica.
      */
-    public void ingresarPaciente(Paciente paciente) throws PacienteNoRegistradoException
+    public void ingresarPaciente(Paciente paciente, LocalDate fecha) throws PacienteNoRegistradoException
     {
-        if (pacientesRegistrados.containsKey(paciente.getNroHistoriaMedica()))
+        if (pacientesRegistrados.containsKey(paciente.getNroHistoriaMedica())){
+            paciente.setFechaIngreso(fecha);
             this.sistemaDeIngreso.ingresaPaciente(paciente);
+        }
         else
             throw new PacienteNoRegistradoException(paciente);
     }
@@ -207,7 +213,26 @@ public class Clinica
         this.sistemaDeReportes.agregarRegistro(medico, paciente, paciente.getFechaIngreso());
 
     }
+    public String generarReporteMedico(IMedico medico, LocalDate fechaInicio, LocalDate fechaFin)
+    {
+        StringBuilder sb = new StringBuilder();
+        sb.append("Reporte de Consultas Médicas del Médico: ").append(medico.getNombre()).append(" ").append(medico.getApellido()).append("\n");
+        sb.append("Desde: ").append(fechaInicio).append(" Hasta: ").append(fechaFin).append("\n-------------------------------------------------------------------------------------------\n");
+        ArrayList<RegistroMedico> consultas= this.sistemaDeReportes.obtenerRegistrosPorMedico(medico);
 
+        consultas.sort(Comparator.comparing(RegistroMedico::getFecha));
+
+        for (RegistroMedico registro :consultas)
+        {
+            if ((registro.getFecha().isEqual(fechaInicio) || registro.getFecha().isAfter(fechaInicio)) &&
+                    (registro.getFecha().isEqual(fechaFin) || registro.getFecha().isBefore(fechaFin)))
+            {
+                sb.append("Fecha: ").append(registro.getFecha()).append("\tPaciente: ").append(registro.getPaciente().getNroHistoriaMedica()).append(" - ");
+                sb.append(registro.getPaciente().getApellido()).append(", ").append(registro.getPaciente().getNombre()).append("\tHonorario consulta: ").append(String.format("%.2f",medico.getSueldo()) ).append("\n");
+            }
+        }
+        return sb.toString();
+    }
     /**
      * Genera un reporte de todas las consultas médicas realizadas por un medico específico.
      * <b>Pre</b>: El medico no debe ser nulo.

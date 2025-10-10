@@ -71,9 +71,9 @@ public class Main
 
         try
         {
-            clinica.ingresarPaciente(paciente1);
-            clinica.ingresarPaciente(paciente2);
-            clinica.ingresarPaciente(paciente3);
+            clinica.ingresarPaciente(paciente1, LocalDate.of(2024, 5, 20));
+            clinica.ingresarPaciente(paciente2, LocalDate.of(2024, 5, 21));
+            clinica.ingresarPaciente(paciente3, LocalDate.of(2024, 5, 22));
         } catch (PacienteNoRegistradoException e) // aca nunca va a entrar
         {
             System.out.println(e.getMessage());
@@ -114,7 +114,7 @@ public class Main
         clinica.registrarPaciente(paciente4);
         try
         {
-            clinica.ingresarPaciente(paciente4);
+            clinica.ingresarPaciente(paciente4, LocalDate.of(2024, 5, 20));
         } catch (PacienteNoRegistradoException e) // aca nunca va a entrar
         {
             System.out.println(e.getMessage());
@@ -145,7 +145,7 @@ public class Main
             System.out.println(e.getMessage());
         }
         System.out.println(factura5.getDetalle());
-
+        System.out.println(clinica.generarReporteMedico(medico1, LocalDate.of(2024, 5, 1), LocalDate.of(2024, 6, 1)));
         // prueba de excepciones
 
         IMedico medicoError1 = null;
@@ -185,7 +185,7 @@ public class Main
         Paciente pacienteNoRegistrado = PacienteFactory.crearPaciente("99999999", "Paciente", "No Registrado", new Domicilio("Calle 123", 456, "Mar del Plata"), "2233344556", "999", 10, LocalDate.of(2024, 5, 20));
         try
         {
-            clinica.ingresarPaciente(pacienteNoRegistrado);
+            clinica.ingresarPaciente(pacienteNoRegistrado, LocalDate.of(2024, 5, 20));
         } catch (PacienteNoRegistradoException e)
         { // aca va a entrar
             System.out.println("Este es el mensaje de paciente no registrado:\t" + e.getMessage());
