@@ -3,6 +3,7 @@ modelo.clinica
 modelo.clinica.modulos.egreso
 modelo.clinica.modulos.egreso.facturacion
 modelo.clinica.modulos.ingreso
+modelo.clinica.modulos.ingreso.salas
 modelo.clinica.modulos.reportes
 modelo.habitaciones
 modelo.personas
