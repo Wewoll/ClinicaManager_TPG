@@ -1,5 +1,6 @@
 package modelo.personas.operario;
 
+import modelo.ambulancia.Ambulancia;
 import modelo.personas.Persona;
 import util.Domicilio;
 

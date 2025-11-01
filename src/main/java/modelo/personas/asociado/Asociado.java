@@ -1,5 +1,6 @@
 package modelo.personas.asociado;
 
+import modelo.ambulancia.Ambulancia;
 import modelo.personas.Persona;
 import util.Domicilio;
 
@@ -7,6 +8,7 @@ public class Asociado extends Persona implements Runnable
 {
     private final int maxCantSolicitudes;
     private final Ambulancia ambulancia;
+
     public Asociado(String nombre, String apellido, String dni, String telefono, Domicilio domicilio, int maxCantSolicitudes, Ambulancia ambulancia)
     {
         super(nombre, apellido, dni, domicilio, telefono);
@@ -17,22 +19,14 @@ public class Asociado extends Persona implements Runnable
     // el asociado puede hacer distintos pedidos en paralelo
     private void atencionADomicilio()
     {
-        try{
-            ambulancia.atenderDomicilio(this);
-            ambulancia.regresarSinPaciente(this);
-        } catch (InterruptedException e) {
-            Thread.currentThread().interrupt();
-        }
+        ambulancia.atenderDomicilio();
+        ambulancia.regresarSinPaciente();
     }
 
     private void trasladoALaClinca()
     {
-        try{
-            ambulancia.trasladarALaClinica(this);   
-            ambulancia.regresarSinPaciente(this);
-        } catch (InterruptedException e) {
-            Thread.currentThread().interrupt();
-        }
+        ambulancia.trasladarALaClinica();
+        ambulancia.regresarSinPaciente();
     }
 
     private void eligirServicio()
@@ -49,6 +43,7 @@ public class Asociado extends Persona implements Runnable
     {
         for (int i = 0; i < maxCantSolicitudes; i++)
         {
+            System.out.println("Asociado " + this.getDni() + " intentando solicitud " + (i + 1) + " de " + maxCantSolicitudes);
             eligirServicio();
         }
     }
