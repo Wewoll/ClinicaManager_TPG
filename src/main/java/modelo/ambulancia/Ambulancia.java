@@ -5,7 +5,7 @@ public class Ambulancia {
     private boolean ocupado;
 
     public Ambulancia() {
-        this.estadoActual = new DisponibleState();
+        this.estadoActual = new DisponibleState(this);
         this.ocupado = false;
     }
 

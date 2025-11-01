@@ -1,7 +1,7 @@
 package modelo.ambulancia;
 
 public class RegresandoClinicaSinPacienteState implements State{
-    Ambulancia ambulancia;
+    private Ambulancia ambulancia;
 
     public RegresandoClinicaSinPacienteState(Ambulancia ambulancia) {
         this.ambulancia = ambulancia;
@@ -15,7 +15,7 @@ public class RegresandoClinicaSinPacienteState implements State{
 
     @Override
     public void SolicitudDeAtencionDomicilio() {
-        this.ambulancia.setState(new AtendiendoDomicilioState(this.ambulancia));
+        this.ambulancia.setState(new AtendiendoEnDomicilioState(this.ambulancia));
     }
 
     @Override

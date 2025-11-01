@@ -1,7 +1,7 @@
 package modelo.ambulancia;
 
 public class RegresandoDelTallerState implements State{
-    Ambulancia ambulancia;
+    private Ambulancia ambulancia;
 
     public RegresandoDelTallerState(Ambulancia ambulancia) {
         this.ambulancia = ambulancia;

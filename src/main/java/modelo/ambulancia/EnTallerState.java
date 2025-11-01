@@ -1,7 +1,7 @@
 package modelo.ambulancia;
 
 public class EnTallerState implements State{
-    Ambulancia ambulancia;
+    private Ambulancia ambulancia;
 
     public EnTallerState(Ambulancia ambulancia) {
         this.ambulancia = ambulancia;
