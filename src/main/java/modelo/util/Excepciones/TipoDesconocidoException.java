@@ -1,4 +1,4 @@
-package util.Excepciones;
+package modelo.util.Excepciones;
 /**
  * Excepción lanzada cuando se encuentra un tipo desconocido.
  */

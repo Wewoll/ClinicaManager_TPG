@@ -1,6 +1,6 @@
 package modelo.personas.paciente;
 
-import util.Domicilio;
+import modelo.util.Domicilio;
 
 import java.time.LocalDate;
 

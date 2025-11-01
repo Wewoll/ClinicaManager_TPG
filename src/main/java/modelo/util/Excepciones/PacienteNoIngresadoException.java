@@ -1,4 +1,4 @@
-package util.Excepciones;
+package modelo.util.Excepciones;
 
 import modelo.personas.paciente.Paciente;
 /**

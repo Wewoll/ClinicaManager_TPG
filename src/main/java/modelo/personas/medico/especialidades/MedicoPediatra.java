@@ -2,7 +2,7 @@ package modelo.personas.medico.especialidades;
 
 import modelo.personas.medico.IMedico;
 import modelo.personas.medico.Medico;
-import util.Domicilio;
+import modelo.util.Domicilio;
 
 public class MedicoPediatra extends Medico {
     private static final double INCREMENTO = 1.05;

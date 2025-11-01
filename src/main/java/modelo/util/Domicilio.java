@@ -1,4 +1,4 @@
-package util;
+package modelo.util;
 
 /**
  * Clase que representa un domicilio con calle, número y ciudad.

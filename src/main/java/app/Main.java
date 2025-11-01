@@ -8,8 +8,8 @@ import modelo.personas.medico.IMedico;
 import modelo.personas.medico.MedicoFactory;
 import modelo.personas.paciente.Paciente;
 import modelo.personas.paciente.PacienteFactory;
-import util.Domicilio;
-import util.Excepciones.*;
+import modelo.util.Domicilio;
+import modelo.util.Excepciones.*;
 
 import java.time.LocalDate;
 

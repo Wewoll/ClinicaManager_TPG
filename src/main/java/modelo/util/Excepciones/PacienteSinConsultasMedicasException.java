@@ -1,4 +1,4 @@
-package util.Excepciones;
+package modelo.util.Excepciones;
 
 /**
  * Excepción lanzada cuando un paciente no tiene consultas médicas registradas.

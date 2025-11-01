@@ -1,11 +1,9 @@
 package modelo.clinica.modulos.reportes;
 
-import util.registros.*;
-
 import modelo.personas.medico.IMedico;
 import modelo.personas.paciente.Paciente;
-import util.registros.RegistroMedico;
-import util.registros.RegistroPaciente;
+import modelo.util.registros.RegistroMedico;
+import modelo.util.registros.RegistroPaciente;
 
 import java.time.LocalDate;
 import java.util.ArrayList;

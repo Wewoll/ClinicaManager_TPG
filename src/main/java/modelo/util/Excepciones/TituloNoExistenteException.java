@@ -1,4 +1,4 @@
-package util.Excepciones;
+package modelo.util.Excepciones;
 /**
  * Excepción lanzada cuando se intenta asignar un título que no existe.
  */

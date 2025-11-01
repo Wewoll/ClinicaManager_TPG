@@ -1,4 +1,4 @@
-package util.Excepciones;
+package modelo.util.Excepciones;
 /**
  * Excepción lanzada cuando se intenta acceder a una especialidad médica que no existe.
  */

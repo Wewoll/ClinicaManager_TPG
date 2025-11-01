@@ -30,7 +30,7 @@ public abstract class Paciente extends Persona
      *                          <b>pre:</b> nroHistoriaMedica no debe ser nulo ni vacio, fechaIngreso no debe ser nulo.
      *                          <b>post:</b> se crea un paciente con su historia clinica, dias internado en 0, sin habitacion asignada e internado en false.
      */
-    public Paciente(String nombre, String apellido, String dni, util.Domicilio domicilio, String telefono, String nroHistoriaMedica, LocalDate fechaIngreso)
+    public Paciente(String nombre, String apellido, String dni, modelo.util.Domicilio domicilio, String telefono, String nroHistoriaMedica, LocalDate fechaIngreso)
     {
         super(nombre, apellido, dni, domicilio, telefono);
         this.nroHistoriaMedica = nroHistoriaMedica;

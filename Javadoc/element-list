@@ -12,6 +12,6 @@ modelo.personas.medico.contratacion
 modelo.personas.medico.especialidades
 modelo.personas.medico.posgrado
 modelo.personas.paciente
-util
-util.Excepciones
-util.registros
+modelo.util
+modelo.util.Excepciones
+modelo.util.registros

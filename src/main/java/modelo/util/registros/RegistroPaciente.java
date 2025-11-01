@@ -1,7 +1,6 @@
-package util.registros;
+package modelo.util.registros;
 
 import modelo.personas.medico.IMedico;
-import modelo.personas.medico.Medico;
 
 import java.time.LocalDate;
 
