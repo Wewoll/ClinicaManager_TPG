@@ -2,13 +2,14 @@ package modelo.ambulancia;
 
 public class Ambulancia {
     private State estadoActual;
-
+    private boolean ocupado;
 
     public Ambulancia() {
         this.estadoActual = new DisponibleState();
+        this.ocupado = false;
     }
 
-    public void cambiarEstado(State nuevoEstado) {
+    public void setState(State nuevoEstado) {
         this.estadoActual = nuevoEstado;
     }
 
@@ -16,5 +17,11 @@ public class Ambulancia {
         return this.estadoActual;
     }
 
+    public boolean isOcupado() {
+        return ocupado;
+    }
 
+    public void setOcupado(boolean ocupado) {
+        this.ocupado = ocupado;
+    }
 }
