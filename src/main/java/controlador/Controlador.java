@@ -3,7 +3,10 @@ package controlador;
 import modelo.clinica.Clinica;
 import vista.IVista;
 
-public class Controlador {
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+public class Controlador implements ActionListener {
     private Clinica clinica;
     private IVista vista;
 
@@ -11,5 +14,10 @@ public class Controlador {
         this.clinica = clinica;
         this.vista = vista;
         this.vista.setControlador(this);
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        
     }
 }
