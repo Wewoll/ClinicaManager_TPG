@@ -1,6 +1,7 @@
 package vista;
 
 import javax.swing.*;
+import javax.swing.border.LineBorder;
 import javax.swing.border.TitledBorder;
 import java.awt.*;
 
@@ -32,11 +33,76 @@ public class Ventana extends JFrame implements IVista{
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
         setVisible(true);
+        aplicarEstilos();
     }
 
     @Override
     public void setControlador(Controlador controlador){
         
+    }
+
+    // Método para aplicar estilo a los componentes creados por $$$setupUI$$$
+    private void aplicarEstilos() {
+        // Paleta de colores
+        Color fondoPrincipal = new Color(245, 247, 250);
+        Color panelColor = Color.WHITE;
+        Color bordePanel = new Color(200, 200, 200);
+        Color botonColor = new Color(70, 130, 180);
+        Color botonHover = new Color(60, 110, 160);
+        Color labelColor = new Color(50, 50, 50);
+
+        // Fondo principal
+        panelPrincipal.setBackground(fondoPrincipal);
+
+        // Paneles internos con borde redondeado y sombra ligera
+        JPanel[] panels = {altaAsociado, bajaAsociado, listaAsociado};
+        for (JPanel p : panels) {
+            p.setBackground(panelColor);
+            p.setBorder(BorderFactory.createCompoundBorder(
+                    new LineBorder(bordePanel, 1, true),
+                    BorderFactory.createEmptyBorder(15, 15, 15, 15)
+            ));
+            p.setOpaque(true);
+        }
+
+        // Botones modernos
+        JButton[] buttons = {darDeAltaButton, darDeBajaButton};
+        for (JButton b : buttons) {
+            b.setFont(new Font("Segoe UI", Font.BOLD, 14));
+            b.setBackground(botonColor);
+            b.setForeground(Color.WHITE);
+            b.setFocusPainted(false);
+            b.setBorder(BorderFactory.createEmptyBorder(8, 20, 8, 20));
+            b.setCursor(new Cursor(Cursor.HAND_CURSOR));
+
+            // Hover effect
+            b.addMouseListener(new java.awt.event.MouseAdapter() {
+                public void mouseEntered(java.awt.event.MouseEvent evt) {
+                    b.setBackground(botonHover);
+                }
+                public void mouseExited(java.awt.event.MouseEvent evt) {
+                    b.setBackground(botonColor);
+                }
+            });
+        }
+
+        // JList
+        listaAsociados.setFont(new Font("Segoe UI", Font.PLAIN, 14));
+        listaAsociados.setBackground(new Color(250, 250, 250));
+        listaAsociados.setBorder(new LineBorder(bordePanel, 1, true));
+        listaAsociados.setSelectionBackground(new Color(70, 130, 180, 80));
+        listaAsociados.setSelectionForeground(Color.BLACK);
+
+        // Pestañas
+        pestañas.setFont(new Font("Segoe UI", Font.BOLD, 14));
+        pestañas.setBackground(fondoPrincipal);
+        pestañas.setForeground(labelColor);
+
+        // Scroll opcional si hay lista larga
+        listaAsociado.setLayout(new BorderLayout());
+        JScrollPane scroll = new JScrollPane(listaAsociados);
+        scroll.setBorder(BorderFactory.createEmptyBorder());
+        listaAsociado.add(scroll, BorderLayout.CENTER);
     }
 
     {
