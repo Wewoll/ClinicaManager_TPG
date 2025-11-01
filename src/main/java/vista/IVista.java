@@ -1,7 +1,7 @@
-package Vista;
+package vista;
 
 
-import Controlador.Controlador;
+import controlador.Controlador;
 
 public interface IVista {
     void setControlador(Controlador controlador);

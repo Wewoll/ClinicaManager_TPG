@@ -1,10 +1,10 @@
-package Vista;
+package vista;
 
 import javax.swing.*;
 import javax.swing.border.TitledBorder;
 import java.awt.*;
 
-import Controlador.Controlador;
+import controlador.Controlador;
 
 public class Ventana extends JFrame implements IVista{
     private JTabbedPane pestañas;

@@ -2,7 +2,7 @@ package modelo.personas.asociado;
 
 import modelo.ambulancia.Ambulancia;
 import modelo.personas.Persona;
-import util.Domicilio;
+import modelo.util.Domicilio;
 
 public class Asociado extends Persona implements Runnable
 {

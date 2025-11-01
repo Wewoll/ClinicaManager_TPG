@@ -2,7 +2,7 @@ package modelo.personas.operario;
 
 import modelo.ambulancia.Ambulancia;
 import modelo.personas.Persona;
-import util.Domicilio;
+import modelo.util.Domicilio;
 
 public class Operario extends Persona implements Runnable
 {

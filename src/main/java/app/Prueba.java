@@ -1,10 +1,10 @@
 package app;
 
-import Vista.IVista;
-import Vista.Ventana;
+import vista.IVista;
+import vista.Ventana;
 
 import modelo.clinica.Clinica;
-import Controlador.Controlador;
+import controlador.Controlador;
 
 public class Prueba {
     public static void main(String[] args) {

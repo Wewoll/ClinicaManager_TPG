@@ -1,7 +1,7 @@
-package Controlador;
+package controlador;
 
 import modelo.clinica.Clinica;
-import Vista.IVista;
+import vista.IVista;
 
 public class Controlador {
     private Clinica clinica;
