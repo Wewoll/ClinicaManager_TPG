@@ -21,5 +21,12 @@ public class TrasladandoPacienteClinicaState implements State{
     }
     @Override
     public void RetornoClinica(){
+        try{
+            Thread.sleep(1000);
+            this.ambulancia.setState(new DisponibleState(this.ambulancia));
+            this.ambulancia.setOcupado(false);
+        }catch(Exception e){
+
+        }
     }
 }

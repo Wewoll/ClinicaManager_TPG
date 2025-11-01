@@ -43,6 +43,7 @@ public class Ambulancia {
         while (ocupado) {
             try {
                 System.out.println("Ambulancia ocupada, esperando para atender domicilio...");
+                System.out.println(this.getEstadoActual());
                 wait(); // Espera 1 segundo antes de verificar nuevamente
             } catch (InterruptedException e) {
                 Thread.currentThread().interrupt();
@@ -57,6 +58,7 @@ public class Ambulancia {
         while (ocupado) {
             try {
                 System.out.println("Ambulancia ocupada, esperando para trasladar a la clinica...");
+                System.out.println(this.getEstadoActual());
                 wait(); // Espera 1 segundo antes de verificar nuevamente
             } catch (InterruptedException e) {
                 Thread.currentThread().interrupt();
@@ -67,15 +69,6 @@ public class Ambulancia {
         estadoActual.SolicitudDeTraslado();
     }
     public synchronized void regresarSinPaciente()  {
-        while (ocupado) {
-            try {
-                System.out.println("Ambulancia ocupada, esperando para regresar sin paciente...");
-                wait(); // Espera 1 segundo antes de verificar nuevamente
-            } catch (InterruptedException e) {
-                Thread.currentThread().interrupt();
-                return; // Salir si el hilo es interrumpido
-            }
-        }
         System.out.println(">> Regresando sin paciente");
         estadoActual.RetornoClinica();
         notifyAll();

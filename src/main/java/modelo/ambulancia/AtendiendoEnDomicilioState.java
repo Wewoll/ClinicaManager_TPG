@@ -17,10 +17,12 @@ public class AtendiendoEnDomicilioState implements State{
     }
     @Override
     public void SolicitudMantenimiento(){
-        ambulancia.setState(new RegresandoClinicaSinPacienteState(this.ambulancia));
+        //todo observer observable (no puede atender solicitud)
+
     }
     @Override
     public void RetornoClinica(){
+        ambulancia.setState(new RegresandoClinicaSinPacienteState(this.ambulancia));
         //todo observer observable (no puede atender solicitud)
     }
 }
