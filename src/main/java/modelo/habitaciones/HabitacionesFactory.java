@@ -1,6 +1,6 @@
 package modelo.habitaciones;
 
-import util.Excepciones.TipoDesconocidoException;
+import modelo.util.Excepciones.TipoDesconocidoException;
 
 /**
  * Clase HabitacionesFactory que implementa el patron de diseño Factory Method

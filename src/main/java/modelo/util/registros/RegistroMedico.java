@@ -1,4 +1,4 @@
-package util.registros;
+package modelo.util.registros;
 
 import modelo.personas.paciente.Paciente;
 

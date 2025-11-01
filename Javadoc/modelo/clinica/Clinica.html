@@ -249,7 +249,7 @@ loadScripts(document, 'script');</script>
 <h3>ingresarPaciente</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">ingresarPaciente</span><wbr><span class="parameters">(<a href="../personas/paciente/Paciente.html" title="class in modelo.personas.paciente">Paciente</a>&nbsp;paciente,
  <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/time/LocalDate.html" title="class or interface in java.time" class="external-link">LocalDate</a>&nbsp;fecha)</span>
-                      throws <span class="exceptions"><a href="../../util/Excepciones/PacienteNoRegistradoException.html" title="class in util.Excepciones">PacienteNoRegistradoException</a></span></div>
+                      throws <span class="exceptions"><a href="../../util/Excepciones/PacienteNoRegistradoException.html" title="class in modelo.util.Excepciones">PacienteNoRegistradoException</a></span></div>
 <div class="block">Ingresa un paciente a la clÃ­nica.
  En caso de que el paciente no estÃ© registrado, lanza una excepciÃ³n PacienteNoRegistradoException.
  Si el paciente estÃ¡ registrado, se procede a ingresarlo al sistema de ingreso</div>
@@ -259,7 +259,7 @@ loadScripts(document, 'script');</script>
 <dd><code>fecha</code> - La fecha de ingreso del paciente.
 <b>Pre</b>: El paciente debe estar registrado en la clÃ­nica.</dd>
 <dt>Throws:</dt>
-<dd><code><a href="../../util/Excepciones/PacienteNoRegistradoException.html" title="class in util.Excepciones">PacienteNoRegistradoException</a></code> - Si el paciente no estÃ¡ registrado en la clÃ­nica.</dd>
+<dd><code><a href="../../util/Excepciones/PacienteNoRegistradoException.html" title="class in modelo.util.Excepciones">PacienteNoRegistradoException</a></code> - Si el paciente no estÃ¡ registrado en la clÃ­nica.</dd>
 </dl>
 </section>
 </li>
@@ -267,7 +267,7 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="egresarPaciente(modelo.personas.paciente.Paciente)">
 <h3>egresarPaciente</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="modulos/egreso/facturacion/Factura.html" title="class in modelo.clinica.modulos.egreso.facturacion">Factura</a></span>&nbsp;<span class="element-name">egresarPaciente</span><wbr><span class="parameters">(<a href="../personas/paciente/Paciente.html" title="class in modelo.personas.paciente">Paciente</a>&nbsp;paciente)</span>
-                        throws <span class="exceptions"><a href="../../util/Excepciones/PacienteSinConsultasMedicasException.html" title="class in util.Excepciones">PacienteSinConsultasMedicasException</a></span></div>
+                        throws <span class="exceptions"><a href="../../util/Excepciones/PacienteSinConsultasMedicasException.html" title="class in modelo.util.Excepciones">PacienteSinConsultasMedicasException</a></span></div>
 <div class="block">Egresar un paciente de la clÃ­nica.
  <b>Pre</b>: El paciente debe estar registrado en la clÃ­nica.
  <b>Post</b>: Se genera una factura para el paciente egresado</div>
@@ -277,7 +277,7 @@ loadScripts(document, 'script');</script>
 <dt>Returns:</dt>
 <dd>Factura generada al egresar el paciente</dd>
 <dt>Throws:</dt>
-<dd><code><a href="../../util/Excepciones/PacienteSinConsultasMedicasException.html" title="class in util.Excepciones">PacienteSinConsultasMedicasException</a></code> - Si el paciente no tiene consultas mÃ©d</dd>
+<dd><code><a href="../../util/Excepciones/PacienteSinConsultasMedicasException.html" title="class in modelo.util.Excepciones">PacienteSinConsultasMedicasException</a></code> - Si el paciente no tiene consultas mÃ©d</dd>
 </dl>
 </section>
 </li>
@@ -286,8 +286,8 @@ loadScripts(document, 'script');</script>
 <h3>egresarPaciente</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="modulos/egreso/facturacion/Factura.html" title="class in modelo.clinica.modulos.egreso.facturacion">Factura</a></span>&nbsp;<span class="element-name">egresarPaciente</span><wbr><span class="parameters">(<a href="../personas/paciente/Paciente.html" title="class in modelo.personas.paciente">Paciente</a>&nbsp;paciente,
  int&nbsp;diasInternado)</span>
-                        throws <span class="exceptions"><a href="../../util/Excepciones/PacienteNoRegistradoException.html" title="class in util.Excepciones">PacienteNoRegistradoException</a>,
-<a href="../../util/Excepciones/PacienteSinConsultasMedicasException.html" title="class in util.Excepciones">PacienteSinConsultasMedicasException</a></span></div>
+                        throws <span class="exceptions"><a href="../../util/Excepciones/PacienteNoRegistradoException.html" title="class in modelo.util.Excepciones">PacienteNoRegistradoException</a>,
+<a href="../../util/Excepciones/PacienteSinConsultasMedicasException.html" title="class in modelo.util.Excepciones">PacienteSinConsultasMedicasException</a></span></div>
 <div class="block">Egresar un paciente de la clÃ­nica con dÃ­as internado.
  <b>Post</b> : Se genera una factura para el paciente egresado, incluyendo los dÃ­as internado.</div>
 <dl class="notes">
@@ -297,8 +297,8 @@ loadScripts(document, 'script');</script>
 <dt>Returns:</dt>
 <dd>Factura generada al egresar el paciente</dd>
 <dt>Throws:</dt>
-<dd><code><a href="../../util/Excepciones/PacienteNoRegistradoException.html" title="class in util.Excepciones">PacienteNoRegistradoException</a></code> - Si el paciente no estÃ¡ registrado en la clÃ­nica.</dd>
-<dd><code><a href="../../util/Excepciones/PacienteSinConsultasMedicasException.html" title="class in util.Excepciones">PacienteSinConsultasMedicasException</a></code> - Si el paciente no tiene consultas mÃ©dicas registradas.</dd>
+<dd><code><a href="../../util/Excepciones/PacienteNoRegistradoException.html" title="class in modelo.util.Excepciones">PacienteNoRegistradoException</a></code> - Si el paciente no estÃ¡ registrado en la clÃ­nica.</dd>
+<dd><code><a href="../../util/Excepciones/PacienteSinConsultasMedicasException.html" title="class in modelo.util.Excepciones">PacienteSinConsultasMedicasException</a></code> - Si el paciente no tiene consultas mÃ©dicas registradas.</dd>
 </dl>
 </section>
 </li>
@@ -307,7 +307,7 @@ loadScripts(document, 'script');</script>
 <h3>atenderPaciente</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">atenderPaciente</span><wbr><span class="parameters">(<a href="../personas/medico/IMedico.html" title="interface in modelo.personas.medico">IMedico</a>&nbsp;medico,
  <a href="../personas/paciente/Paciente.html" title="class in modelo.personas.paciente">Paciente</a>&nbsp;paciente)</span>
-                     throws <span class="exceptions"><a href="../../util/Excepciones/PacienteNoIngresadoException.html" title="class in util.Excepciones">PacienteNoIngresadoException</a></span></div>
+                     throws <span class="exceptions"><a href="../../util/Excepciones/PacienteNoIngresadoException.html" title="class in modelo.util.Excepciones">PacienteNoIngresadoException</a></span></div>
 <div class="block">Atender a un paciente por un mÃ©dico.
  <b>Pre</b>: El mÃ©dico y el paciente no deben ser nulos.
  <b>Post</b>: Se registra la atenciÃ³n del paciente por el mÃ©dico en el sistema de reportes.</div>
@@ -316,7 +316,7 @@ loadScripts(document, 'script');</script>
 <dd><code>medico</code> - El mÃ©dico que atiende al paciente.</dd>
 <dd><code>paciente</code> - El paciente que es atendido.</dd>
 <dt>Throws:</dt>
-<dd><code><a href="../../util/Excepciones/PacienteNoIngresadoException.html" title="class in util.Excepciones">PacienteNoIngresadoException</a></code> - Si el paciente no ha sido ingresado previamente.</dd>
+<dd><code><a href="../../util/Excepciones/PacienteNoIngresadoException.html" title="class in modelo.util.Excepciones">PacienteNoIngresadoException</a></code> - Si el paciente no ha sido ingresado previamente.</dd>
 </dl>
 </section>
 </li>
@@ -348,10 +348,10 @@ loadScripts(document, 'script');</script>
 <h3>internarPaciente</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">internarPaciente</span><wbr><span class="parameters">(<a href="../personas/paciente/Paciente.html" title="class in modelo.personas.paciente">Paciente</a>&nbsp;paciente,
  <a href="../habitaciones/Habitacion.html" title="class in modelo.habitaciones">Habitacion</a>&nbsp;h)</span>
-                      throws <span class="exceptions"><a href="../../util/Excepciones/PacienteNoRegistradoException.html" title="class in util.Excepciones">PacienteNoRegistradoException</a>,
-<a href="../../util/Excepciones/PacienteNoIngresadoException.html" title="class in util.Excepciones">PacienteNoIngresadoException</a>,
-<a href="../../util/Excepciones/PacienteYaInternado.html" title="class in util.Excepciones">PacienteYaInternado</a>,
-<a href="../../util/Excepciones/HabitacionOcupadaException.html" title="class in util.Excepciones">HabitacionOcupadaException</a></span></div>
+                      throws <span class="exceptions"><a href="../../util/Excepciones/PacienteNoRegistradoException.html" title="class in modelo.util.Excepciones">PacienteNoRegistradoException</a>,
+<a href="../../util/Excepciones/PacienteNoIngresadoException.html" title="class in modelo.util.Excepciones">PacienteNoIngresadoException</a>,
+<a href="../../util/Excepciones/PacienteYaInternado.html" title="class in modelo.util.Excepciones">PacienteYaInternado</a>,
+<a href="../../util/Excepciones/HabitacionOcupadaException.html" title="class in modelo.util.Excepciones">HabitacionOcupadaException</a></span></div>
 <div class="block">Interna a un paciente en una habitaciÃ³n especÃ­fica.
  <b>Post</b>: El paciente es internado en la habitaciÃ³n especificada.</div>
 <dl class="notes">
@@ -359,10 +359,10 @@ loadScripts(document, 'script');</script>
 <dd><code>paciente</code> - El paciente a internar.</dd>
 <dd><code>h</code> - La habitaciÃ³n donde se internarÃ¡ al paciente.</dd>
 <dt>Throws:</dt>
-<dd><code><a href="../../util/Excepciones/PacienteNoRegistradoException.html" title="class in util.Excepciones">PacienteNoRegistradoException</a></code> - Si el paciente no estÃ¡ registrado en la clÃ­nica.</dd>
-<dd><code><a href="../../util/Excepciones/PacienteNoIngresadoException.html" title="class in util.Excepciones">PacienteNoIngresadoException</a></code> - Si el paciente no ha sido ingresado previamente.</dd>
-<dd><code><a href="../../util/Excepciones/PacienteYaInternado.html" title="class in util.Excepciones">PacienteYaInternado</a></code> - Si el paciente ya estÃ¡ internado.</dd>
-<dd><code><a href="../../util/Excepciones/HabitacionOcupadaException.html" title="class in util.Excepciones">HabitacionOcupadaException</a></code> - Si la habitaciÃ³n ya estÃ¡ ocupada.</dd>
+<dd><code><a href="../../util/Excepciones/PacienteNoRegistradoException.html" title="class in modelo.util.Excepciones">PacienteNoRegistradoException</a></code> - Si el paciente no estÃ¡ registrado en la clÃ­nica.</dd>
+<dd><code><a href="../../util/Excepciones/PacienteNoIngresadoException.html" title="class in modelo.util.Excepciones">PacienteNoIngresadoException</a></code> - Si el paciente no ha sido ingresado previamente.</dd>
+<dd><code><a href="../../util/Excepciones/PacienteYaInternado.html" title="class in modelo.util.Excepciones">PacienteYaInternado</a></code> - Si el paciente ya estÃ¡ internado.</dd>
+<dd><code><a href="../../util/Excepciones/HabitacionOcupadaException.html" title="class in modelo.util.Excepciones">HabitacionOcupadaException</a></code> - Si la habitaciÃ³n ya estÃ¡ ocupada.</dd>
 </dl>
 </section>
 </li>

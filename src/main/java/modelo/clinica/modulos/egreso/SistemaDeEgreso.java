@@ -2,7 +2,7 @@ package modelo.clinica.modulos.egreso;
 
 import modelo.clinica.modulos.egreso.facturacion.Factura;
 import modelo.personas.paciente.Paciente;
-import util.registros.RegistroPaciente;
+import modelo.util.registros.RegistroPaciente;
 
 import java.util.ArrayList;
 

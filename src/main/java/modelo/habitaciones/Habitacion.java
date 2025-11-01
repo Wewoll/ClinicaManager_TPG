@@ -1,7 +1,7 @@
 package modelo.habitaciones;
 
 import modelo.personas.paciente.Paciente;
-import util.Excepciones.HabitacionOcupadaException;
+import modelo.util.Excepciones.HabitacionOcupadaException;
 
 /**
  * Clase abstracta Habitacion

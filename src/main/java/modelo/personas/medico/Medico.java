@@ -1,9 +1,8 @@
 package modelo.personas.medico;
 
 import modelo.personas.Persona;
-import util.Domicilio;
+import modelo.util.Domicilio;
 
-import java.util.Random;
 /**
  * Clase abstracta Medico que representa a un medico
  * Contiene atributos nroMatricula y sueldoBase

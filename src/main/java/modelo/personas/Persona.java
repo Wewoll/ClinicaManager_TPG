@@ -1,6 +1,6 @@
 package modelo.personas;
 
-import util.Domicilio;
+import modelo.util.Domicilio;
 
 /**
  * Clasee abastracta Persona que representa a una persona

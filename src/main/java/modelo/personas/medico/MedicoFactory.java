@@ -1,12 +1,12 @@
 package modelo.personas.medico;
 
-import util.Domicilio;
+import modelo.util.Domicilio;
 import modelo.personas.medico.especialidades.*;
 import modelo.personas.medico.contratacion.*;
 import modelo.personas.medico.posgrado.*;
-import util.Excepciones.ContratacionNoExistenteException;
-import util.Excepciones.EspecialidadNoExistenteException;
-import util.Excepciones.TituloNoExistenteException;
+import modelo.util.Excepciones.ContratacionNoExistenteException;
+import modelo.util.Excepciones.EspecialidadNoExistenteException;
+import modelo.util.Excepciones.TituloNoExistenteException;
 
 /**
  * Clase MedicoFactory que crea medicos segun su especialidad, tipo de contratacion y titulo de posgrado

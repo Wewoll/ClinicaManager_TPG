@@ -7,12 +7,11 @@ import modelo.clinica.modulos.ingreso.SistemaIngreso;
 import modelo.habitaciones.Habitacion;
 import modelo.personas.medico.IMedico;
 import modelo.personas.paciente.Paciente;
-import util.registros.RegistroMedico;
-import util.registros.RegistroPaciente;
-import util.Excepciones.*;
+import modelo.util.registros.RegistroMedico;
+import modelo.util.registros.RegistroPaciente;
+import modelo.util.Excepciones.*;
 
 import java.time.LocalDate;
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.ArrayList;

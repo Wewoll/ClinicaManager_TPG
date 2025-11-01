@@ -3,7 +3,7 @@ package modelo.clinica.modulos.egreso.facturacion;
 import java.util.ArrayList;
 
 import modelo.personas.paciente.*;
-import util.registros.*;
+import modelo.util.registros.*;
 
 /**
  * Clase Factura que representa una factura generada para un paciente.

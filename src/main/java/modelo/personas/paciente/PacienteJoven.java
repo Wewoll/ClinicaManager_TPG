@@ -17,7 +17,7 @@ public class PacienteJoven extends Paciente{
      * @param nroHistoriaMedica
      * @param fechaIngreso
      */
-    public PacienteJoven(String nombre, String apellido, String dni , util.Domicilio domicilio,String telefono, String nroHistoriaMedica, LocalDate fechaIngreso){
+    public PacienteJoven(String nombre, String apellido, String dni , modelo.util.Domicilio domicilio, String telefono, String nroHistoriaMedica, LocalDate fechaIngreso){
         super(nombre, apellido, dni, domicilio, telefono, nroHistoriaMedica, fechaIngreso);
     }
 
