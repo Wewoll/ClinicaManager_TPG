@@ -17,12 +17,6 @@ public class Controlador implements ActionListener {
         this.vista.setActionListener(this);
     }
 
-    public setVista(IVista vista)
-        {
-        this.vista = vista;
-        this.vista.setActionListener(this);
-        }
-
     @Override
     public void actionPerformed(ActionEvent e) {
         String comando = e.getActionCommand();
