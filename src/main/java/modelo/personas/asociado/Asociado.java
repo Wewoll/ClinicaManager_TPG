@@ -1,19 +1,32 @@
 package modelo.personas.asociado;
 
 import modelo.ambulancia.Ambulancia;
-import modelo.personas.Persona;
 import modelo.util.Domicilio;
+import patrones.PatronObserver.Observado;
 
-public class Asociado extends Persona implements Runnable
+public class Asociado extends Observado implements Runnable
 {
-    private final int maxCantSolicitudes;
-    private final Ambulancia ambulancia;
+    private int maxCantSolicitudes;
+    private Ambulancia ambulancia;
+    private int cantSolicitudesAtendidas;
 
     public Asociado(String nombre, String apellido, String dni, String telefono, Domicilio domicilio, int maxCantSolicitudes, Ambulancia ambulancia)
     {
         super(nombre, apellido, dni, domicilio, telefono);
         this.ambulancia = ambulancia;
         this.maxCantSolicitudes = maxCantSolicitudes;
+        this.cantSolicitudesAtendidas = 0;
+        this.ambulancia.agregarAsociado(this);
+    }
+
+    public int getCantSolicitudesAtendidas()
+    {
+        return cantSolicitudesAtendidas;
+    }
+
+    public int getMaxCantSolicitudes()
+    {
+        return maxCantSolicitudes;
     }
 
     // el asociado puede hacer distintos pedidos en paralelo
@@ -41,11 +54,13 @@ public class Asociado extends Persona implements Runnable
     @Override
     public void run()
     {
-        for (int i = 0; i < maxCantSolicitudes; i++)
+        while (ambulancia.isSimulacionActiva() && this.cantSolicitudesAtendidas < this.maxCantSolicitudes)
         {
-            System.out.println("Asociado " + this.getDni() + " intentando solicitud " + (i + 1) + " de " + maxCantSolicitudes);
+            System.out.println("Asociado " + this.getDni() + " intentando solicitud " + (this.cantSolicitudesAtendidas + 1) + " de " + maxCantSolicitudes);
             eligirServicio();
+            this.cantSolicitudesAtendidas++;
         }
+        System.out.println("Asociado " + this.getDni() + " ha finalizado sus solicitudes.");
     }
 
     @Override
