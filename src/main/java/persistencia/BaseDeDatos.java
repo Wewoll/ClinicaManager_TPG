@@ -11,6 +11,7 @@ public class BaseDeDatos {
     public BaseDeDatos() {
         conexion = null;
         cargarDriver();
+        abrirConexion();
     }
 
     public static void cargarDriver() {
@@ -24,32 +25,56 @@ public class BaseDeDatos {
     public static void abrirConexion() {
         try {
             conexion = DriverManager.getConnection(URL, USUARIO, CONTRASENA);
-            //TODO : levantar base de datos (persistencia)
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
 
-    public static void cerrarConexion() {
+    public static void cerrarConexion() throws SQLException {
         if (conexion != null) {
-            try {
-                //TODO : grabado de la base de datos (persistencia)
-                conexion.close();
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
+            conexion.close();
         }
     }
-
-    public ResultSet ejecutarConsulta(String consulta) {
-
+    public static Connection getConexion() {
+        return conexion;
+    }
+    public ResultSet ejecutarConsulta(String consulta, int id) throws SQLException{
         ResultSet rs = null;
-        try {
-            Statement stmt = conexion.createStatement();
-            stmt.executeQuery(consulta);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+        PreparedStatement stmt = conexion.prepareStatement(consulta);
+        if (id != -1)
+            stmt.setInt(1, id);
+        rs = stmt.executeQuery(consulta);
         return rs;
     }
+    public void ejecutarActualizacion(String actualizacion, AsociadoDTO aDTO) throws SQLException{
+        PreparedStatement stmt = conexion.prepareStatement(actualizacion);
+        stmt.setInt(1, aDTO.getId());
+        stmt.setString(2, aDTO.getNombre());
+        stmt.setString(3, aDTO.getApellido());
+        stmt.setString(4, aDTO.getDni());
+        stmt.setObject(5, aDTO.getDomicilio());
+        stmt.setString(6, aDTO.getTelefono());
+        stmt.executeUpdate(actualizacion);
+    }
+
+    public void ejecutarIncert(String insert, AsociadoDTO aDTO)throws SQLException {
+        PreparedStatement stmt = conexion.prepareStatement(insert);
+        stmt.setInt(1, aDTO.getId());
+        stmt.setString(2, aDTO.getNombre());
+        stmt.setString(3, aDTO.getApellido());
+        stmt.setString(4, aDTO.getDni());
+        stmt.setObject(5, aDTO.getDomicilio());
+        stmt.setString(6, aDTO.getTelefono());
+        stmt.executeUpdate(insert);
+
+    }
+
+    public void ejecutarDelete(String delete, int id) throws SQLException{
+
+        PreparedStatement stmt = conexion.prepareStatement(delete);
+        stmt.setInt(1, id);
+        stmt.executeUpdate(delete);
+
+    }
+
 }
