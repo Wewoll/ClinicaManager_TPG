@@ -11,6 +11,6 @@ public class Prueba {
         IVista vista = new Ventana();
         Clinica clinica = Clinica.getInstancia();
         Controlador controlador = new Controlador(clinica, vista);
-        vista.setControlador(controlador);
+        vista.setActionListener(controlador);
     }
 }
