@@ -5,6 +5,7 @@ import vista.IVista;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 
 public class Controlador implements ActionListener {
     private Clinica modelo;
@@ -46,7 +47,7 @@ public class Controlador implements ActionListener {
             this.modelo.iniciarSimulacion(this.vista.getAsociados(), this.vista.getSolicudes());
             this.vista.iniciarSimulacion();
         }
-        catch (SimulacionNoIniciadaException e) {
+        catch (InterruptedException e) {
             this.vista.mostrarMensaje("Fallo", "No se pudo iniciar la simulacion.");
         }
     }
@@ -60,7 +61,7 @@ public class Controlador implements ActionListener {
             this.vista.mostraMensaje("Exito", "Asociado guardado correctamente.");
             this.vista.limpiarFormularioAlta();
         }
-        catch (AsociadoNoAgregadoException e) {
+        catch (SQLException e) {
             this.vista.mostrarMensaje("Fallo", "No se pudo guardar al asociado.");
         }
     }
@@ -73,7 +74,7 @@ public class Controlador implements ActionListener {
             this.vista.mostraMensaje("Exito", "Asociado eliminado correctamente.");
             this.vista.limpiarFormularioBaja();
         }
-        catch (AsociadoNoEliminadoException e) {
+        catch (SQLException e) {
             this.vista.mostrarMensaje("Fallo", "No se pudo eliminar al asociado.");
         }
     }
