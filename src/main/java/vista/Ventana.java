@@ -5,7 +5,6 @@ import javax.swing.border.LineBorder;
 import javax.swing.border.TitledBorder;
 import java.awt.*;
 
-import controlador.Comandos;
 import controlador.Controlador;
 
 public class Ventana extends JFrame implements IVista{
@@ -33,8 +32,8 @@ public class Ventana extends JFrame implements IVista{
         setSize(800, 600);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
-        darDeAltaButton.setActionCommand(Comandos.DAR_ALTA);
-        darDeBajaButton.setActionCommand(Comandos.DAR_BAJA);
+        darDeAltaButton.setActionCommand(DAR_ALTA);
+        darDeBajaButton.setActionCommand(DAR_BAJA);
         setVisible(true);
         aplicarEstilos();
     }

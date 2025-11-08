@@ -3,7 +3,6 @@ package vista;
 import javax.swing.*;
 import java.awt.*;
 
-import controlador.Comandos;
 import controlador.Controlador;
 
 public class VentanaConfiguracion extends JFrame implements IVista {
@@ -18,7 +17,7 @@ public class VentanaConfiguracion extends JFrame implements IVista {
         setSize(800, 600);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
-        aceptarConfiguracionButton.setActionCommand(Comandos.ACEPTAR);
+        aceptarConfiguracionButton.setActionCommand(ACEPTAR);
         setVisible(true);
     }
 

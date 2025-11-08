@@ -27,15 +27,15 @@ public class Controlador implements ActionListener {
         String comando = e.getActionCommand();
 
         switch (comando) {
-            case Comandos.ACEPTAR: {
+            case IVista.ACEPTAR: {
                 this.iniciarSimulacion();
                 break;
             }
-            case Comandos.DAR_ALTA: {
+            case IVista.DAR_ALTA: {
                 this.guardarAsociado();
                 break;
             }
-            case Comandos.DAR_BAJA: {
+            case IVista.DAR_BAJA: {
                 this.eliminarAsociado();
             }
         }
