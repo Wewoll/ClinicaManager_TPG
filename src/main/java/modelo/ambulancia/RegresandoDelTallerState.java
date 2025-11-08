@@ -5,7 +5,7 @@ public class RegresandoDelTallerState implements State{
 
     public RegresandoDelTallerState(Ambulancia ambulancia) {
         this.ambulancia = ambulancia;
-        this.ambulancia.setOcupado(true);
+        this.ambulancia.setOcupado(false);
     }
 
     @Override

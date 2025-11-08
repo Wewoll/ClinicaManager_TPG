@@ -2,7 +2,10 @@ package modelo.personas.operario;
 
 import modelo.ambulancia.Ambulancia;
 import modelo.personas.Persona;
+import modelo.personas.asociado.Asociado;
 import modelo.util.Domicilio;
+
+import java.util.ArrayList;
 
 public class Operario extends Persona implements Runnable
 {
@@ -12,11 +15,24 @@ public class Operario extends Persona implements Runnable
         super(nombre, apellido,  dni, domicilio, telefono);
         this.ambulancia = ambulancia;
     }
-
+    private void terminaronAsociados()
+    {
+        ArrayList<Asociado> asociados = this.ambulancia.getAsociados();
+        for (Asociado asociado : asociados)
+        {
+            System.out.println("Cantidad de solicitudes atendidas por asociado " + asociado.getDni() + ": " + asociado.getCantSolicitudesAtendidas() + "/" + asociado.getMaxCantSolicitudes());
+            if (asociado.getCantSolicitudesAtendidas() >= asociado.getMaxCantSolicitudes())
+            {
+                this.ambulancia.setSimulacionActiva(false);
+                return;
+            }
+        }
+        this.ambulancia.setSimulacionActiva(true);
+    }
     @Override
     public void run() {
         // pedir mantenimiento de ambulancias
-        while(true){
+        while(this.ambulancia.isSimulacionActiva()){
             try {
                 long tiempoEspera = (long)(Math.random() * 5000 + 5000); // entre 5 y 10 segundos
                 Thread.sleep(tiempoEspera); // espera 10 segundos antes de solicitar mantenimiento
@@ -25,6 +41,12 @@ public class Operario extends Persona implements Runnable
                 break;
             }
             ambulancia.solicitarMantenimiento();
+            try{
+                System.out.println("Mantenimiento realizado por operario " + this.getDni());
+                Thread.sleep(5000);
+            } catch (InterruptedException e) {}
+            ambulancia.volviendoDelTaller();
+            terminaronAsociados();
         }
 
     }

@@ -1,7 +1,9 @@
 package app;
 
 import modelo.ambulancia.Ambulancia;
+import modelo.ambulancia.RetornoAutomatico;
 import modelo.personas.asociado.Asociado;
+import modelo.personas.operario.Operario;
 
 public class PruebaSimulacion
 {
@@ -14,7 +16,11 @@ public class PruebaSimulacion
         Asociado asociado4 = new Asociado("Ana", "Martinez", "44332211", "555-4321", null, 5, ambulancia);
         Asociado asociado5 = new Asociado("Luis", "Rodriguez", "55667788", "555-6789", null, 5, ambulancia);
         Asociado asociado6 = new Asociado("Sofia", "Fernandez", "88776655", "555-9876", null, 5, ambulancia);
+        RetornoAutomatico retornoAutomatico = new RetornoAutomatico(ambulancia);
+        Operario operario = new Operario("Pedro", "Sanchez", "99887766", "555-0000", null, ambulancia);
 
+        new Thread(retornoAutomatico).start();
+        new Thread(operario).start();
         new Thread(asociado1).start();
         new Thread(asociado2).start();
         new Thread(asociado3).start();
