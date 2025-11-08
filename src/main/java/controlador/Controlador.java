@@ -16,24 +16,24 @@ public class Controlador implements ActionListener {
         this.vista.setActionListener(this);
     }
 
-    public setVista(IVista vista)
-        {
+    public void setVista(IVista vista)
+    {
         this.vista = vista;
         this.vista.setActionListener(this);
-        }
+    }
 
     @Override
     public void actionPerformed(ActionEvent e) {
         String comando = e.getActionCommand();
 
         switch (comando) {
-            case Comandos.ACEPTAR:
+            case IVista.ACEPTAR:
                 modelo.iniciarSimulacion(this.vista.getAsociados(), this.vista.getSolicudes());
                 this.vista
                 break;
-            case Comandos.DAR_ALTA:
+            case IVista.DAR_ALTA:
                 break;
-            case Comandos.DAR_BAJA:
+            case IVista.DAR_BAJA:
                 break;
         }
     }
