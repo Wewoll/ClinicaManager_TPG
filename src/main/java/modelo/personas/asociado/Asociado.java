@@ -1,11 +1,13 @@
 package modelo.personas.asociado;
 
 import modelo.ambulancia.Ambulancia;
+import modelo.personas.Persona;
 import modelo.util.Domicilio;
 import patrones.PatronObserver.Observado;
 
-public class Asociado extends Observado implements Runnable
+public class Asociado extends Persona implements Runnable
 {
+    private int id;
     private int maxCantSolicitudes;
     private Ambulancia ambulancia;
     private int cantSolicitudesAtendidas;
@@ -17,6 +19,21 @@ public class Asociado extends Observado implements Runnable
         this.maxCantSolicitudes = maxCantSolicitudes;
         this.cantSolicitudesAtendidas = 0;
         this.ambulancia.agregarAsociado(this);
+    }
+
+    public Asociado(String nombre, String apellido, String dni, String telefono, Domicilio domicilio){
+        super(nombre, apellido, dni, domicilio, telefono);
+        this.maxCantSolicitudes = Integer.MAX_VALUE;
+        this.cantSolicitudesAtendidas = 0;
+        this.ambulancia = null;
+    }
+    public int getId()
+    {
+        return id;
+    }
+    public void setId(int id)
+    {
+        this.id = id;
     }
 
     public int getCantSolicitudesAtendidas()
@@ -79,4 +96,5 @@ public class Asociado extends Observado implements Runnable
         Asociado asociado = (Asociado) obj;
         return this.getDni().equals(asociado.getDni());
     }
+
 }

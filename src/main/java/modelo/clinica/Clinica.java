@@ -1,16 +1,23 @@
 package modelo.clinica;
 
+import modelo.ambulancia.Ambulancia;
 import modelo.clinica.modulos.egreso.SistemaDeEgreso;
 import modelo.clinica.modulos.egreso.facturacion.Factura;
 import modelo.clinica.modulos.reportes.SistemaDeReportes;
 import modelo.clinica.modulos.ingreso.SistemaIngreso;
 import modelo.habitaciones.Habitacion;
+import modelo.personas.asociado.Asociado;
 import modelo.personas.medico.IMedico;
 import modelo.personas.paciente.Paciente;
+import modelo.util.Domicilio;
 import modelo.util.registros.RegistroMedico;
 import modelo.util.registros.RegistroPaciente;
 import modelo.util.Excepciones.*;
+import persistencia.AsociadoDTO;
+import persistencia.DataAccessObject;
+import vista.VistaAsociadoDTO;
 
+import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.Comparator;
 import java.util.HashMap;
@@ -36,6 +43,9 @@ public class Clinica
     private SistemaDeEgreso sistemaDeEgreso;
     private ArrayList<Paciente> listaAtencion;
     private ArrayList<Habitacion> listaHabitaciones;
+    private ArrayList<Asociado> asociados;
+    private Ambulancia ambulancia;
+    private DataAccessObject dao;
     /**
      * Constructor privado para el patrón Singleton
      *
@@ -76,6 +86,8 @@ public class Clinica
             instancia.sistemaDeEgreso = new SistemaDeEgreso();
             instancia.listaAtencion = new ArrayList<>();
             instancia.listaHabitaciones = new ArrayList<>();
+            instancia.asociados = new ArrayList<>();
+            instancia.ambulancia = new Ambulancia();
         }
         return instancia;
     }
@@ -275,5 +287,51 @@ public class Clinica
         paciente.setInternado(true);
         paciente.setHabitacion(h);
         this.listaAtencion.remove(paciente);
+    }
+
+    public void agregarAsociado(Asociado asociado){
+        this.asociados.add(asociado);
+    }
+
+    public void iniciarSimulacion(int cantAsociados, int maxCantSolicitudesPorAsociado){
+        try{
+            ArrayList<AsociadoDTO> asociadosDTOs= this.dao.cargarConLimite(cantAsociados);
+            for (AsociadoDTO aDTO: asociadosDTOs){
+                Asociado asociado = new Asociado(aDTO.getNombre(), aDTO.getApellido(), aDTO.getDni(), aDTO.getTelefono(), aDTO.getDomicilio(),  maxCantSolicitudesPorAsociado,this.ambulancia);
+                this.asociados.add(asociado);
+                Thread hiloAsociado = new Thread(asociado);
+                hiloAsociado.start();
+            }
+        }catch (SQLException e){
+            System.out.println("Error al cargar con limite de solicitudes");
+        }
+    }
+
+    public void guardarNuevoAsociado(Asociado asociado){
+
+        try{
+            dao.guardar(asociado);
+        }catch (Exception e){
+
+        }
+    }
+
+    public void eliminarAsociado(String dni){
+        try{
+            for (Asociado a: asociados){
+                if (a.getDni().equals(dni)){
+                    dao.eliminar(a.getId());
+                    asociados.remove(a);
+                    break;
+                }
+            }
+        }catch (Exception e){
+
+        }
+    }
+
+
+    public Asociado crearAsociado(VistaAsociadoDTO datos){
+        return new Asociado(datos.getNombre(), datos.getApellido(), datos.getDni(), datos.getTelefono(), new Domicilio(datos.getCalle(),datos.getNumero(),datos.getCiudad()));
     }
 }

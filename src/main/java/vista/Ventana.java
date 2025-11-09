@@ -60,7 +60,7 @@ public class Ventana extends JFrame implements IVista {
         String dni = textField3.getText();
         String ciudad = textField4.getText();
         String calle = textField5.getText();
-        String numero = textField6.getText();
+        int numero = Integer.parseInt(textField6.getText());
         String telefono = textField7.getText();
 
         return new VistaAsociadoDTO(nombre, apellido, dni, ciudad, calle, numero, telefono);

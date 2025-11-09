@@ -1,7 +1,9 @@
 package controlador;
 
 import modelo.clinica.Clinica;
+import modelo.personas.asociado.Asociado;
 import vista.IVista;
+import vista.VistaAsociadoDTO;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -38,7 +40,7 @@ public class Controlador implements ActionListener {
 
     public void iniciarSimulacion(){
         try {
-            this.modelo.iniciarSimulacion(this.vista.getAsociados(), this.vista.getSolicudes());
+            this.modelo.iniciarSimulacion (this.vista.getAsociados(), this.vista.getSolicudes());
             this.vista.iniciarSimulacion();
         }
         catch (InterruptedException e) {

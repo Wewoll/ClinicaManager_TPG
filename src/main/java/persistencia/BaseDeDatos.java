@@ -38,6 +38,7 @@ public class BaseDeDatos {
     public static Connection getConexion() {
         return conexion;
     }
+
     public ResultSet ejecutarConsulta(String consulta, int id) throws SQLException{
         ResultSet rs = null;
         PreparedStatement stmt = conexion.prepareStatement(consulta);
@@ -57,7 +58,7 @@ public class BaseDeDatos {
         stmt.executeUpdate(actualizacion);
     }
 
-    public void ejecutarIncert(String insert, AsociadoDTO aDTO)throws SQLException {
+    public void ejecutarInsert(String insert, AsociadoDTO aDTO)throws SQLException {
         PreparedStatement stmt = conexion.prepareStatement(insert);
         stmt.setInt(1, aDTO.getId());
         stmt.setString(2, aDTO.getNombre());

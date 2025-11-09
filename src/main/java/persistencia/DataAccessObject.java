@@ -18,11 +18,26 @@ public class DataAccessObject {
 
         String query = "INSERT INTO Asociados VALUES (?,?,?,?,?,?)";
 
-        bd.ejecutarIncert(query,aDTO);
+        bd.ejecutarInsert(query,aDTO);
     }
     public void cerrarConexion() throws SQLException{
         BaseDeDatos.cerrarConexion();
     }
+
+    public  ArrayList<AsociadoDTO> cargarConLimite(int limite) throws SQLException {
+
+        String query = "SELECT * FROM Asociados LIMIT ? ;";
+
+        ResultSet resultado = bd.ejecutarConsulta(query, -1);
+        ArrayList<AsociadoDTO> asociadosDTO = new ArrayList<>();
+        while (resultado.next()) {
+            AsociadoDTO aDTO = this.CrearDTO(resultado.getInt("id"), resultado.getString("nombre"), resultado.getString("apellido"), resultado.getString("dni"),
+                    resultado.getString("telefono"), resultado.getObject("domicilio"));
+            asociadosDTO.add(aDTO);
+        }
+        return asociadosDTO;
+    }
+
     public AsociadoDTO cargar(int id) throws SQLException {
 
         String query = "SELECT * FROM Asociados WHERE id = ? ;";
