@@ -1,5 +1,7 @@
 package vista;
 
+import modelo.modeloAplicacion.EstadoSimulacion;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -7,9 +9,11 @@ public class VentanaSimulacion extends JFrame implements IVistaSimulacion {
     private JPanel panelPrincipal;
     private JList list1;
     private JButton finalizarButton;
+    private DefaultListModel<String> listModel;
 
     public VentanaSimulacion() {
-
+        listModel = new DefaultListModel();
+        list1.setModel(listModel);
     }
 
     @Override
@@ -22,8 +26,14 @@ public class VentanaSimulacion extends JFrame implements IVistaSimulacion {
         setVisible(true);
     }
 
+    @Override
     public void setActionListener ( controlador.Controlador controlador ) {
         this.finalizarButton.addActionListener(controlador);
+    }
+
+    @Override
+    public void actualizarEstadoSimulacion ( EstadoSimulacion estado ) {
+        listModel.addElement(estado.getMensaje());
     }
 
 

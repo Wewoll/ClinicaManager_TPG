@@ -12,10 +12,11 @@ public interface IVistaPrincipal {
     public static final String DAR_BAJA = "DAR_BAJA";
     void setActionListener(Controlador controlador);
     public AsociadoDTO getNuevoAsociado();
-    public void mostrarMensaje(String titulo, String mensaje);
     public void limpiarFormularioAlta();
     public void limpiarFormularioBaja();
     public void actualizarListaAsociados(ArrayList<String> asociados);
     public int getCantAsociados();
     public int getCantSolicitudes();
+    void mostrarMensaje(String exito, String s);
+    public String getDNI();
 }

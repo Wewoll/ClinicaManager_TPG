@@ -56,9 +56,9 @@ public class Controlador implements ActionListener {
 
         try {
             this.modelo.guardarNuevoAsociado(datos);
-            this.vistaPrincipal.mostraMensaje("Exito", "Asociado guardado correctamente.");
+            this.vistaPrincipal.mostrarMensaje("Exito", "Asociado guardado correctamente.");
             this.vistaPrincipal.limpiarFormularioAlta();
-            this.vistaPrincipal.actualizarListaAsociados();
+            //this.vistaPrincipal.actualizarListaAsociados();
         }
         catch (SQLException e) {
             this.vistaPrincipal.mostrarMensaje("Fallo", "No se pudo guardar al asociado.");
@@ -70,9 +70,9 @@ public class Controlador implements ActionListener {
 
         try {
             this.modelo.eliminarAsociado(dni);
-            this.vistaPrincipal.mostraMensaje("Exito", "Asociado eliminado correctamente.");
+            this.vistaPrincipal.mostrarMensaje("Exito", "Asociado eliminado correctamente.");
             this.vistaPrincipal.limpiarFormularioBaja();
-            this.vistaPrincipal.actualizarListaAsociados();
+            //this.vistaPrincipal.actualizarListaAsociados();
         }
         catch (SQLException e) {
             this.vistaPrincipal.mostrarMensaje("Fallo", "No se pudo eliminar al asociado.");

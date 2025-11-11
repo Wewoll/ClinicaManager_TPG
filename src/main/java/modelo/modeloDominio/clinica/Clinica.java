@@ -339,7 +339,7 @@ public class Clinica
      * @param cantAsociados                Cantidad de asociados a cargar.
      * @param maxCantSolicitudesPorAsociado Máximo de solicitudes por asociado.
      */
-    public void iniciarSimulacion(int cantAsociados, int maxCantSolicitudesPorAsociado){
+    public void iniciarSimulacion(int cantAsociados, int maxCantSolicitudesPorAsociado) throws InterruptedException {
             assert cantAsociados > 0 : "La cantidad de asociados debe ser mayor que 0";
             assert maxCantSolicitudesPorAsociado > 0 : "La cantidad maxima de solicitudes por asociado debe ser mayor que 0";
         try{
@@ -362,14 +362,10 @@ public class Clinica
      *
      * @param datos Datos del asociado a guardar.
      */
-    public void guardarNuevoAsociado(AsociadoDTO datos){
+    public void guardarNuevoAsociado(AsociadoDTO datos) throws SQLException {
         assert datos != null : "El asociado no puede ser nulo";
-        try{
-            Asociado asociado = new Asociado(datos);
-            dao.guardar(asociado);
-        }catch (Exception e){
-
-        }
+        Asociado asociado = new Asociado(datos);
+        dao.guardar(asociado);
     }
 
     /**
@@ -379,18 +375,14 @@ public class Clinica
      *
      * @param dni DNI del asociado a eliminar.
      */
-    public void eliminarAsociado(String dni){
+    public void eliminarAsociado(String dni) throws SQLException{
         assert dni != null : "El asociado no puede ser nulo";
-        try{
-            for (Asociado a: asociados){
-                if (a.getDni().equals(dni)){
-                    dao.eliminar(a.getId());
-                    asociados.remove(a);
-                    break;
-                }
+        for (Asociado a: asociados){
+            if (a.getDni().equals(dni)){
+                dao.eliminar(a.getId());
+                asociados.remove(a);
+                break;
             }
-        }catch (Exception e){
-
         }
     }
 

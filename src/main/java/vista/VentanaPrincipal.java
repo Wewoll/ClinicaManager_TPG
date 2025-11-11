@@ -84,7 +84,7 @@ public class VentanaPrincipal extends JFrame implements IVistaPrincipal {
 
     @Override
     public void mostrarMensaje(String titulo, String mensaje) {
-
+        JOptionPane.showMessageDialog(this, mensaje, titulo, JOptionPane.INFORMATION_MESSAGE);
     }
 
     @Override
@@ -109,6 +109,11 @@ public class VentanaPrincipal extends JFrame implements IVistaPrincipal {
         for (String asociado : asociados) {
             this.listaModel.addElement(asociado);
         }
+    }
+
+    @Override
+    public String getDNI() {
+        return textField8.getText();
     }
 
     // Método para aplicar estilo a los componentes creados por $$$setupUI$$$
