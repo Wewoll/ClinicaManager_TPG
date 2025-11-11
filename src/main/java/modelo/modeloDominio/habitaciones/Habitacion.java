@@ -22,6 +22,7 @@ public abstract class Habitacion
      */
     public Habitacion(int maximoPacientes)
     {
+        assert maximoPacientes >= 1 : "El maximo de pacientes debe ser mayor o igual a 1";
         this.maximoPacientes = maximoPacientes;
         this.cantidadPacientes = 0;
         this.nroHabitacion = nroHabitacionSiguiente;
@@ -77,6 +78,7 @@ public abstract class Habitacion
      */
     protected void setCantPacientes(int cantidadPacientes)
     {
+        assert cantidadPacientes >= 0 && cantidadPacientes <= this.maximoPacientes : "La cantidad de pacientes debe ser mayor o igual a 0 y menor o igual al maximo de pacientes";
         this.cantidadPacientes = cantidadPacientes;
     }
 
