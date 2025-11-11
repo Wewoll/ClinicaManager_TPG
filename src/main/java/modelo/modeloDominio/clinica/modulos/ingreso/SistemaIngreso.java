@@ -22,6 +22,7 @@ public class SistemaIngreso
      * @param p Paciente a ingresar a la sala de espera.
      */
     public void ingresaPaciente(Paciente p){
+        assert  p != null : "La paciente no puede ser nulo";
         salaDeEspera.ingresaPaciente(p);
     }
 
@@ -33,6 +34,7 @@ public class SistemaIngreso
      * @return true si el paciente fue sacado, false si no estaba en la sala de espera.
      */
     public boolean sacarPacienteSalaDeEspera(Paciente p){
+        assert  p != null : "La paciente no puede ser nulo";
         return salaDeEspera.sacarPaciente(p);
     }
 }

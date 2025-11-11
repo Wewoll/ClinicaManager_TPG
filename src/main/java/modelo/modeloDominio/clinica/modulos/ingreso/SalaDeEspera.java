@@ -21,6 +21,8 @@ public class SalaDeEspera
      */
     public SalaDeEspera(Patio p, SalaPrivada s)
     {
+        assert p != null : "El patio no puede ser nulo";
+        assert s != null : "La sala privada no puede ser nula";
         patio = p;
         salaPrivada = s;
     }
@@ -30,6 +32,7 @@ public class SalaDeEspera
      */
     public void ingresaPaciente(Paciente p)
     {
+        assert p != null : "El paciente no puede ser nulo";
         Paciente pacienteSalaPrivada = salaPrivada.getPaciente();
         if (!salaPrivada.isOcupado())
         {
@@ -58,6 +61,7 @@ public class SalaDeEspera
      */
     public boolean sacarPaciente(Paciente p)
     {
+        assert  p != null : "El paciente no puede ser nulo";
         boolean res = this.patio.sacarPaciente(p);
         if (!res)
         {

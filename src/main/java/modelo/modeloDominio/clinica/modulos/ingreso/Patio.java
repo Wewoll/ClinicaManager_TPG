@@ -33,6 +33,7 @@ public class Patio {
      * @param listaEspera Lista de pacientes en espera.
      */
     public void setListaEspera(ArrayList<Paciente> listaEspera) {
+        assert listaEspera != null : "La lista de espera no puede ser nula";
         this.listaEspera = listaEspera;
     }
 
@@ -43,6 +44,7 @@ public class Patio {
      * @param paciente Paciente a agregar a la lista de espera.
      */
     public void addPaciente(Paciente paciente){
+        assert paciente != null : "La paciente no puede ser nula";
         this.listaEspera.add(paciente);
     }
 
@@ -54,6 +56,7 @@ public class Patio {
      * @return true si el paciente fue sacado, false si no estaba en la lista.
      */
     public boolean sacarPaciente(Paciente paciente){
+        assert paciente != null : "La paciente no puede ser nula";
         return this.listaEspera.remove(paciente);
     }
 }

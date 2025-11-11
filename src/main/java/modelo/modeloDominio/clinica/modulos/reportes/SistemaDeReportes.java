@@ -39,6 +39,9 @@ public class SistemaDeReportes
      */
     public void agregarRegistro(IMedico m, Paciente p, LocalDate fecha)
     {
+        assert m != null : "El medico no puede ser nulo";
+        assert p != null : "El paciente no puede ser nulo";
+        assert fecha != null : "La fecha no puede ser nula";
         RegistroMedico rMedico = new RegistroMedico(p, fecha);
         RegistroPaciente rPaciente = new RegistroPaciente(m, fecha);
 
@@ -64,7 +67,7 @@ public class SistemaDeReportes
      */
     public ArrayList<RegistroPaciente> obtenerRegistrosPorPaciente(Paciente p)
     {
-
+        assert p != null : "El paciente no puede ser nulo";
         return this.pacientes.get(p.getNroHistoriaMedica());
     }
 
@@ -77,6 +80,7 @@ public class SistemaDeReportes
      */
     public ArrayList<RegistroMedico> obtenerRegistrosPorMedico(IMedico m)
     {
+        assert  m != null : "El medico no puede ser nulo";
         return this.medicos.get(m.getNroMatricula());
     }
 
@@ -89,6 +93,7 @@ public class SistemaDeReportes
      */
     public void limpiarRegistrosPaciente(Paciente p)
     {
+        assert p != null : "El paciente no puede ser nulo";
         ArrayList<RegistroPaciente> listaPaciente = this.pacientes.get(p.getNroHistoriaMedica());
         listaPaciente.clear();
         this.pacientes.put(p.getNroHistoriaMedica(), listaPaciente);
