@@ -146,17 +146,25 @@ public class BaseDeDatos {
      * <b>post:</b> se crea la tabla Asociados y se insertan datos de ejemplo.
      */
     public void iniciarBD(){
-        String query = "IF NOT EXISTS(SELECT * FROM sys.databases WHERE name = 'Grupo_7')\n" +
-                "BEGIN\n" +
-                "CREATE DATABASE Grupo_7;\n" +
-                "END;";
-        try{
-            Statement stmt = conexion.createStatement();
-            stmt.execute(query);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        query = "USE Grupo_7;";
+//        String query = "IF NOT EXISTS(SELECT * FROM sys.databases WHERE name = 'Grupo_7')\n" +
+//                "BEGIN\n" +
+//                "CREATE DATABASE Grupo_7;\n" +
+//                "END;";
+//        try{
+//            Statement stmt = conexion.createStatement();
+//            stmt.execute(query);
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//        }
+//        query = "USE Grupo_7;";
+//        try{
+//            Statement stmt = conexion.createStatement();
+//            stmt.execute(query);
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//        }
+
+        String query = "DROP TABLE IF EXISTS Asociados;";
         try{
             Statement stmt = conexion.createStatement();
             stmt.execute(query);
@@ -164,15 +172,7 @@ public class BaseDeDatos {
             e.printStackTrace();
         }
 
-        query = "DROP TABLE IF EXISTS Asociados;";
-        try{
-            Statement stmt = conexion.createStatement();
-            stmt.execute(query);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-
-        query = "CREATE TABLE IF NOT EXISTS Asociados (int id AUTO_INCREMENT PRIMARY KEY , VARCHAR(30) nombre,VARCHAR(30) apellido, VARCHAR(10) DNI UNIQUE, VARCHAR(30) calle,int numero, VARCHAR(35) ciudad, VARCHAR(15) telefono);";
+        query = "CREATE TABLE IF NOT EXISTS Asociados (id INT NOT NULL AUTO_INCREMENT PRIMARY KEY ,nombre VARCHAR(30) , apellido VARCHAR(30), DNI VARCHAR(10) UNIQUE, calle VARCHAR(30) , numero INT,  ciudad VARCHAR(35),telefono VARCHAR(15) );";
         try {
             Statement stmt = conexion.createStatement();
             stmt.execute(query);
@@ -180,7 +180,7 @@ public class BaseDeDatos {
             e.printStackTrace();
         }
 
-        query = "INSERT INTO Asociados (id, nombre, apellido, dni, domicilio, telefono) VALUES (1, 'Juan', 'State', '12345678', 'Buenos Aires', 123, 'Mar del Plata', '2235551234'), (2, 'Maria', 'Template', '87654321', 'Libertad',742, 'Mar del Plata', '2235555678'), (3, 'Carlos', 'Observer', '11223344', 'Colon', 456, 'Mar del Plata', '2235558765'), (4, 'Jose', 'Concurrencia', '21842190', 'Juan B Justo,'200,' Mar del Plata', '1551232349'), (5, 'Xin', 'Dao', '33445566', 'Corrientes', 789,'Mar del Plata', '2235554321'), (6, 'Ana', 'Facade', '66554433', 'San Martin', 321, 'Mar del Plata', '2235556789');";
+        query = "INSERT INTO Asociados (id, nombre, apellido, dni, calle, numero, ciudad, telefono) VALUES (1, 'Juan', 'State', '12345678', 'Buenos Aires', 123, 'Mar del Plata', '2235551234'), (2, 'Maria', 'Template', '87654321', 'Libertad',742, 'Mar del Plata', '2235555678'), (3, 'Carlos', 'Observer', '11223344', 'Colon', 456, 'Mar del Plata', '2235558765'), (4, 'Jose', 'Concurrencia', '21842190', 'Juan B Justo',200,' Mar del Plata', '1551232349'), (5, 'Xin', 'Dao', '33445566', 'Corrientes', 789,'Mar del Plata', '2235554321'), (6, 'Ana', 'Facade', '66554433', 'San Martin', 321, 'Mar del Plata', '2235556789');";
 
         try{
             Statement stmt = conexion.createStatement();
