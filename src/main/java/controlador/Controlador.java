@@ -1,6 +1,7 @@
 package controlador;
 
 import modelo.clinica.Clinica;
+import modelo.modeloDominio.clinica.Clinica;
 import persistencia.AsociadoDTO;
 import vista.IVistaPrincipal;
 import vista.IVistaSimulacion;

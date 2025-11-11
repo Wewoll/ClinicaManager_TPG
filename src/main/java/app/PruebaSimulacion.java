@@ -1,9 +1,9 @@
 package app;
 
-import modelo.ambulancia.Ambulancia;
-import modelo.ambulancia.RetornoAutomatico;
-import modelo.personas.asociado.Asociado;
-import modelo.personas.operario.Operario;
+import modelo.modeloDominio.ambulancia.Ambulancia;
+import modelo.modeloDominio.ambulancia.RetornoAutomatico;
+import modelo.modeloDominio.personas.asociado.Asociado;
+import modelo.modeloDominio.personas.operario.Operario;
 
 public class PruebaSimulacion
 {

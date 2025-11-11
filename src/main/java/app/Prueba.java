@@ -4,7 +4,7 @@ import vista.IVistaPrincipal;
 import vista.IVistaSimulacion;
 import vista.VentanaPrincipal;
 
-import modelo.clinica.Clinica;
+import modelo.modeloDominio.clinica.Clinica;
 import controlador.Controlador;
 import vista.VentanaSimulacion;
 

@@ -6,7 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <meta name="dc.created" content="2025-10-11">
-<meta name="description" content="declaration: package: modelo.personas.medico.contratacion, class: DecoratorContratacion">
+<meta name="description" content="declaration: package: modelo.modeloDominio.personas.medico.contratacion, class: DecoratorContratacion">
 <meta name="generator" content="javadoc/ClassWriterImpl">
 <link rel="stylesheet" type="text/css" href="../../../../stylesheet.css" title="Style">
 <link rel="stylesheet" type="text/css" href="../../../../script-dir/jquery-ui.min.css" title="Style">
@@ -68,25 +68,25 @@ loadScripts(document, 'script');</script>
 <main role="main">
 <!-- ======== START OF CLASS DATA ======== -->
 <div class="header">
-<div class="sub-title"><span class="package-label-in-type">Package</span>&nbsp;<a href="package-summary.html">modelo.personas.medico.contratacion</a></div>
+<div class="sub-title"><span class="package-label-in-type">Package</span>&nbsp;<a href="package-summary.html">modelo.modeloDominio.personas.medico.contratacion</a></div>
 <h1 title="Class DecoratorContratacion" class="title">Class DecoratorContratacion</h1>
 </div>
 <div class="inheritance" title="Inheritance Tree"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">java.lang.Object</a>
-<div class="inheritance">modelo.personas.medico.contratacion.DecoratorContratacion</div>
+<div class="inheritance">modelo.modeloDominio.personas.medico.contratacion.DecoratorContratacion</div>
 </div>
 <section class="class-description" id="class-description">
 <dl class="notes">
 <dt>All Implemented Interfaces:</dt>
-<dd><code><a href="../IMedico.html" title="interface in modelo.personas.medico">IMedico</a></code></dd>
+<dd><code><a href="../IMedico.html" title="interface in modelo.modeloDominio.personas.medico">IMedico</a></code></dd>
 </dl>
 <dl class="notes">
 <dt>Direct Known Subclasses:</dt>
-<dd><code><a href="DecoratorContratacionPermanente.html" title="class in modelo.personas.medico.contratacion">DecoratorContratacionPermanente</a></code>, <code><a href="DecoratorContratacionResidente.html" title="class in modelo.personas.medico.contratacion">DecoratorContratacionResidente</a></code></dd>
+<dd><code><a href="DecoratorContratacionPermanente.html" title="class in modelo.modeloDominio.personas.medico.contratacion">DecoratorContratacionPermanente</a></code>, <code><a href="DecoratorContratacionResidente.html" title="class in modelo.modeloDominio.personas.medico.contratacion">DecoratorContratacionResidente</a></code></dd>
 </dl>
 <hr>
 <div class="type-signature"><span class="modifiers">public abstract class </span><span class="element-name type-name-label">DecoratorContratacion</span>
 <span class="extends-implements">extends <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a>
-implements <a href="../IMedico.html" title="interface in modelo.personas.medico">IMedico</a></span></div>
+implements <a href="../IMedico.html" title="interface in modelo.modeloDominio.personas.medico">IMedico</a></span></div>
 <div class="block">Clase abstracta DecoratorContratacion que implementa la interfaz IMedico
  Contiene un atributo encapsulado de tipo DecoratorPosgrado</div>
 </section>
@@ -101,7 +101,7 @@ implements <a href="../IMedico.html" title="interface in modelo.personas.medico"
 <div class="table-header col-first">Modifier and Type</div>
 <div class="table-header col-second">Field</div>
 <div class="table-header col-last">Description</div>
-<div class="col-first even-row-color"><code>protected <a href="../posgrado/DecoratorPosgrado.html" title="class in modelo.personas.medico.posgrado">DecoratorPosgrado</a></code></div>
+<div class="col-first even-row-color"><code>protected <a href="../posgrado/DecoratorPosgrado.html" title="class in modelo.modeloDominio.personas.medico.posgrado">DecoratorPosgrado</a></code></div>
 <div class="col-second even-row-color"><code><a href="#encapsulado" class="member-name-link">encapsulado</a></code></div>
 <div class="col-last even-row-color">&nbsp;</div>
 </div>
@@ -115,7 +115,7 @@ implements <a href="../IMedico.html" title="interface in modelo.personas.medico"
 <div class="summary-table two-column-summary">
 <div class="table-header col-first">Constructor</div>
 <div class="table-header col-last">Description</div>
-<div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E(modelo.personas.medico.posgrado.DecoratorPosgrado)" class="member-name-link">DecoratorContratacion</a><wbr>(<a href="../posgrado/DecoratorPosgrado.html" title="class in modelo.personas.medico.posgrado">DecoratorPosgrado</a>&nbsp;medico)</code></div>
+<div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E(modelo.personas.medico.posgrado.DecoratorPosgrado)" class="member-name-link">DecoratorContratacion</a><wbr>(<a href="../posgrado/DecoratorPosgrado.html" title="class in modelo.modeloDominio.personas.medico.posgrado">DecoratorPosgrado</a>&nbsp;medico)</code></div>
 <div class="col-last even-row-color">
 <div class="block">Constructor de DecoratorContratacion
  <b>pre:</b> medico no debe ser nulo.</div>
@@ -159,7 +159,7 @@ implements <a href="../IMedico.html" title="interface in modelo.personas.medico"
 <h3 id="methods-inherited-from-class-java.lang.Object">Methods inherited from class&nbsp;java.lang.<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a></h3>
 <code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html#clone()" title="class or interface in java.lang" class="external-link">clone</a>, <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html#equals(java.lang.Object)" title="class or interface in java.lang" class="external-link">equals</a>, <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html#finalize()" title="class or interface in java.lang" class="external-link">finalize</a>, <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html#getClass()" title="class or interface in java.lang" class="external-link">getClass</a>, <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html#hashCode()" title="class or interface in java.lang" class="external-link">hashCode</a>, <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html#notify()" title="class or interface in java.lang" class="external-link">notify</a>, <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html#notifyAll()" title="class or interface in java.lang" class="external-link">notifyAll</a>, <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html#wait()" title="class or interface in java.lang" class="external-link">wait</a>, <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html#wait(long)" title="class or interface in java.lang" class="external-link">wait</a>, <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html#wait(long,int)" title="class or interface in java.lang" class="external-link">wait</a></code></div>
 <div class="inherited-list">
-<h3 id="methods-inherited-from-class-modelo.personas.medico.IMedico">Methods inherited from interface&nbsp;modelo.personas.medico.<a href="../IMedico.html" title="interface in modelo.personas.medico">IMedico</a></h3>
+<h3 id="methods-inherited-from-class-modelo.personas.medico.IMedico">Methods inherited from interface&nbsp;modelo.modeloDominio.personas.medico.<a href="../IMedico.html" title="interface in modelo.modeloDominio.personas.medico">IMedico</a></h3>
 <code><a href="../IMedico.html#getSueldo()">getSueldo</a></code></div>
 </section>
 </li>
@@ -175,7 +175,7 @@ implements <a href="../IMedico.html" title="interface in modelo.personas.medico"
 <li>
 <section class="detail" id="encapsulado">
 <h3>encapsulado</h3>
-<div class="member-signature"><span class="modifiers">protected</span>&nbsp;<span class="return-type"><a href="../posgrado/DecoratorPosgrado.html" title="class in modelo.personas.medico.posgrado">DecoratorPosgrado</a></span>&nbsp;<span class="element-name">encapsulado</span></div>
+<div class="member-signature"><span class="modifiers">protected</span>&nbsp;<span class="return-type"><a href="../posgrado/DecoratorPosgrado.html" title="class in modelo.modeloDominio.personas.medico.posgrado">DecoratorPosgrado</a></span>&nbsp;<span class="element-name">encapsulado</span></div>
 </section>
 </li>
 </ul>
@@ -189,7 +189,7 @@ implements <a href="../IMedico.html" title="interface in modelo.personas.medico"
 <li>
 <section class="detail" id="&lt;init&gt;(modelo.personas.medico.posgrado.DecoratorPosgrado)">
 <h3>DecoratorContratacion</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">DecoratorContratacion</span><wbr><span class="parameters">(<a href="../posgrado/DecoratorPosgrado.html" title="class in modelo.personas.medico.posgrado">DecoratorPosgrado</a>&nbsp;medico)</span></div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">DecoratorContratacion</span><wbr><span class="parameters">(<a href="../posgrado/DecoratorPosgrado.html" title="class in modelo.modeloDominio.personas.medico.posgrado">DecoratorPosgrado</a>&nbsp;medico)</span></div>
 <div class="block">Constructor de DecoratorContratacion
  <b>pre:</b> medico no debe ser nulo.
  <b>post:</b> se crea un DecoratorContratacion con el medico proporcionado.</div>
@@ -214,7 +214,7 @@ implements <a href="../IMedico.html" title="interface in modelo.personas.medico"
 <div class="block">Metodo publico String para preguntar cual es el numero de matricula del medico.</div>
 <dl class="notes">
 <dt>Specified by:</dt>
-<dd><code><a href="../IMedico.html#getNroMatricula()">getNroMatricula</a></code>&nbsp;in interface&nbsp;<code><a href="../IMedico.html" title="interface in modelo.personas.medico">IMedico</a></code></dd>
+<dd><code><a href="../IMedico.html#getNroMatricula()">getNroMatricula</a></code>&nbsp;in interface&nbsp;<code><a href="../IMedico.html" title="interface in modelo.modeloDominio.personas.medico">IMedico</a></code></dd>
 <dt>Returns:</dt>
 <dd>nroMatricula del medico</dd>
 </dl>
@@ -227,7 +227,7 @@ implements <a href="../IMedico.html" title="interface in modelo.personas.medico"
 <div class="block">Metodo publico String para preguntar cual es el nombre del medico.</div>
 <dl class="notes">
 <dt>Specified by:</dt>
-<dd><code><a href="../IMedico.html#getNombre()">getNombre</a></code>&nbsp;in interface&nbsp;<code><a href="../IMedico.html" title="interface in modelo.personas.medico">IMedico</a></code></dd>
+<dd><code><a href="../IMedico.html#getNombre()">getNombre</a></code>&nbsp;in interface&nbsp;<code><a href="../IMedico.html" title="interface in modelo.modeloDominio.personas.medico">IMedico</a></code></dd>
 <dt>Returns:</dt>
 <dd>nombre del medico</dd>
 </dl>
@@ -240,7 +240,7 @@ implements <a href="../IMedico.html" title="interface in modelo.personas.medico"
 <div class="block">Metodo publico String para preguntar cual es el apellido del medico.</div>
 <dl class="notes">
 <dt>Specified by:</dt>
-<dd><code><a href="../IMedico.html#getApellido()">getApellido</a></code>&nbsp;in interface&nbsp;<code><a href="../IMedico.html" title="interface in modelo.personas.medico">IMedico</a></code></dd>
+<dd><code><a href="../IMedico.html#getApellido()">getApellido</a></code>&nbsp;in interface&nbsp;<code><a href="../IMedico.html" title="interface in modelo.modeloDominio.personas.medico">IMedico</a></code></dd>
 <dt>Returns:</dt>
 <dd>apellido del medico</dd>
 </dl>
