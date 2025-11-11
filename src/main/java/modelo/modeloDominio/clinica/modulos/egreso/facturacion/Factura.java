@@ -26,6 +26,7 @@ public class Factura
      */
     public Factura(Paciente paciente)
     {
+        assert  paciente != null : "El paciente no puede ser nulo";
         this.numeroFactura = ++Factura.contadorFacturas;
         this.paciente = paciente;
     }
@@ -59,6 +60,7 @@ public class Factura
      */
     public void setDetalle(ArrayList<RegistroPaciente> consultasMedicas)
     {
+        assert consultasMedicas != null : "La lista de consultas medicas no puede ser nulo";
         StringBuilder aux = new StringBuilder();
         aux.append("N° Factura: ").append(this.numeroFactura).append("\n").append("Nombre Paciente: ").append(this.paciente.getNombre()).append("\n").append("Fecha Ingreso: ").append(consultasMedicas.get(0).getFecha()).append("\n").append("Fecha Egreso: ").append(consultasMedicas.get(0).getFecha().plusDays(paciente.getDiasInternado())).append("\n");
         if (this.paciente.getDiasInternado() > 0)
