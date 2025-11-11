@@ -4,6 +4,7 @@ import modelo.ambulancia.Ambulancia;
 import modelo.personas.Persona;
 import modelo.util.Domicilio;
 import patrones.PatronObserver.Observado;
+import persistencia.AsociadoDTO;
 
 public class Asociado extends Persona implements Runnable
 {
@@ -23,6 +24,13 @@ public class Asociado extends Persona implements Runnable
 
     public Asociado(String nombre, String apellido, String dni, String telefono, Domicilio domicilio){
         super(nombre, apellido, dni, domicilio, telefono);
+        this.maxCantSolicitudes = Integer.MAX_VALUE;
+        this.cantSolicitudesAtendidas = 0;
+        this.ambulancia = null;
+    }
+
+    public Asociado(AsociadoDTO datos) {
+        super(datos.getNombre(), datos.getApellido(), datos.getDni(), new Domicilio(datos.getCalle(), datos.getNumero(), datos.getCiudad()), datos.getTelefono());
         this.maxCantSolicitudes = Integer.MAX_VALUE;
         this.cantSolicitudesAtendidas = 0;
         this.ambulancia = null;

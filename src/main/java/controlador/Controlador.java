@@ -2,6 +2,7 @@ package controlador;
 
 import modelo.clinica.Clinica;
 import modelo.personas.asociado.Asociado;
+import persistencia.AsociadoDTO;
 import vista.IVista;
 import vista.VistaAsociadoDTO;
 
@@ -49,11 +50,10 @@ public class Controlador implements ActionListener {
     }
 
     public void guardarAsociado() {
-        VistaAsociadoDTO datos = this.vista.getNuevoAsociado();
-        Asociado asociado = modelo.crearAsociado(datos);
+        AsociadoDTO datos = this.vista.getNuevoAsociado();
 
         try {
-            this.modelo.guardarNuevoAsociado(asociado);
+            this.modelo.guardarNuevoAsociado(datos);
             this.vista.mostraMensaje("Exito", "Asociado guardado correctamente.");
             this.vista.limpiarFormularioAlta();
             this.vista.actualizarListaAsociados();
