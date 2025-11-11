@@ -3,7 +3,6 @@ package modelo.personas.asociado;
 import modelo.ambulancia.Ambulancia;
 import modelo.personas.Persona;
 import modelo.util.Domicilio;
-import patrones.PatronObserver.Observado;
 
 public class Asociado extends Persona implements Runnable
 {
