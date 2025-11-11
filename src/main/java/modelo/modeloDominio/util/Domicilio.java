@@ -17,6 +17,9 @@ public class Domicilio {
      * @param ciudad La ciudad del domicilio.
      */
     public Domicilio(String calle, int numero, String ciudad) {
+        assert calle != null;
+        assert numero > 0;
+        assert ciudad != null;
         this.calle = calle;
         this.numero = numero;
         this.ciudad = ciudad;
@@ -36,6 +39,7 @@ public class Domicilio {
      * @param calle La nueva calle del domicilio.
      */
     public void setCalle(String calle) {
+        assert calle != null;
         this.calle = calle;
     }
     /**
@@ -53,6 +57,7 @@ public class Domicilio {
      * @param numero El nuevo número del domicilio.
      */
     public void setNumero(int numero) {
+        assert numero > 0;
         this.numero = numero;
     }
 
@@ -70,6 +75,7 @@ public class Domicilio {
      * @param ciudad La nueva ciudad del domicilio.
      */
     public void setCiudad(String ciudad) {
+        assert ciudad != null;
         this.ciudad = ciudad;
     }
 
