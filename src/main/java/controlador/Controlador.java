@@ -1,10 +1,9 @@
 package controlador;
 
 import modelo.clinica.Clinica;
-import modelo.personas.asociado.Asociado;
 import persistencia.AsociadoDTO;
-import vista.IVista;
-import vista.VistaAsociadoDTO;
+import vista.IVistaPrincipal;
+import vista.IVistaSimulacion;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -12,12 +11,15 @@ import java.sql.SQLException;
 
 public class Controlador implements ActionListener {
     private Clinica modelo;
-    private IVista vista;
+    private IVistaPrincipal vistaPrincipal;
+    private IVistaSimulacion vistaSimulacion;
 
-    public Controlador(Clinica modelo, IVista vista) {
+    public Controlador(Clinica modelo, IVistaPrincipal vistaPrincipal, IVistaSimulacion vistaSimulacion) {
         this.modelo = modelo;
-        this.vista = vista;
-        this.vista.setActionListener(this);
+        this.vistaPrincipal = vistaPrincipal;
+        this.vistaPrincipal.setActionListener(this);
+        this.vistaSimulacion = vistaSimulacion;
+        this.vistaSimulacion.setActionListener(this);
     }
 
     @Override
@@ -25,15 +27,15 @@ public class Controlador implements ActionListener {
         String comando = e.getActionCommand();
 
         switch (comando) {
-            case IVista.ACEPTAR: {
+            case IVistaPrincipal.ACEPTAR: {
                 this.iniciarSimulacion();
                 break;
             }
-            case IVista.DAR_ALTA: {
+            case IVistaPrincipal.DAR_ALTA: {
                 this.guardarAsociado();
                 break;
             }
-            case IVista.DAR_BAJA: {
+            case IVistaPrincipal.DAR_BAJA: {
                 this.eliminarAsociado();
             }
         }
@@ -41,39 +43,39 @@ public class Controlador implements ActionListener {
 
     public void iniciarSimulacion(){
         try {
-            this.modelo.iniciarSimulacion (this.vista.getAsociados(), this.vista.getSolicudes());
-            this.vista.iniciarSimulacion();
+            this.modelo.iniciarSimulacion(this.vistaPrincipal.getCantAsociados(), this.vistaPrincipal.getCantSolicitudes());
+            this.vistaSimulacion.iniciarSimulacion();
         }
         catch (InterruptedException e) {
-            this.vista.mostrarMensaje("Fallo", "No se pudo iniciar la simulacion.");
+            this.vistaPrincipal.mostrarMensaje("Fallo", "No se pudo iniciar la simulacion.");
         }
     }
 
     public void guardarAsociado() {
-        AsociadoDTO datos = this.vista.getNuevoAsociado();
+        AsociadoDTO datos = this.vistaPrincipal.getNuevoAsociado();
 
         try {
             this.modelo.guardarNuevoAsociado(datos);
-            this.vista.mostraMensaje("Exito", "Asociado guardado correctamente.");
-            this.vista.limpiarFormularioAlta();
-            this.vista.actualizarListaAsociados();
+            this.vistaPrincipal.mostraMensaje("Exito", "Asociado guardado correctamente.");
+            this.vistaPrincipal.limpiarFormularioAlta();
+            this.vistaPrincipal.actualizarListaAsociados();
         }
         catch (SQLException e) {
-            this.vista.mostrarMensaje("Fallo", "No se pudo guardar al asociado.");
+            this.vistaPrincipal.mostrarMensaje("Fallo", "No se pudo guardar al asociado.");
         }
     }
 
     public void eliminarAsociado() {
-        String dni = this.vista.getDNI();
+        String dni = this.vistaPrincipal.getDNI();
 
         try {
             this.modelo.eliminarAsociado(dni);
-            this.vista.mostraMensaje("Exito", "Asociado eliminado correctamente.");
-            this.vista.limpiarFormularioBaja();
-            this.vista.actualizarListaAsociados();
+            this.vistaPrincipal.mostraMensaje("Exito", "Asociado eliminado correctamente.");
+            this.vistaPrincipal.limpiarFormularioBaja();
+            this.vistaPrincipal.actualizarListaAsociados();
         }
         catch (SQLException e) {
-            this.vista.mostrarMensaje("Fallo", "No se pudo eliminar al asociado.");
+            this.vistaPrincipal.mostrarMensaje("Fallo", "No se pudo eliminar al asociado.");
         }
     }
 }

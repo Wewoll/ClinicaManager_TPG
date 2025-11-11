@@ -1,16 +1,18 @@
 package app;
 
-import vista.IVista;
-import vista.Ventana;
+import vista.IVistaPrincipal;
+import vista.IVistaSimulacion;
+import vista.VentanaPrincipal;
 
 import modelo.clinica.Clinica;
 import controlador.Controlador;
+import vista.VentanaSimulacion;
 
 public class Prueba {
     public static void main(String[] args) {
-        IVista vista = new Ventana();
+        IVistaPrincipal vistaPrincipal = new VentanaPrincipal();
+        IVistaSimulacion vistaSimulacion = new VentanaSimulacion();
         Clinica clinica = Clinica.getInstancia();
-        Controlador controlador = new Controlador(clinica, vista);
-        vista.setActionListener(controlador);
+        Controlador controlador = new Controlador(clinica, vistaPrincipal, vistaSimulacion);
     }
 }

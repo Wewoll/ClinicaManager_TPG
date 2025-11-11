@@ -1,7 +1,7 @@
 package modelo.modeloAplicacion;
 
 
-import vista.IVista;
+import vista.IVistaPrincipal;
 
 import java.util.ArrayList;
 import java.util.Observable;
@@ -10,7 +10,7 @@ import java.util.Observer;
 public class ObservadorAsociado implements Observer
 {
     private ArrayList<Observado> observados;
-    private IVista vista;
+    private IVistaPrincipal vista;
 
     public ObservadorAsociado(Observado observado)
     {
@@ -18,12 +18,12 @@ public class ObservadorAsociado implements Observer
         this.observados.add(observado);
     }
 
-    public IVista getVista()
+    public IVistaPrincipal getVista()
     {
         return vista;
     }
 
-    public void setVista(IVista vista)
+    public void setVista(IVistaPrincipal vista)
     {
         this.vista = vista;
     }
