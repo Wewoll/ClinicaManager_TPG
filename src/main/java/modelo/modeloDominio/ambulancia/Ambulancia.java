@@ -1,10 +1,13 @@
 package modelo.modeloDominio.ambulancia;
 
+import modelo.modeloAplicacion.ObservableSimulacion;
 import modelo.modeloDominio.personas.asociado.Asociado;
+import modelo.modeloDominio.personas.operario.Operario;
 
 import java.util.ArrayList;
 
-public class Ambulancia {
+public class Ambulancia extends ObservableSimulacion
+{
     private State estadoActual;
     private boolean ocupado;
     private boolean isSimulacionActiva;
@@ -51,30 +54,31 @@ public class Ambulancia {
         isSimulacionActiva = simulacionActiva;
     }
 
-    public synchronized void solicitarMantenimiento()  {
+    public synchronized void solicitarMantenimiento(Operario o)  {
         while (this.ocupado) {
             try {
-                System.out.println("Ambulancia ocupada, esperando para solicitar mantenimiento...");
+                // System.out.println("Ambulancia ocupada, esperando para solicitar mantenimiento...");
                 wait(); // Espera 1 segundo antes de verificar nuevamente
             } catch (InterruptedException e) {
                 Thread.currentThread().interrupt();
                 return; // Salir si el hilo es interrumpido
             }
         }
-        System.out.println(">> Solicitando mantenimiento");
+        o.notifyObservers(o.getEstado());
+        // System.out.println(">> Solicitando mantenimiento");
         estadoActual.SolicitudMantenimiento();
         notifyAll();
     }
     public synchronized void volviendoDelTaller() {
-        System.out.println(">> Volviendo del taller");
+        // System.out.println(">> Volviendo del taller");
         estadoActual.SolicitudMantenimiento();
         notifyAll();
     }
     public synchronized void atenderDomicilio()  {
         while (this.ocupado) {
             try {
-                System.out.println("Ambulancia ocupada, esperando para atender domicilio...");
-                System.out.println(this.getEstadoActual());
+                // System.out.println("Ambulancia ocupada, esperando para atender domicilio...");
+                // System.out.println(this.getEstadoActual());
                 wait(); // Espera 1 segundo antes de verificar nuevamente
             } catch (InterruptedException e) {
                 Thread.currentThread().interrupt();
@@ -84,30 +88,31 @@ public class Ambulancia {
         System.out.println(">> Atendiendo domicilio");
         estadoActual.SolicitudDeAtencionDomicilio();
     }
-    public synchronized void trasladarALaClinica()
+    public synchronized void trasladarALaClinica(Asociado a)
     {
         while (this.ocupado) {
             try {
-                System.out.println("Ambulancia ocupada, esperando para trasladar a la clinica...");
-                System.out.println(this.getEstadoActual());
+                // System.out.println("Ambulancia ocupada, esperando para trasladar a la clinica...");
+                // System.out.println(this.getEstadoActual());
                 wait(); // Espera 1 segundo antes de verificar nuevamente
             } catch (InterruptedException e) {
                 Thread.currentThread().interrupt();
                 return; // Salir si el hilo es interrumpido
             }
         }
-        System.out.println(">> Trasladando a la clinica");
+        a.notifyObservers(a.getEstado());
+        // System.out.println(">> Trasladando a la clinica");
         this.estadoActual.SolicitudDeTraslado();
     }
 
     public synchronized void retornoAutomatico()  {
-        System.out.println(">> Retorno automatico");
+        // System.out.println(">> Retorno automatico");
         estadoActual.RetornoClinica();
         notifyAll();
     }
 
     public synchronized void regresarSinPaciente()  {
-        System.out.println("<< Regresando sin paciente");
+        // System.out.println("<< Regresando sin paciente");
         estadoActual.RetornoClinica();
         notifyAll();
     }

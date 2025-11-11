@@ -1,13 +1,15 @@
 package modelo.modeloDominio.personas.operario;
 
+import modelo.modeloAplicacion.EstadoSimulacion;
 import modelo.modeloDominio.ambulancia.Ambulancia;
 import modelo.modeloDominio.personas.Persona;
+import modelo.modeloDominio.personas.PersonaObservable;
 import modelo.modeloDominio.personas.asociado.Asociado;
 import modelo.modeloDominio.util.Domicilio;
 
 import java.util.ArrayList;
 
-public class Operario extends Persona implements Runnable
+public class Operario extends PersonaObservable implements Runnable
 {
     private Ambulancia ambulancia;
     public Operario(String nombre, String apellido, String dni, String telefono, Domicilio domicilio, Ambulancia ambulancia)
@@ -40,7 +42,8 @@ public class Operario extends Persona implements Runnable
                 Thread.currentThread().interrupt();
                 break;
             }
-            ambulancia.solicitarMantenimiento();
+            this.setEstado(new EstadoSimulacion("El operario " + this.getDni() + " solicita mantenimiento de la ambulancia.","Operario"));
+            ambulancia.solicitarMantenimiento(this);
             try{
                 System.out.println("Mantenimiento realizado por operario " + this.getDni());
                 Thread.sleep(5000);

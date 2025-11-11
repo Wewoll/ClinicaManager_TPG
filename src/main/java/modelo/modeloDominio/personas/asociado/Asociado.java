@@ -1,5 +1,6 @@
 package modelo.modeloDominio.personas.asociado;
 
+import modelo.modeloAplicacion.EstadoSimulacion;
 import modelo.modeloDominio.ambulancia.Ambulancia;
 import modelo.modeloDominio.personas.PersonaObservable;
 import modelo.modeloDominio.util.Domicilio;
@@ -56,13 +57,15 @@ public class Asociado extends PersonaObservable implements Runnable
     // el asociado puede hacer distintos pedidos en paralelo
     private void atencionADomicilio()
     {
+        this.setEstado(new EstadoSimulacion("El asociado " + this.getDni() + " solicita traslado a clinica.","Asociado"));
         ambulancia.atenderDomicilio();
         ambulancia.regresarSinPaciente();
     }
 
     private void trasladoALaClinca()
     {
-        ambulancia.trasladarALaClinica();
+        this.setEstado(new EstadoSimulacion("El asociado " + this.getDni() + " solicita traslado a clinica.","Asociado"));
+        ambulancia.trasladarALaClinica(this);
         ambulancia.regresarSinPaciente();
     }
 
@@ -80,11 +83,11 @@ public class Asociado extends PersonaObservable implements Runnable
     {
         while (ambulancia.isSimulacionActiva() && this.cantSolicitudesAtendidas < this.maxCantSolicitudes)
         {
-            System.out.println("Asociado " + this.getDni() + " intentando solicitud " + (this.cantSolicitudesAtendidas + 1) + " de " + maxCantSolicitudes);
+            // System.out.println("Asociado " + this.getDni() + " intentando solicitud " + (this.cantSolicitudesAtendidas + 1) + " de " + maxCantSolicitudes);
             eligirServicio();
             this.cantSolicitudesAtendidas++;
         }
-        System.out.println("Asociado " + this.getDni() + " ha finalizado sus solicitudes.");
+        // System.out.println("Asociado " + this.getDni() + " ha finalizado sus solicitudes.");
     }
 
     @Override
