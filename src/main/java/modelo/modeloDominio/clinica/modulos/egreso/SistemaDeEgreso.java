@@ -22,6 +22,8 @@ public class SistemaDeEgreso
      */
     public Factura egresarPaciente(Paciente p, ArrayList<RegistroPaciente> consultasMedicas)
     {
+        assert p != null : "El paciente no puede ser nulo";
+        assert consultasMedicas != null : "La lista de consultas medicas no puede ser nula";
         Factura f = new Factura(p);
         f.setDetalle(consultasMedicas);
         return f;

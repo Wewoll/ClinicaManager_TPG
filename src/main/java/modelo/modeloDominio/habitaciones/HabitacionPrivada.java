@@ -26,6 +26,7 @@ public class HabitacionPrivada extends Habitacion{
      */
     @Override
     public double calcularArancelInternacion(Paciente p) {
+        assert p != null : "El paciente no puede ser nulo";
         int cantdias = p.getDiasInternado();
         double arancel;
         if (cantdias == 1)

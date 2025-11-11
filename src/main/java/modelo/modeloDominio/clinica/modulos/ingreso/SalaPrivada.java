@@ -48,6 +48,7 @@ public class SalaPrivada {
      * @param paciente Paciente a asignar a la sala privada.
      */
     public void setPaciente(Paciente paciente) {
+        assert paciente != null : "El paciente no puede ser nulo";
         this.paciente = paciente;
     }
 }

@@ -29,6 +29,7 @@ public class PacienteMayor extends Paciente{
      */
     @Override
     public boolean prioridad(Paciente paciente){
+        assert  paciente != null;
         return paciente.prioridadConMayor();
     }
 

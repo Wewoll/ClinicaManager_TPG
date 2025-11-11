@@ -21,6 +21,7 @@ public class HabitacionCompartida extends Habitacion{
      */
     @Override
     public double calcularArancelInternacion(Paciente p) {
+        assert p != null : "El paciente no puede ser nulo";
         int cantdias = p.getDiasInternado();
         return COSTO * cantdias;
     }
