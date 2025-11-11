@@ -71,6 +71,8 @@ public class BaseDeDatos {
      * @throws SQLException Si ocurre un error al ejecutar la consulta.
      */
     public ResultSet ejecutarConsulta(String consulta, int id) throws SQLException{
+        assert consulta != null;
+        assert id != -1;
         ResultSet rs = null;
         PreparedStatement stmt = conexion.prepareStatement(consulta);
         stmt.setInt(1, id);
@@ -86,6 +88,8 @@ public class BaseDeDatos {
      * @throws SQLException Si ocurre un error al ejecutar la actualización.
      */
     public void ejecutarActualizacion(String actualizacion, AsociadoDTO aDTO) throws SQLException{
+        assert  actualizacion != null;
+        assert aDTO != null;
         PreparedStatement stmt = conexion.prepareStatement(actualizacion);
         stmt.setInt(1, aDTO.getId());
         stmt.setString(2, aDTO.getNombre());
@@ -106,6 +110,8 @@ public class BaseDeDatos {
      * @throws SQLException Si ocurre un error al ejecutar la inserción.
      */
     public void ejecutarInsert(String insert, AsociadoDTO aDTO)throws SQLException {
+        assert   insert != null;
+        assert aDTO != null;
         PreparedStatement stmt = conexion.prepareStatement(insert);
         stmt.setInt(1, aDTO.getId());
         stmt.setString(2, aDTO.getNombre());
@@ -126,6 +132,8 @@ public class BaseDeDatos {
      * @throws SQLException Si ocurre un error al ejecutar la eliminación.
      */
     public void ejecutarDelete(String delete, int id) throws SQLException{
+        assert   delete != null;
+        assert id != -1;
 
         PreparedStatement stmt = conexion.prepareStatement(delete);
         stmt.setInt(1, id);
