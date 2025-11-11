@@ -297,7 +297,7 @@ public class Clinica
         try{
             ArrayList<AsociadoDTO> asociadosDTOs= this.dao.cargarConLimite(cantAsociados);
             for (AsociadoDTO aDTO: asociadosDTOs){
-                Asociado asociado = new Asociado(aDTO.getNombre(), aDTO.getApellido(), aDTO.getDni(), aDTO.getTelefono(), aDTO.getDomicilio(),  maxCantSolicitudesPorAsociado,this.ambulancia);
+                Asociado asociado = new Asociado(aDTO.getNombre(), aDTO.getApellido(), aDTO.getDni(), aDTO.getTelefono(), new Domicilio(aDTO.getCalle(), aDTO.getNumero(), aDTO.getCiudad()),  maxCantSolicitudesPorAsociado,this.ambulancia);
                 this.asociados.add(asociado);
                 Thread hiloAsociado = new Thread(asociado);
                 hiloAsociado.start();
@@ -307,9 +307,10 @@ public class Clinica
         }
     }
 
-    public void guardarNuevoAsociado(Asociado asociado){
+    public void guardarNuevoAsociado(AsociadoDTO datos){
 
         try{
+            Asociado asociado = new Asociado(datos);
             dao.guardar(asociado);
         }catch (Exception e){
 

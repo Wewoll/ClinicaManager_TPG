@@ -9,13 +9,22 @@ public class AsociadoDTO implements Serializable {
     private String nombre;
     private String apellido;
     private String dni;
-    private Domicilio domicilio;
+    private String ciudad;
+    private String calle;
+    private int numero;
     private String telefono;
     private int id;
 
-    public AsociadoDTO() {
-
+    public AsociadoDTO(String nombre, String apellido, String dni, String ciudad, String calle, int numero, String telefono) {
+        this.nombre = nombre;
+        this.apellido = apellido;
+        this.dni = dni;
+        this.ciudad = ciudad;
+        this.calle = calle;
+        this.numero = numero;
+        this.telefono = telefono;
     }
+
     public String getNombre() {
         return nombre;
     }
@@ -34,11 +43,23 @@ public class AsociadoDTO implements Serializable {
     public void setDni(String dni) {
         this.dni = dni;
     }
-    public Domicilio getDomicilio() {
-        return domicilio;
+    public String getCiudad() {
+        return ciudad;
     }
-    public void setDomicilio(Domicilio domicilio) {
-        this.domicilio = domicilio;
+    public void setCiudad(String ciudad) {
+        this.ciudad = ciudad;
+    }
+    public String getCalle() {
+        return calle;
+    }
+    public void setCalle(String calle) {
+        this.calle = calle;
+    }
+    public int getNumero() {
+        return numero;
+    }
+    public void setNumero(int numero) {
+        this.numero = numero;
     }
     public String getTelefono() {
         return telefono;
