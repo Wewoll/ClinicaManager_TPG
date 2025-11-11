@@ -11,7 +11,7 @@ import controlador.Controlador;
 
 import java.util.ArrayList;
 
-public class Ventana extends JFrame implements IVista {
+public class VentanaPrincipal extends JFrame implements IVistaPrincipal {
     private JTabbedPane pestañas;
     private JPanel altaAsociado;
     private JTextField textField1;
@@ -29,11 +29,13 @@ public class Ventana extends JFrame implements IVista {
     private JButton darDeBajaButton;
     private JList listaAsociados;
     private JButton aceptarConfiguracionButton;
+    private JTextField cantAsociados;
+    private JTextField cantSolicitudes;
 
     private DefaultListModel<String> listaModel;
 
 
-    public Ventana() {
+    public VentanaPrincipal() {
         setContentPane(panelPrincipal);
         setTitle("Gestion de Asociados");
         setSize(800, 600);
@@ -67,8 +69,16 @@ public class Ventana extends JFrame implements IVista {
     }
 
     @Override
-    public void iniciarSimulacion() {
+    public int getCantAsociados() {
+        // TODO: Validar cantidades negativas o incorrectas
+        return Integer.parseInt(cantAsociados.getText());
+    }
 
+
+    @Override
+    public int getCantSolicitudes() {
+        // TODO: Validar cantidades negativas o incorrectas
+        return Integer.parseInt(cantSolicitudes.getText());
     }
 
     @Override
@@ -95,7 +105,7 @@ public class Ventana extends JFrame implements IVista {
     @Override
     public void actualizarListaAsociados(ArrayList<String> asociados) {
         this.listaModel.clear();
-        for(String asociado : asociados) {
+        for (String asociado : asociados) {
             this.listaModel.addElement(asociado);
         }
     }
@@ -289,9 +299,9 @@ public class Ventana extends JFrame implements IVista {
         final JLabel label10 = new JLabel();
         label10.setText("Cantidad de asociados");
         panel13.add(label10, new com.intellij.uiDesigner.core.GridConstraints(0, 0, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_WEST, com.intellij.uiDesigner.core.GridConstraints.FILL_NONE, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
-        final JTextField textField9 = new JTextField();
-        textField9.setText("");
-        panel13.add(textField9, new com.intellij.uiDesigner.core.GridConstraints(1, 0, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_WEST, com.intellij.uiDesigner.core.GridConstraints.FILL_HORIZONTAL, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_WANT_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(150, -1), null, 0, false));
+        cantAsociados = new JTextField();
+        cantAsociados.setText("");
+        panel13.add(cantAsociados, new com.intellij.uiDesigner.core.GridConstraints(1, 0, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_WEST, com.intellij.uiDesigner.core.GridConstraints.FILL_HORIZONTAL, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_WANT_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(150, -1), null, 0, false));
         final JPanel panel14 = new JPanel();
         panel14.setLayout(new com.intellij.uiDesigner.core.GridLayoutManager(3, 1, new Insets(0, 0, 0, 0), -1, -1));
         panel10.add(panel14, new com.intellij.uiDesigner.core.GridConstraints(1, 0, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_BOTH, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
@@ -304,9 +314,9 @@ public class Ventana extends JFrame implements IVista {
         final JLabel label11 = new JLabel();
         label11.setText("Cantidad maxima de solicitudes");
         panel15.add(label11, new com.intellij.uiDesigner.core.GridConstraints(0, 0, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_WEST, com.intellij.uiDesigner.core.GridConstraints.FILL_NONE, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
-        final JTextField textField10 = new JTextField();
-        textField10.setText("");
-        panel15.add(textField10, new com.intellij.uiDesigner.core.GridConstraints(1, 0, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_WEST, com.intellij.uiDesigner.core.GridConstraints.FILL_HORIZONTAL, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_WANT_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(150, -1), null, 0, false));
+        cantSolicitudes = new JTextField();
+        cantSolicitudes.setText("");
+        panel15.add(cantSolicitudes, new com.intellij.uiDesigner.core.GridConstraints(1, 0, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_WEST, com.intellij.uiDesigner.core.GridConstraints.FILL_HORIZONTAL, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_WANT_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(150, -1), null, 0, false));
     }
 
     /**
