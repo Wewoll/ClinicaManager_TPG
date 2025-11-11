@@ -88,6 +88,7 @@ public class Clinica
             instancia.listaHabitaciones = new ArrayList<>();
             instancia.asociados = new ArrayList<>();
             instancia.ambulancia = new Ambulancia();
+            instancia.dao = new DataAccessObject();
         }
         return instancia;
     }
@@ -112,6 +113,7 @@ public class Clinica
      */
     public void registrarMedico(IMedico medico)
     {
+        assert medico != null: "El medico no puede ser nulo";
         medicos.put(medico.getNroMatricula(), medico);
     }
 
@@ -124,6 +126,7 @@ public class Clinica
      */
     public void registrarPaciente(Paciente paciente)
     {
+        assert paciente != null: "El paciente no puede ser nulo";
         pacientesRegistrados.put(paciente.getNroHistoriaMedica(), paciente);
     }
     /**
@@ -133,7 +136,11 @@ public class Clinica
      *
      * @param h La habitacion a registrar.
      */
-    public void agregarHabitacion(Habitacion h) { this.listaHabitaciones.add(h); }
+    public void agregarHabitacion(Habitacion h)
+    {
+        assert  h != null: "El habitacion no puede ser nulo";
+        this.listaHabitaciones.add(h);
+    }
 
     /**
      * Ingresa un paciente a la clínica.
@@ -147,6 +154,8 @@ public class Clinica
      */
     public void ingresarPaciente(Paciente paciente, LocalDate fecha) throws PacienteNoRegistradoException
     {
+        assert   paciente != null: "El paciente no puede ser nulo";
+        assert  fecha != null: "El fecha no puede ser nulo";
         if (pacientesRegistrados.containsKey(paciente.getNroHistoriaMedica())){
             paciente.setFechaIngreso(fecha);
             this.sistemaDeIngreso.ingresaPaciente(paciente);
@@ -166,6 +175,7 @@ public class Clinica
      */
     public Factura egresarPaciente(Paciente paciente) throws PacienteSinConsultasMedicasException
     {
+        assert paciente != null: "El paciente no puede ser nulo";
         ArrayList<RegistroPaciente> consultasMedicas = this.sistemaDeReportes.obtenerRegistrosPorPaciente(paciente);
         if (consultasMedicas == null)
             throw new PacienteSinConsultasMedicasException("El paciente no tiene consultas médicas registradas.");
@@ -187,6 +197,8 @@ public class Clinica
      */
     public Factura egresarPaciente(Paciente paciente, int diasInternado) throws PacienteNoRegistradoException, PacienteSinConsultasMedicasException
     {
+        assert paciente != null: "El paciente no puede ser nulo";
+        assert diasInternado >= 0: "Los dias internado no pueden ser negativos";
         ArrayList<RegistroPaciente> consultasMedicas = this.sistemaDeReportes.obtenerRegistrosPorPaciente(paciente);
         Paciente p = this.pacientesRegistrados.get(paciente.getNroHistoriaMedica());
         if (p == null)
@@ -211,6 +223,9 @@ public class Clinica
      */
     public void atenderPaciente(IMedico medico, Paciente paciente) throws PacienteNoIngresadoException
     {
+        assert medico != null: "El medico no puede ser nulo";
+        assert  paciente != null: "El paciente no puede ser nulo";
+
         if (this.sistemaDeIngreso.sacarPacienteSalaDeEspera(paciente))
         {
             listaAtencion.add(paciente);
@@ -224,8 +239,22 @@ public class Clinica
         this.sistemaDeReportes.agregarRegistro(medico, paciente, paciente.getFechaIngreso());
 
     }
+
+    /**
+     * Genera un reporte de todas las consultas médicas realizadas por un medico específico en un rango de fechas.
+     * <b>Pre</b>: El medico no debe ser nulo y las fechas deben ser válidas.
+     * <b>Post</b>: Se retorna un String con el reporte de las consultas médicas del medico en el rango de fechas.
+     *
+     * @param medico      El medico del cual se desea generar el reporte.
+     * @param fechaInicio Fecha de inicio del rango.
+     * @param fechaFin    Fecha de fin del rango.
+     * @return String con el reporte de las consultas médicas del medico en el rango de fechas.
+     */
     public String generarReporteMedico(IMedico medico, LocalDate fechaInicio, LocalDate fechaFin)
     {
+        assert medico != null : "El medico no puede ser nulo";
+        assert  fechaInicio != null : "La fecha de inicio no puede ser nula";
+        assert fechaFin != null : "La fecha de fin no puede ser nula";
         StringBuilder sb = new StringBuilder();
         sb.append("Reporte de Consultas Médicas del Médico: ").append(medico.getNombre()).append(" ").append(medico.getApellido()).append("\n");
         sb.append("Desde: ").append(fechaInicio).append(" Hasta: ").append(fechaFin).append("\n-------------------------------------------------------------------------------------------\n");
@@ -254,6 +283,7 @@ public class Clinica
      */
     public String reportesMedicos(IMedico medico)
     {
+        assert medico != null: "El medico no puede ser nulo";
         StringBuilder sb = new StringBuilder();
         sb.append("Reportes del Medico: ").append(medico.getNombre()).append(" ").append(medico.getApellido()).append("\n");
         for (RegistroMedico registro : this.sistemaDeReportes.obtenerRegistrosPorMedico(medico))
@@ -276,6 +306,8 @@ public class Clinica
      */
     public void internarPaciente(Paciente paciente, Habitacion h) throws PacienteNoRegistradoException, PacienteNoIngresadoException, PacienteYaInternado, HabitacionOcupadaException
     {
+        assert   paciente != null: "El paciente no puede ser nulo";
+        assert  h != null: "La habitacion no puede ser nula";
         if (!this.pacientesRegistrados.containsKey(paciente.getNroHistoriaMedica()))
             throw new PacienteNoRegistradoException(paciente);
         if (!this.listaAtencion.contains(paciente))
@@ -289,11 +321,27 @@ public class Clinica
         this.listaAtencion.remove(paciente);
     }
 
+    /**
+     * Agrega un asociado a la lista de asociados de la clínica.
+     * <b>Pre</b>: El asociado no debe ser nulo.
+     * <b>Post</b>: El asociado se agrega a la lista de asociados de la clínica.
+     * @param asociado El asociado a agregar.
+     */
     public void agregarAsociado(Asociado asociado){
+        assert asociado != null : "El asociado no puede ser nulo";
         this.asociados.add(asociado);
     }
-
+    /**
+     * Inicia la simulación de la clínica con una cantidad específica de asociados y un máximo de solicitudes por asociado.
+     * <b>Pre</b>: cantAsociados y maxCantSolicitudesPorAsociado deben ser mayores que 0.
+     * <b>Post</b>: Se inicia la simulación con los asociados cargados desde la base de datos.
+     *
+     * @param cantAsociados                Cantidad de asociados a cargar.
+     * @param maxCantSolicitudesPorAsociado Máximo de solicitudes por asociado.
+     */
     public void iniciarSimulacion(int cantAsociados, int maxCantSolicitudesPorAsociado){
+            assert cantAsociados > 0 : "La cantidad de asociados debe ser mayor que 0";
+            assert maxCantSolicitudesPorAsociado > 0 : "La cantidad maxima de solicitudes por asociado debe ser mayor que 0";
         try{
             ArrayList<AsociadoDTO> asociadosDTOs= this.dao.cargarConLimite(cantAsociados);
             for (AsociadoDTO aDTO: asociadosDTOs){
@@ -307,8 +355,15 @@ public class Clinica
         }
     }
 
+    /**
+     * Guarda un nuevo asociado en la base de datos.
+     * <b>Pre</b>: Los datos del asociado no deben ser nulos.
+     * <b>Post</b>: Se guarda el nuevo asociado en la base de datos.
+     *
+     * @param datos Datos del asociado a guardar.
+     */
     public void guardarNuevoAsociado(AsociadoDTO datos){
-
+        assert datos != null : "El asociado no puede ser nulo";
         try{
             Asociado asociado = new Asociado(datos);
             dao.guardar(asociado);
@@ -317,7 +372,15 @@ public class Clinica
         }
     }
 
+    /**
+     * Elimina un asociado de la base de datos y de la lista de asociados de la clínica.
+     * <b>Pre</b>: El DNI del asociado no debe ser nulo.
+     * <b>Post</b>: Se elimina el asociado de la base de datos y de la lista de asociados de la clínica.
+     *
+     * @param dni DNI del asociado a eliminar.
+     */
     public void eliminarAsociado(String dni){
+        assert dni != null : "El asociado no puede ser nulo";
         try{
             for (Asociado a: asociados){
                 if (a.getDni().equals(dni)){
@@ -331,8 +394,16 @@ public class Clinica
         }
     }
 
-
+    /**
+     * Crea un objeto Asociado a partir de los datos proporcionados.
+     * <b>Pre</b>: Los datos del asociado no deben ser nulos.
+     * <b>Post</b>: Se devuelve un objeto Asociado con los datos proporcionados.
+     *
+     * @param datos Datos del asociado a crear.
+     * @return Objeto Asociado creado.
+     */
     public Asociado crearAsociado(VistaAsociadoDTO datos){
+        assert datos != null : "El asociado no puede ser nulo";
         return new Asociado(datos.getNombre(), datos.getApellido(), datos.getDni(), datos.getTelefono(), new Domicilio(datos.getCalle(),datos.getNumero(),datos.getCiudad()));
     }
 }

@@ -21,6 +21,7 @@ public class BaseDeDatos {
         conexion = null;
         cargarDriver();
         abrirConexion();
+        iniciarBD();
     }
     /**
      * Carga el driver JDBC de MySQL.
@@ -136,7 +137,7 @@ public class BaseDeDatos {
      * Inicializa la base de datos creando la tabla Asociados y llenándola con datos de ejemplo.
      * <b>post:</b> se crea la tabla Asociados y se insertan datos de ejemplo.
      */
-    public void IniciarBD(){
+    public void iniciarBD(){
         String query = "DROP TABLE IF EXISTS Asociados;";
         try{
             Statement stmt = conexion.createStatement();
@@ -145,7 +146,7 @@ public class BaseDeDatos {
             e.printStackTrace();
         }
 
-        query = "CREATE TABLE IF NOT EXISTS Asociados (int id PRIMARY KEY, VARCHAR(30) nombre,VARCHAR(30) apellido, VARCHAR(10) DNI UNIQUE, VARCHAR(30) calle,int numero, VARCHAR(35) ciudad, VARCHAR(15) telefono);";
+        query = "CREATE TABLE IF NOT EXISTS Asociados (int id AUTO_INCREMENT PRIMARY KEY , VARCHAR(30) nombre,VARCHAR(30) apellido, VARCHAR(10) DNI UNIQUE, VARCHAR(30) calle,int numero, VARCHAR(35) ciudad, VARCHAR(15) telefono);";
         try {
             Statement stmt = conexion.createStatement();
             stmt.execute(query);
