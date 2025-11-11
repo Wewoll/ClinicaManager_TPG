@@ -55,6 +55,7 @@ public abstract class PersonaObservable extends Observable
      */
     public void setNombre(String nombre)
     {
+        assert  nombre != null;
         this.nombre = nombre;
     }
 
@@ -77,6 +78,7 @@ public abstract class PersonaObservable extends Observable
      */
     public void setApellido(String apellido)
     {
+        assert   apellido != null;
         this.apellido = apellido;
     }
 
@@ -109,6 +111,7 @@ public abstract class PersonaObservable extends Observable
      */
     public void setDomicilio(Domicilio domicilio)
     {
+        assert  domicilio != null;
         this.domicilio = domicilio;
     }
 
@@ -131,6 +134,7 @@ public abstract class PersonaObservable extends Observable
      */
     public void setTelefono(String telefono)
     {
+        assert  telefono != null;
         this.telefono = telefono;
     }
 }

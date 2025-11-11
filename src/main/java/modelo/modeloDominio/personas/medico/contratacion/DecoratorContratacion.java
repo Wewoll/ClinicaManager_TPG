@@ -20,6 +20,7 @@ public abstract class DecoratorContratacion implements IMedico
      */
     public DecoratorContratacion(DecoratorPosgrado medico)
     {
+        assert medico != null : "El medico no puede ser nulo";
         this.encapsulado = medico;
     }
 

@@ -87,6 +87,7 @@ public abstract class Paciente extends Persona
      */
     public void setFechaIngreso(LocalDate fechaIngreso)
     {
+        assert fechaIngreso != null;
         this.fechaIngreso = fechaIngreso;
     }
 
@@ -110,6 +111,7 @@ public abstract class Paciente extends Persona
      */
     public void setDiasInternado(int diasInternado)
     {
+        assert diasInternado >= 0;
         this.diasInternado = diasInternado;
     }
 
@@ -132,6 +134,7 @@ public abstract class Paciente extends Persona
      */
     public void setHabitacion(Habitacion habitacion)
     {
+        assert habitacion != null;
         this.habitacion = habitacion;
     }
 

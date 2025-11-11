@@ -46,6 +46,7 @@ public abstract class Persona {
      * @param nombre
      */
     public void setNombre(String nombre) {
+        assert nombre != null;
         this.nombre = nombre;
     }
 
@@ -64,6 +65,7 @@ public abstract class Persona {
      * @param apellido
      */
     public void setApellido(String apellido) {
+        assert apellido != null;
         this.apellido = apellido;
     }
     /**
@@ -88,6 +90,7 @@ public abstract class Persona {
      * @param domicilio
      */
     public void setDomicilio(Domicilio domicilio) {
+        assert domicilio != null;
         this.domicilio = domicilio;
     }
 
@@ -106,6 +109,7 @@ public abstract class Persona {
      * @param telefono
      */
     public void setTelefono(String telefono) {
+        assert telefono != null;
         this.telefono = telefono;
     }
 }

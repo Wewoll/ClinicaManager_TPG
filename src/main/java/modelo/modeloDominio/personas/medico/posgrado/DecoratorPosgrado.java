@@ -18,6 +18,7 @@ public abstract class DecoratorPosgrado implements IMedico {
      * @param medico El medico al que se le aplicará el posgrado.
      */
     public DecoratorPosgrado(Medico medico) {
+        assert medico != null;
         this.encapsulado = medico;
     }
 
