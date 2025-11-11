@@ -1,8 +1,5 @@
 package persistencia;
 
-import modelo.ambulancia.Ambulancia;
-import modelo.util.Domicilio;
-
 import java.io.Serializable;
 
 public class AsociadoDTO implements Serializable {

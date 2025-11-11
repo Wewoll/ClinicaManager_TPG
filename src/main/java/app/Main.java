@@ -1,15 +1,15 @@
 package app;
 
-import modelo.clinica.Clinica;
-import modelo.clinica.modulos.egreso.facturacion.Factura;
-import modelo.habitaciones.Habitacion;
-import modelo.habitaciones.HabitacionesFactory;
-import modelo.personas.medico.IMedico;
-import modelo.personas.medico.MedicoFactory;
-import modelo.personas.paciente.Paciente;
-import modelo.personas.paciente.PacienteFactory;
-import modelo.util.Domicilio;
-import modelo.util.Excepciones.*;
+import modelo.modeloDominio.clinica.Clinica;
+import modelo.modeloDominio.clinica.modulos.egreso.facturacion.Factura;
+import modelo.modeloDominio.habitaciones.Habitacion;
+import modelo.modeloDominio.habitaciones.HabitacionesFactory;
+import modelo.modeloDominio.personas.medico.IMedico;
+import modelo.modeloDominio.personas.medico.MedicoFactory;
+import modelo.modeloDominio.personas.paciente.Paciente;
+import modelo.modeloDominio.personas.paciente.PacienteFactory;
+import modelo.modeloDominio.util.Domicilio;
+import modelo.modeloDominio.util.Excepciones.*;
 
 import java.time.LocalDate;
 

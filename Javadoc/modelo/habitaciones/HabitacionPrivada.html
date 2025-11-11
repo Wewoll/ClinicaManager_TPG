@@ -6,7 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <meta name="dc.created" content="2025-10-11">
-<meta name="description" content="declaration: package: modelo.habitaciones, class: HabitacionPrivada">
+<meta name="description" content="declaration: package: modelo.modeloDominio.habitaciones, class: HabitacionPrivada">
 <meta name="generator" content="javadoc/ClassWriterImpl">
 <link rel="stylesheet" type="text/css" href="../../stylesheet.css" title="Style">
 <link rel="stylesheet" type="text/css" href="../../script-dir/jquery-ui.min.css" title="Style">
@@ -68,18 +68,18 @@ loadScripts(document, 'script');</script>
 <main role="main">
 <!-- ======== START OF CLASS DATA ======== -->
 <div class="header">
-<div class="sub-title"><span class="package-label-in-type">Package</span>&nbsp;<a href="package-summary.html">modelo.habitaciones</a></div>
+<div class="sub-title"><span class="package-label-in-type">Package</span>&nbsp;<a href="package-summary.html">modelo.modeloDominio.habitaciones</a></div>
 <h1 title="Class HabitacionPrivada" class="title">Class HabitacionPrivada</h1>
 </div>
 <div class="inheritance" title="Inheritance Tree"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">java.lang.Object</a>
-<div class="inheritance"><a href="Habitacion.html" title="class in modelo.habitaciones">modelo.habitaciones.Habitacion</a>
-<div class="inheritance">modelo.habitaciones.HabitacionPrivada</div>
+<div class="inheritance"><a href="Habitacion.html" title="class in modelo.modeloDominio.habitaciones">modelo.modeloDominio.habitaciones.Habitacion</a>
+<div class="inheritance">modelo.modeloDominio.habitaciones.HabitacionPrivada</div>
 </div>
 </div>
 <section class="class-description" id="class-description">
 <hr>
 <div class="type-signature"><span class="modifiers">public class </span><span class="element-name type-name-label">HabitacionPrivada</span>
-<span class="extends-implements">extends <a href="Habitacion.html" title="class in modelo.habitaciones">Habitacion</a></span></div>
+<span class="extends-implements">extends <a href="Habitacion.html" title="class in modelo.modeloDominio.habitaciones">Habitacion</a></span></div>
 <div class="block">Clase especifica HabitacionCompartida que extiende Habitacion
  Contiene atributos estaticos MAXIMO_PACIENTES y COSTO</div>
 </section>
@@ -90,7 +90,7 @@ loadScripts(document, 'script');</script>
 <section class="field-summary" id="field-summary">
 <h2>Field Summary</h2>
 <div class="inherited-list">
-<h3 id="fields-inherited-from-class-modelo.habitaciones.Habitacion">Fields inherited from class&nbsp;modelo.habitaciones.<a href="Habitacion.html" title="class in modelo.habitaciones">Habitacion</a></h3>
+<h3 id="fields-inherited-from-class-modelo.habitaciones.Habitacion">Fields inherited from class&nbsp;modelo.modeloDominio.habitaciones.<a href="Habitacion.html" title="class in modelo.modeloDominio.habitaciones">Habitacion</a></h3>
 <code><a href="Habitacion.html#ocupada">ocupada</a></code></div>
 </section>
 </li>
@@ -122,7 +122,7 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-second">Method</div>
 <div class="table-header col-last">Description</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>double</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#calcularArancelInternacion(modelo.personas.paciente.Paciente)" class="member-name-link">calcularArancelInternacion</a><wbr>(<a href="../personas/paciente/Paciente.html" title="class in modelo.personas.paciente">Paciente</a>&nbsp;p)</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#calcularArancelInternacion(modelo.personas.paciente.Paciente)" class="member-name-link">calcularArancelInternacion</a><wbr>(<a href="../personas/paciente/Paciente.html" title="class in modelo.modeloDominio.personas.paciente">Paciente</a>&nbsp;p)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Metodo double que calcula el arancel de internacion</div>
 </div>
@@ -135,7 +135,7 @@ loadScripts(document, 'script');</script>
 </div>
 </div>
 <div class="inherited-list">
-<h3 id="methods-inherited-from-class-modelo.habitaciones.Habitacion">Methods inherited from class&nbsp;modelo.habitaciones.<a href="Habitacion.html" title="class in modelo.habitaciones">Habitacion</a></h3>
+<h3 id="methods-inherited-from-class-modelo.habitaciones.Habitacion">Methods inherited from class&nbsp;modelo.modeloDominio.habitaciones.<a href="Habitacion.html" title="class in modelo.modeloDominio.habitaciones">Habitacion</a></h3>
 <code><a href="Habitacion.html#desocupar()">desocupar</a>, <a href="Habitacion.html#getCantidadPacientes()">getCantidadPacientes</a>, <a href="Habitacion.html#getMaximoPacientes()">getMaximoPacientes</a>, <a href="Habitacion.html#getNroHabitacion()">getNroHabitacion</a>, <a href="Habitacion.html#isOcupada()">isOcupada</a>, <a href="Habitacion.html#ocupar()">ocupar</a>, <a href="Habitacion.html#setCantPacientes(int)">setCantPacientes</a></code></div>
 <div class="inherited-list">
 <h3 id="methods-inherited-from-class-java.lang.Object">Methods inherited from class&nbsp;java.lang.<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a></h3>
@@ -170,11 +170,11 @@ loadScripts(document, 'script');</script>
 <li>
 <section class="detail" id="calcularArancelInternacion(modelo.personas.paciente.Paciente)">
 <h3>calcularArancelInternacion</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">double</span>&nbsp;<span class="element-name">calcularArancelInternacion</span><wbr><span class="parameters">(<a href="../personas/paciente/Paciente.html" title="class in modelo.personas.paciente">Paciente</a>&nbsp;p)</span></div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">double</span>&nbsp;<span class="element-name">calcularArancelInternacion</span><wbr><span class="parameters">(<a href="../personas/paciente/Paciente.html" title="class in modelo.modeloDominio.personas.paciente">Paciente</a>&nbsp;p)</span></div>
 <div class="block">Metodo double que calcula el arancel de internacion</div>
 <dl class="notes">
 <dt>Specified by:</dt>
-<dd><code><a href="Habitacion.html#calcularArancelInternacion(modelo.personas.paciente.Paciente)">calcularArancelInternacion</a></code>&nbsp;in class&nbsp;<code><a href="Habitacion.html" title="class in modelo.habitaciones">Habitacion</a></code></dd>
+<dd><code><a href="Habitacion.html#calcularArancelInternacion(modelo.personas.paciente.Paciente)">calcularArancelInternacion</a></code>&nbsp;in class&nbsp;<code><a href="Habitacion.html" title="class in modelo.modeloDominio.habitaciones">Habitacion</a></code></dd>
 <dt>Parameters:</dt>
 <dd><code>p</code> - persona a la que se le calcula el arancel
  <b>pre:</b> p no debe ser nulo.

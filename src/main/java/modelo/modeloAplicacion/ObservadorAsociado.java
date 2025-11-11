@@ -1,7 +1,7 @@
 package modelo.modeloAplicacion;
 
 
-import modelo.personas.PersonaObservable;
+import modelo.modeloDominio.personas.PersonaObservable;
 import vista.IVista;
 
 import java.util.ArrayList;

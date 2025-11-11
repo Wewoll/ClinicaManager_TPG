@@ -1,10 +1,8 @@
 package controlador;
 
-import modelo.clinica.Clinica;
-import modelo.personas.asociado.Asociado;
+import modelo.modeloDominio.clinica.Clinica;
 import persistencia.AsociadoDTO;
 import vista.IVista;
-import vista.VistaAsociadoDTO;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;

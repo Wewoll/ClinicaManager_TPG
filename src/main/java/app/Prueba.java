@@ -3,7 +3,7 @@ package app;
 import vista.IVista;
 import vista.Ventana;
 
-import modelo.clinica.Clinica;
+import modelo.modeloDominio.clinica.Clinica;
 import controlador.Controlador;
 
 public class Prueba {

@@ -1,7 +1,6 @@
 package persistencia;
 
-import modelo.personas.asociado.Asociado;
-import modelo.util.Domicilio;
+import modelo.modeloDominio.personas.asociado.Asociado;
 
 import java.sql.*;
 import java.util.ArrayList;
