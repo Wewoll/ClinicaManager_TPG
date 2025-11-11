@@ -138,7 +138,18 @@ public class BaseDeDatos {
      * <b>post:</b> se crea la tabla Asociados y se insertan datos de ejemplo.
      */
     public void iniciarBD(){
-        String query = "DROP TABLE IF EXISTS Asociados;";
+        String query = "IF NOT EXISTS(SELECT * FROM sys.databases WHERE name = 'Grupo_7')\n" +
+                "BEGIN\n" +
+                "CREATE DATABASE Grupo_7;\n" +
+                "END;";
+        try{
+            Statement stmt = conexion.createStatement();
+            stmt.execute(query);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        query = "DROP TABLE IF EXISTS Asociados;";
         try{
             Statement stmt = conexion.createStatement();
             stmt.execute(query);
