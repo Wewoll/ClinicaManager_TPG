@@ -20,6 +20,8 @@ public class RegistroPaciente {
      * @param fecha Fecha del registro.
      */
     public RegistroPaciente(IMedico medico, LocalDate fecha) {
+        assert medico != null : "El médico no puede ser nulo";
+        assert fecha != null : "La fecha no puede ser nula";
         this.medico = medico;
         this.fecha = fecha;
     }
