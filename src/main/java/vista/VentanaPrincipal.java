@@ -8,6 +8,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 import controlador.Controlador;
+import persistencia.AsociadoDTO;
 
 import java.util.ArrayList;
 
@@ -56,7 +57,7 @@ public class VentanaPrincipal extends JFrame implements IVistaPrincipal {
     }
 
     @Override
-    public VistaAsociadoDTO getNuevoAsociado() {
+    public AsociadoDTO getNuevoAsociado() {
         String nombre = textField1.getText();
         String apellido = textField2.getText();
         String dni = textField3.getText();
@@ -65,7 +66,7 @@ public class VentanaPrincipal extends JFrame implements IVistaPrincipal {
         int numero = Integer.parseInt(textField6.getText());
         String telefono = textField7.getText();
 
-        return new VistaAsociadoDTO(nombre, apellido, dni, ciudad, calle, numero, telefono);
+        return new AsociadoDTO(nombre, apellido, dni, ciudad, calle, numero, telefono);
     }
 
     @Override
