@@ -2,11 +2,11 @@ package modelo.personas.asociado;
 
 import modelo.ambulancia.Ambulancia;
 import modelo.personas.Persona;
+import modelo.personas.PersonaObservable;
 import modelo.util.Domicilio;
-import patrones.PatronObserver.Observado;
 import persistencia.AsociadoDTO;
 
-public class Asociado extends Persona implements Runnable
+public class Asociado extends PersonaObservable implements Runnable
 {
     private int id;
     private int maxCantSolicitudes;

@@ -1,6 +1,7 @@
 package modelo.modeloAplicacion;
 
 
+import modelo.personas.PersonaObservable;
 import vista.IVista;
 
 import java.util.ArrayList;
@@ -9,7 +10,7 @@ import java.util.Observer;
 
 public class ObservadorAsociado implements Observer
 {
-    private ArrayList<Observado> observados;
+    private ArrayList<PersonaObservable> observados;
     private IVista vista;
 
     public ObservadorAsociado(Observado observado)
