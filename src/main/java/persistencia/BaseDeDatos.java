@@ -148,6 +148,13 @@ public class BaseDeDatos {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        query = "USE Grupo_7;";
+        try{
+            Statement stmt = conexion.createStatement();
+            stmt.execute(query);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
 
         query = "DROP TABLE IF EXISTS Asociados;";
         try{
