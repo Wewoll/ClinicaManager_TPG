@@ -42,7 +42,7 @@ public class Controlador implements ActionListener {
 
     public void iniciarSimulacion(){
         try {
-            this.modelo.iniciarSimulacion(this.vistaPrincipal.getCantAsociados(), this.vistaPrincipal.getCantSolicitudes());
+            this.modelo.iniciarSimulacion(this.vistaPrincipal.getCantAsociados(), this.vistaPrincipal.getCantSolicitudes(),this.vistaSimulacion);
             this.vistaSimulacion.iniciarSimulacion();
         }
         catch (InterruptedException e) {

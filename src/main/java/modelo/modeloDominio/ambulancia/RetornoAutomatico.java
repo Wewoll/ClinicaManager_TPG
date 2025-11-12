@@ -6,7 +6,7 @@ import modelo.modeloDominio.personas.asociado.Asociado;
 import java.util.ArrayList;
 import java.util.Observable;
 
-public class RetornoAutomatico extends Observable implements Runnable
+public class RetornoAutomatico implements Runnable
 {
     private Ambulancia ambulancia;
 
@@ -31,7 +31,6 @@ public class RetornoAutomatico extends Observable implements Runnable
     @Override
     public void run()
     {
-        new NotificacionSimulacion("La ambulancia incia retorno automatico", "INFO");
         while (ambulancia.isSimulacionActiva())
         {
             terminaronAsociados();

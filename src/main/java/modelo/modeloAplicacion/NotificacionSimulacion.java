@@ -18,4 +18,13 @@ public class NotificacionSimulacion
     {
         return tipo;
     }
+
+    @Override
+    public String toString()
+    {
+        return "NotificacionSimulacion{" +
+                "mensaje='" + mensaje + '\'' +
+                ", tipo='" + tipo + '\'' +
+                '}';
+    }
 }

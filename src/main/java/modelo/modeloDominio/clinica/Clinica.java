@@ -1,6 +1,8 @@
 package modelo.modeloDominio.clinica;
 
+import modelo.modeloAplicacion.ObservadorSimulacion;
 import modelo.modeloDominio.ambulancia.Ambulancia;
+import modelo.modeloDominio.ambulancia.RetornoAutomatico;
 import modelo.modeloDominio.clinica.modulos.egreso.SistemaDeEgreso;
 import modelo.modeloDominio.clinica.modulos.egreso.facturacion.Factura;
 import modelo.modeloDominio.clinica.modulos.reportes.SistemaDeReportes;
@@ -8,6 +10,7 @@ import modelo.modeloDominio.clinica.modulos.ingreso.SistemaIngreso;
 import modelo.modeloDominio.habitaciones.Habitacion;
 import modelo.modeloDominio.personas.asociado.Asociado;
 import modelo.modeloDominio.personas.medico.IMedico;
+import modelo.modeloDominio.personas.operario.Operario;
 import modelo.modeloDominio.personas.paciente.Paciente;
 import modelo.modeloDominio.util.Domicilio;
 import modelo.modeloDominio.util.registros.RegistroMedico;
@@ -15,6 +18,7 @@ import modelo.modeloDominio.util.registros.RegistroPaciente;
 import modelo.modeloDominio.util.Excepciones.*;
 import persistencia.AsociadoDTO;
 import persistencia.DataAccessObject;
+import vista.IVistaSimulacion;
 import vista.VistaAsociadoDTO;
 
 import java.sql.SQLException;
@@ -339,17 +343,23 @@ public class Clinica
      * @param cantAsociados                Cantidad de asociados a cargar.
      * @param maxCantSolicitudesPorAsociado Máximo de solicitudes por asociado.
      */
-    public void iniciarSimulacion(int cantAsociados, int maxCantSolicitudesPorAsociado) throws InterruptedException {
+    public void iniciarSimulacion(int cantAsociados, int maxCantSolicitudesPorAsociado, IVistaSimulacion vistaSimulacion) throws InterruptedException {
             assert cantAsociados > 0 : "La cantidad de asociados debe ser mayor que 0";
             assert maxCantSolicitudesPorAsociado > 0 : "La cantidad maxima de solicitudes por asociado debe ser mayor que 0";
         try{
             ArrayList<AsociadoDTO> asociadosDTOs= this.dao.cargarConLimite(cantAsociados);
+            ObservadorSimulacion observador = new ObservadorSimulacion(this.ambulancia, vistaSimulacion);
+            RetornoAutomatico retornoAutomatico = new RetornoAutomatico(this.ambulancia);
+            Operario operario = new Operario("Operario1", "ApellidoOp", "00000001", "555-0001", new Domicilio("Calle Op",1,"CiudadOp"), this.ambulancia);
+            // observador.agregarObservado(retornoAutomatico);
             for (AsociadoDTO aDTO: asociadosDTOs){
                 Asociado asociado = new Asociado(aDTO.getNombre(), aDTO.getApellido(), aDTO.getDni(), aDTO.getTelefono(), new Domicilio(aDTO.getCalle(), aDTO.getNumero(), aDTO.getCiudad()),  maxCantSolicitudesPorAsociado,this.ambulancia);
                 this.asociados.add(asociado);
                 Thread hiloAsociado = new Thread(asociado);
                 hiloAsociado.start();
             }
+            new Thread(operario).start();
+            new Thread(retornoAutomatico).start();
         }catch (SQLException e){
             System.out.println("Error al cargar con limite de solicitudes");
             // mostrar mensaje de error en la interfaz

@@ -2,11 +2,12 @@ package modelo.modeloDominio.personas.asociado;
 
 import modelo.modeloAplicacion.NotificacionSimulacion;
 import modelo.modeloDominio.ambulancia.Ambulancia;
-import modelo.modeloDominio.personas.PersonaObservable;
+import modelo.modeloDominio.personas.Persona;
 import modelo.modeloDominio.util.Domicilio;
+import modelo.modeloDominio.util.TiempoMuerto;
 import persistencia.AsociadoDTO;
 
-public class Asociado extends PersonaObservable implements Runnable
+public class Asociado extends Persona implements Runnable
 {
     private int id;
     private int maxCantSolicitudes;
@@ -58,6 +59,7 @@ public class Asociado extends PersonaObservable implements Runnable
     private void atencionADomicilio()
     {
         ambulancia.atenderDomicilio(this);
+        TiempoMuerto.esperar();
         ambulancia.regresarSinPaciente();
     }
 
@@ -65,6 +67,7 @@ public class Asociado extends PersonaObservable implements Runnable
     {
         new NotificacionSimulacion("El asociado " + this.getDni() + " solicita traslado a clinica.","Asociado");
         ambulancia.trasladarALaClinica(this);
+        TiempoMuerto.esperar();
         ambulancia.regresarSinPaciente();
     }
 
@@ -84,6 +87,8 @@ public class Asociado extends PersonaObservable implements Runnable
         {
             // System.out.println("Asociado " + this.getDni() + " intentando solicitud " + (this.cantSolicitudesAtendidas + 1) + " de " + maxCantSolicitudes);
             eligirServicio();
+            TiempoMuerto.esperar();
+            // System.out.println("Asociado " + this.getDni() + " ha finalizado solicitud " + (this.cantSolicitudesAtendidas + 1) + " de " + maxCantSolicitudes);
             this.cantSolicitudesAtendidas++;
         }
         // System.out.println("Asociado " + this.getDni() + " ha finalizado sus solicitudes.");

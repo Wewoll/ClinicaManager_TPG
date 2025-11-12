@@ -59,62 +59,73 @@ public class Ambulancia extends Observable
         while (this.ocupado) {
             try {
                 // System.out.println("Ambulancia ocupada, esperando para solicitar mantenimiento...");
-                wait(); // Espera 1 segundo antes de verificar nuevamente
+                setChanged();
+                this.notifyObservers(new NotificacionSimulacion("Ambulancia ocupada, el operario "+ o.getNombre() + " espera para solicitar mantenimiento...","Operario"));
+                wait();
             } catch (InterruptedException e) {
                 Thread.currentThread().interrupt();
                 return; // Salir si el hilo es interrumpido
             }
         }
-        o.notifyObservers(new NotificacionSimulacion("El operario " + o.getDni() + " solicita mantenimiento de la ambulancia.","Operario"));
+        setChanged();
+        this.notifyObservers(new NotificacionSimulacion(">> El operario " + o.getNombre() + " solicitó el mantenimiento de la ambulancia.","Operario"));
         // System.out.println(">> Solicitando mantenimiento");
         estadoActual.SolicitudMantenimiento();
         notifyAll();
     }
     public synchronized void volviendoDelTaller() {
         // System.out.println(">> Volviendo del taller");
+        this.notifyObservers(new NotificacionSimulacion("<< La ambulancia vuelve del taller.","AMBULANCIA"));
         estadoActual.SolicitudMantenimiento();
         notifyAll();
     }
     public synchronized void atenderDomicilio(Asociado a)  {
         while (this.ocupado) {
             try {
+                setChanged();
+                this.notifyObservers(new NotificacionSimulacion("Ambulancia ocupada, el asociado "+ a.getNombre() + " espera para ser atendido a domicilio...","Asociado"));
                 // System.out.println("Ambulancia ocupada, esperando para atender domicilio...");
                 // System.out.println(this.getEstadoActual());
-                wait(); // Espera 1 segundo antes de verificar nuevamente
+                wait();
             } catch (InterruptedException e) {
                 Thread.currentThread().interrupt();
                 return; // Salir si el hilo es interrumpido
             }
         }
-        a.notifyObservers(new NotificacionSimulacion("El asociado " + a.getDni() + " solicita traslado a clinica.","Asociado"));
+        setChanged();
+        this.notifyObservers(new NotificacionSimulacion(">> El asociado " + a.getNombre() + " es atendido domicilio.","Asociado"));
         estadoActual.SolicitudDeAtencionDomicilio();
     }
     public synchronized void trasladarALaClinica(Asociado a)
     {
         while (this.ocupado) {
             try {
-                // System.out.println("Ambulancia ocupada, esperando para trasladar a la clinica...");
+                setChanged();
+                this.notifyObservers(new NotificacionSimulacion("Ambulancia ocupada, el asociado "+ a.getNombre() + " espera para ser trasladado a la clinica...","Asociado"));
                 // System.out.println(this.getEstadoActual());
-                wait(); // Espera 1 segundo antes de verificar nuevamente
+                wait();
             } catch (InterruptedException e) {
                 Thread.currentThread().interrupt();
                 return; // Salir si el hilo es interrumpido
             }
         }
-        a.notifyObservers(new NotificacionSimulacion("El asociado " + a.getDni() + " solicita traslado a clinica.","Asociado"));
+        setChanged();
+        this.notifyObservers(new NotificacionSimulacion(">> El asociado " + a.getNombre() + " es trasladado a la clinica.","Asociado"));
         // System.out.println(">> Trasladando a la clinica");
         this.estadoActual.SolicitudDeTraslado();
     }
 
     public synchronized void retornoAutomatico(RetornoAutomatico retornoAutomatico)  {
-        retornoAutomatico.notifyObservers(new NotificacionSimulacion("La ambulancia incia retorno automatico", "INFO"));
+        setChanged();
+        this.notifyObservers(new NotificacionSimulacion("La ambulancia incia retorno automatico", "INFO"));
         estadoActual.RetornoClinica();
         notifyAll();
     }
 
     public synchronized void regresarSinPaciente()  {
         // System.out.println("<< Regresando sin paciente");
-        this.notifyObservers(new NotificacionSimulacion("La ambulancia regresa sin paciente a la clinica.","AMBULANCIA"));
+        setChanged();
+        this.notifyObservers(new NotificacionSimulacion("<< La ambulancia regresa sin paciente a la clinica.","AMBULANCIA"));
         estadoActual.RetornoClinica();
         notifyAll();
     }

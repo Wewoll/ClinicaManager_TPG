@@ -2,7 +2,7 @@ package modelo.modeloDominio.personas.operario;
 
 import modelo.modeloAplicacion.NotificacionSimulacion;
 import modelo.modeloDominio.ambulancia.Ambulancia;
-import modelo.modeloDominio.personas.PersonaObservable;
+import modelo.modeloDominio.personas.Persona;
 import modelo.modeloDominio.personas.asociado.Asociado;
 import modelo.modeloDominio.util.Domicilio;
 
@@ -12,7 +12,7 @@ import java.util.ArrayList;
  * Clase Operario que representa a un operario encargado del mantenimiento de ambulancias.
  * Hereda de PersonaObservable e implementa Runnable para permitir la ejecución en un hilo separado.
  */
-public class Operario extends PersonaObservable implements Runnable
+public class Operario extends Persona implements Runnable
 {
     private Ambulancia ambulancia;
 
@@ -71,7 +71,7 @@ public class Operario extends PersonaObservable implements Runnable
             }
             ambulancia.solicitarMantenimiento(this);
             try{
-                System.out.println("Mantenimiento realizado por operario " + this.getDni());
+                // System.out.println("Mantenimiento realizado por operario " + this.getDni());
                 Thread.sleep(5000);
             } catch (InterruptedException e) {}
             ambulancia.volviendoDelTaller();

@@ -77,7 +77,7 @@ public class BaseDeDatos {
         PreparedStatement stmt = conexion.prepareStatement(consulta);
         stmt.setInt(1, id);
         rs = stmt.executeQuery();
-        stmt.close();
+        // stmt.close();
         return rs;
     }
 
