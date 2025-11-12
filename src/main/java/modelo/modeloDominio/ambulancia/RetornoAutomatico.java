@@ -1,10 +1,12 @@
 package modelo.modeloDominio.ambulancia;
 
+import modelo.modeloAplicacion.EstadoSimulacion;
+import modelo.modeloAplicacion.ObservableSimulacion;
 import modelo.modeloDominio.personas.asociado.Asociado;
 
 import java.util.ArrayList;
 
-public class RetornoAutomatico implements Runnable
+public class RetornoAutomatico extends ObservableSimulacion implements Runnable
 {
     private Ambulancia ambulancia;
 
@@ -17,7 +19,7 @@ public class RetornoAutomatico implements Runnable
         ArrayList<Asociado> asociados = this.ambulancia.getAsociados();
         for (Asociado asociado : asociados)
         {
-            System.out.println("Cantidad de solicitudes atendidas por asociado " + asociado.getDni() + ": " + asociado.getCantSolicitudesAtendidas() + "/" + asociado.getMaxCantSolicitudes());
+            // System.out.println("Cantidad de solicitudes atendidas por asociado " + asociado.getDni() + ": " + asociado.getCantSolicitudesAtendidas() + "/" + asociado.getMaxCantSolicitudes());
             if (asociado.getCantSolicitudesAtendidas() >= asociado.getMaxCantSolicitudes())
             {
                 this.ambulancia.setSimulacionActiva(false);
@@ -29,6 +31,7 @@ public class RetornoAutomatico implements Runnable
     @Override
     public void run()
     {
+        this.setEstado(new EstadoSimulacion("La ambulancia incia retorno automatico", "INFO"));
         while (ambulancia.isSimulacionActiva())
         {
             terminaronAsociados();
@@ -41,7 +44,7 @@ public class RetornoAutomatico implements Runnable
                 return; // Salir si el hilo es interrumpido
             }
             System.out.println(">> Iniciando retorno automatico de la ambulancia");
-            ambulancia.retornoAutomatico();
+            ambulancia.retornoAutomatico(this);
         }
     }
 }
