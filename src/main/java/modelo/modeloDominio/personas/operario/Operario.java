@@ -9,14 +9,36 @@ import modelo.modeloDominio.util.Domicilio;
 
 import java.util.ArrayList;
 
+/**
+ * Clase Operario que representa a un operario encargado del mantenimiento de ambulancias.
+ * Hereda de PersonaObservable e implementa Runnable para permitir la ejecución en un hilo separado.
+ */
 public class Operario extends PersonaObservable implements Runnable
 {
     private Ambulancia ambulancia;
+
+    /**
+     * Constructor parametrizado de la clase Operario.
+     * <b>pre:</b> los parámetros no deben ser nulos.
+     * <b>post:</b> se crea una instancia de Operario con los valores proporcionados.
+     * @param nombre
+     * @param apellido
+     * @param dni
+     * @param telefono
+     * @param domicilio
+     * @param ambulancia
+     */
     public Operario(String nombre, String apellido, String dni, String telefono, Domicilio domicilio, Ambulancia ambulancia)
     {
         super(nombre, apellido,  dni, domicilio, telefono);
         this.ambulancia = ambulancia;
     }
+
+    /**
+     * Método privado que verifica si los asociados han terminado de atender sus solicitudes.
+     * Si algún asociado ha alcanzado su máximo de solicitudes atendidas, se desactiva la simulación.
+     * <b>post:</b> se actualiza el estado de la simulación en la ambulancia.
+     */
     private void terminaronAsociados()
     {
         ArrayList<Asociado> asociados = this.ambulancia.getAsociados();
@@ -31,6 +53,12 @@ public class Operario extends PersonaObservable implements Runnable
         }
         this.ambulancia.setSimulacionActiva(true);
     }
+
+    /**
+     * Método run que ejecuta la lógica del operario en un hilo separado.
+     * El operario solicita mantenimiento de la ambulancia cada cierto tiempo mientras la simulación esté activa.
+     * <b>post:</b> el operario solicita mantenimiento de la ambulancia periódicamente.
+     */
     @Override
     public void run() {
         // pedir mantenimiento de ambulancias
