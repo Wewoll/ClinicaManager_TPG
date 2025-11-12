@@ -76,7 +76,8 @@ public class BaseDeDatos {
         ResultSet rs = null;
         PreparedStatement stmt = conexion.prepareStatement(consulta);
         stmt.setInt(1, id);
-        rs = stmt.executeQuery(consulta);
+        rs = stmt.executeQuery();
+        stmt.close();
         return rs;
     }
 
@@ -99,7 +100,8 @@ public class BaseDeDatos {
         stmt.setInt(6, aDTO.getNumero());
         stmt.setString(7, aDTO.getCiudad());
         stmt.setString(8, aDTO.getTelefono());
-        stmt.executeUpdate(actualizacion);
+        stmt.executeUpdate();
+        stmt.close();
     }
 
     /**
@@ -121,8 +123,8 @@ public class BaseDeDatos {
         stmt.setInt(6, aDTO.getNumero());
         stmt.setString(7, aDTO.getCiudad());
         stmt.setString(8, aDTO.getTelefono());
-        stmt.executeUpdate(insert);
-
+        stmt.executeUpdate();
+        stmt.close();
     }
     /**
      * Ejecuta una sentencia DELETE SQL.
@@ -137,8 +139,8 @@ public class BaseDeDatos {
 
         PreparedStatement stmt = conexion.prepareStatement(delete);
         stmt.setInt(1, id);
-        stmt.executeUpdate(delete);
-
+        stmt.executeUpdate();
+        stmt.close();
     }
 
     /**
@@ -152,6 +154,7 @@ public class BaseDeDatos {
         try{
             Statement stmt = conexion.createStatement();
             stmt.execute(query);
+            stmt.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -159,6 +162,7 @@ public class BaseDeDatos {
         try{
             Statement stmt = conexion.createStatement();
             stmt.execute(query);
+            stmt.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -167,6 +171,7 @@ public class BaseDeDatos {
         try{
             Statement stmt = conexion.createStatement();
             stmt.execute(query);
+            stmt.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -175,6 +180,7 @@ public class BaseDeDatos {
         try {
             Statement stmt = conexion.createStatement();
             stmt.execute(query);
+            stmt.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -204,6 +210,7 @@ public class BaseDeDatos {
         try{
             Statement stmt = conexion.createStatement();
             stmt.execute(query);
+            stmt.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
