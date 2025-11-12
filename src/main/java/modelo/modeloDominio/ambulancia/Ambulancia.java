@@ -105,8 +105,8 @@ public class Ambulancia extends ObservableSimulacion
         this.estadoActual.SolicitudDeTraslado();
     }
 
-    public synchronized void retornoAutomatico()  {
-        // System.out.println(">> Retorno automatico");
+    public synchronized void retornoAutomatico(RetornoAutomatico retornoAutomatico)  {
+        retornoAutomatico.notifyObservers(retornoAutomatico.getEstado());
         estadoActual.RetornoClinica();
         notifyAll();
     }

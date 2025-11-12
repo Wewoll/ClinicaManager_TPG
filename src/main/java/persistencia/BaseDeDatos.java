@@ -9,7 +9,7 @@ import java.sql.*;
  */
 public class BaseDeDatos {
     private static Connection conexion;
-    private static final String URL = "jdbc:mysql://localhost:3306/Grupo_7";
+    private static final String URL = "jdbc:mysql://localhost:3306/?useSSL=false&serverTimezone=UTC";
     private static final String USUARIO = "progra_c";
     private static final String CONTRASENA = "progra_c";
 
@@ -146,25 +146,24 @@ public class BaseDeDatos {
      * <b>post:</b> se crea la tabla Asociados y se insertan datos de ejemplo.
      */
     public void iniciarBD(){
-//        String query = "IF NOT EXISTS(SELECT * FROM sys.databases WHERE name = 'Grupo_7')\n" +
-//                "BEGIN\n" +
-//                "CREATE DATABASE Grupo_7;\n" +
-//                "END;";
-//        try{
-//            Statement stmt = conexion.createStatement();
-//            stmt.execute(query);
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//        }
-//        query = "USE Grupo_7;";
-//        try{
-//            Statement stmt = conexion.createStatement();
-//            stmt.execute(query);
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//        }
+        String query = "CREATE DATABASE IF NOT EXISTS Grupo_7\n" +
+                "CHARACTER SET utf8\n" +
+                "COLLATE utf8_unicode_ci;";
+        try{
+            Statement stmt = conexion.createStatement();
+            stmt.execute(query);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        query = "USE Grupo_7;";
+        try{
+            Statement stmt = conexion.createStatement();
+            stmt.execute(query);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
 
-        String query = "DROP TABLE IF EXISTS Asociados;";
+        query = "DROP TABLE IF EXISTS Asociados;";
         try{
             Statement stmt = conexion.createStatement();
             stmt.execute(query);
@@ -180,7 +179,27 @@ public class BaseDeDatos {
             e.printStackTrace();
         }
 
-        query = "INSERT INTO Asociados (id, nombre, apellido, dni, calle, numero, ciudad, telefono) VALUES (1, 'Juan', 'State', '12345678', 'Buenos Aires', 123, 'Mar del Plata', '2235551234'), (2, 'Maria', 'Template', '87654321', 'Libertad',742, 'Mar del Plata', '2235555678'), (3, 'Carlos', 'Observer', '11223344', 'Colon', 456, 'Mar del Plata', '2235558765'), (4, 'Jose', 'Concurrencia', '21842190', 'Juan B Justo',200,' Mar del Plata', '1551232349'), (5, 'Xin', 'Dao', '33445566', 'Corrientes', 789,'Mar del Plata', '2235554321'), (6, 'Ana', 'Facade', '66554433', 'San Martin', 321, 'Mar del Plata', '2235556789');";
+        query = "INSERT INTO Asociados (id, nombre, apellido, dni, calle, numero, ciudad, telefono) VALUES\n" +
+                "(1, 'Juan', 'State', '12345678', 'Buenos Aires', 123, 'Mar del Plata', '2235551234'),\n" +
+                "(2, 'Maria', 'Template', '87654321', 'Libertad', 742, 'Mar del Plata', '2235555678'),\n" +
+                "(3, 'Carlos', 'Observer', '11223344', 'Colon', 456, 'Mar del Plata', '2235558765'),\n" +
+                "(4, 'Jose', 'Concurrencia', '21842190', 'Juan B Justo', 200, ' Mar del Plata', '1551232349'),\n" +
+                "(5, 'Xin', 'Dao', '33445566', 'Corrientes', 789, 'Mar del Plata', '2235554321'),\n" +
+                "(6, 'Ana', 'Facade', '66554433', 'San Martin', 321, 'Mar del Plata', '2235556789'),\n" +
+                "(7, 'Laura', 'Singleton', '22334455', 'Alem', 1450, 'Mar del Plata', '2236112233'),\n" +
+                "(8, 'Martin', 'Factory', '33445577', 'Guemes', 2870, 'Mar del Plata', '2236223344'),\n" +
+                "(9, 'Sofia', 'Builder', '44556677', 'Independencia', 1100, 'Mar del Plata', '2236334455'),\n" +
+                "(10, 'David', 'Adapter', '55667788', 'Luro', 3450, 'Mar del Plata', '2236445566'),\n" +
+                "(11, 'Elena', 'Decorator', '66778899', 'Cordoba', 2120, 'Mar del Plata', '2236556677'),\n" +
+                "(12, 'Pedro', 'Proxy', '77889900', 'Rivadavia', 3000, 'Mar del Plata', '155889900'),\n" +
+                "(13, 'Lucia', 'Strategy', '88990011', 'Belgrano', 2500, 'Mar del Plata', '2235001122'),\n" +
+                "(14, 'Diego', 'Command', '99001122', 'Moreno', 3100, 'Mar del Plata', '2235112233'),\n" +
+                "(15, 'Valeria', 'Iterator', '10112233', 'Jara', 850, 'Mar del Plata', '2235223344'),\n" +
+                "(16, 'Miguel', 'Mediator', '12131415', 'Alberti', 1700, 'Mar del Plata', '2235334455'),\n" +
+                "(17, 'Clara', 'Memento', '16171819', 'Garay', 1900, 'Mar del Plata', '155445566'),\n" +
+                "(18, 'Sergio', 'Visitor', '20212223', 'Castelli', 2300, 'Mar del Plata', '2235556677'),\n" +
+                "(19, 'Paula', 'Bridge', '24252627', 'Falucho', 2010, 'Mar del Plata', '2235667788'),\n" +
+                "(20, 'Adrian', 'Composite', '28293031', 'Olavarria', 2700, 'Mar del Plata','2235778899');";
 
         try{
             Statement stmt = conexion.createStatement();
