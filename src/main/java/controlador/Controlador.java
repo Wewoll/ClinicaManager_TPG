@@ -25,9 +25,10 @@ public class Controlador implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         String comando = e.getActionCommand();
-
+        System.out.println("Comando recibido: " + comando);
         switch (comando) {
             case IVistaPrincipal.ACEPTAR: {
+                System.out.println("Iniciando simulacion...");
                 this.iniciarSimulacion();
                 break;
             }
