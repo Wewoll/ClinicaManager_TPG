@@ -1,12 +1,12 @@
 package modelo.modeloDominio.ambulancia;
 
-import modelo.modeloAplicacion.EstadoSimulacion;
-import modelo.modeloAplicacion.ObservableSimulacion;
+import modelo.modeloAplicacion.NotificacionSimulacion;
 import modelo.modeloDominio.personas.asociado.Asociado;
 
 import java.util.ArrayList;
+import java.util.Observable;
 
-public class RetornoAutomatico extends ObservableSimulacion implements Runnable
+public class RetornoAutomatico extends Observable implements Runnable
 {
     private Ambulancia ambulancia;
 
@@ -31,7 +31,7 @@ public class RetornoAutomatico extends ObservableSimulacion implements Runnable
     @Override
     public void run()
     {
-        this.setEstado(new EstadoSimulacion("La ambulancia incia retorno automatico", "INFO"));
+        new NotificacionSimulacion("La ambulancia incia retorno automatico", "INFO");
         while (ambulancia.isSimulacionActiva())
         {
             terminaronAsociados();

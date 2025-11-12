@@ -1,7 +1,6 @@
 package modelo.modeloDominio.personas;
 
 
-import modelo.modeloAplicacion.ObservableSimulacion;
 import modelo.modeloDominio.util.Domicilio;
 
 import java.util.Observable;
@@ -10,7 +9,7 @@ import java.util.Observable;
  * Clasee abastracta Persona que representa a una persona
  * Contiene atributos nombre, apellido, dni, domicilio y telefono
  */
-public abstract class PersonaObservable extends ObservableSimulacion
+public abstract class PersonaObservable extends Observable
 {
     private String nombre;
     private String apellido;

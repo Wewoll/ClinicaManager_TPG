@@ -1,5 +1,7 @@
 package modelo.modeloDominio.ambulancia;
 
+import modelo.modeloAplicacion.NotificacionSimulacion;
+
 public class RegresandoClinicaSinPacienteState implements State{
     private Ambulancia ambulancia;
 
@@ -21,6 +23,7 @@ public class RegresandoClinicaSinPacienteState implements State{
     @Override
     public void SolicitudMantenimiento() {
         //TODO observer observable (no puede atender solicitud)
+        this.ambulancia.notifyObservers(new NotificacionSimulacion("La ambulancia no puede atender la solicitud de mantenimiento porque se encuentra regresando a la clínica sin paciente.","AMBULANCIA"));
     }
 
     @Override

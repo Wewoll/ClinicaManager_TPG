@@ -1,5 +1,7 @@
 package modelo.modeloDominio.ambulancia;
 
+import modelo.modeloAplicacion.NotificacionSimulacion;
+
 public class AtendiendoEnDomicilioState implements State{
     private Ambulancia ambulancia;
 
@@ -14,11 +16,12 @@ public class AtendiendoEnDomicilioState implements State{
     @Override
     public void SolicitudDeAtencionDomicilio(){
         //todo observer observable (no puede atender solicitud)
+        this.ambulancia.notifyObservers(new NotificacionSimulacion("La ambulancia no puede atender la solicitud de atención a domicilio porque se encuentra atendiendo un paciente en domicilio.","AMBULANCIA"));
     }
     @Override
     public void SolicitudMantenimiento(){
         //todo observer observable (no puede atender solicitud)
-
+        this.ambulancia.notifyObservers(new NotificacionSimulacion("La ambulancia no puede atender la solicitud de mantenimiento porque se encuentra atendiendo un paciente en domicilio.","AMBULANCIA"));
     }
     @Override
     public void RetornoClinica(){

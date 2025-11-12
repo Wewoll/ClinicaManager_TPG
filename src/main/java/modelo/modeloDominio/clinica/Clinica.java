@@ -352,6 +352,8 @@ public class Clinica
             }
         }catch (SQLException e){
             System.out.println("Error al cargar con limite de solicitudes");
+            // mostrar mensaje de error en la interfaz
+            e.printStackTrace();
         }
     }
 

@@ -1,6 +1,6 @@
 package vista;
 
-import modelo.modeloAplicacion.EstadoSimulacion;
+import modelo.modeloAplicacion.NotificacionSimulacion;
 
 import javax.swing.*;
 import java.awt.*;
@@ -33,7 +33,7 @@ public class VentanaSimulacion extends JFrame implements IVistaSimulacion {
     }
 
     @Override
-    public void actualizarEstadoSimulacion ( EstadoSimulacion estado ) {
+    public void actualizarEstadoSimulacion ( NotificacionSimulacion estado ) {
         listModel.addElement(estado.getMensaje());
     }
 

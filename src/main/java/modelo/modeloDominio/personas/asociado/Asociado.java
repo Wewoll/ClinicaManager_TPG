@@ -1,6 +1,6 @@
 package modelo.modeloDominio.personas.asociado;
 
-import modelo.modeloAplicacion.EstadoSimulacion;
+import modelo.modeloAplicacion.NotificacionSimulacion;
 import modelo.modeloDominio.ambulancia.Ambulancia;
 import modelo.modeloDominio.personas.PersonaObservable;
 import modelo.modeloDominio.util.Domicilio;
@@ -57,14 +57,13 @@ public class Asociado extends PersonaObservable implements Runnable
     // el asociado puede hacer distintos pedidos en paralelo
     private void atencionADomicilio()
     {
-        this.setEstado(new EstadoSimulacion("El asociado " + this.getDni() + " solicita traslado a clinica.","Asociado"));
-        ambulancia.atenderDomicilio();
+        ambulancia.atenderDomicilio(this);
         ambulancia.regresarSinPaciente();
     }
 
     private void trasladoALaClinca()
     {
-        this.setEstado(new EstadoSimulacion("El asociado " + this.getDni() + " solicita traslado a clinica.","Asociado"));
+        new NotificacionSimulacion("El asociado " + this.getDni() + " solicita traslado a clinica.","Asociado");
         ambulancia.trasladarALaClinica(this);
         ambulancia.regresarSinPaciente();
     }

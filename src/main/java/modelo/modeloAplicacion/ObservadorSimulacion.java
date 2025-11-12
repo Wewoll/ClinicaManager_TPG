@@ -9,12 +9,12 @@ import java.util.Observer;
 
 public class ObservadorSimulacion implements Observer
 {
-    private ArrayList<ObservableSimulacion> observados;
+    private ArrayList<Observable> observados;
     private IVistaSimulacion vista;
 
-    public ObservadorSimulacion(ObservableSimulacion observado)
+    public ObservadorSimulacion(Observable observado)
     {
-        this.observados = new ArrayList<ObservableSimulacion>();
+        this.observados = new ArrayList<Observable>();
         this.observados.add(observado);
     }
 
@@ -31,10 +31,9 @@ public class ObservadorSimulacion implements Observer
     @Override
     public void update(Observable o, Object arg)
     {
-        ObservableSimulacion observado = (ObservableSimulacion)o;
-        if (!this.observados.contains(observado))
+        if (!this.observados.contains(o))
             throw new IllegalArgumentException("El observable no es observado por este observador.");
-        EstadoSimulacion estado = (EstadoSimulacion)arg;
+        NotificacionSimulacion estado = (NotificacionSimulacion)arg;
 
         this.vista.actualizarEstadoSimulacion(estado);
     }

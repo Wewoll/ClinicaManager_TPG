@@ -1,11 +1,11 @@
 package modelo.modeloAplicacion;
 
-public class EstadoSimulacion
+public class NotificacionSimulacion
 {
     private String mensaje;
     private String tipo;
 
-    public EstadoSimulacion(String mensaje, String tipo)
+    public NotificacionSimulacion(String mensaje, String tipo)
     {
         this.mensaje = mensaje;
         this.tipo = tipo;

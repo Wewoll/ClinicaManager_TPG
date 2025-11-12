@@ -1,8 +1,7 @@
 package modelo.modeloDominio.personas.operario;
 
-import modelo.modeloAplicacion.EstadoSimulacion;
+import modelo.modeloAplicacion.NotificacionSimulacion;
 import modelo.modeloDominio.ambulancia.Ambulancia;
-import modelo.modeloDominio.personas.Persona;
 import modelo.modeloDominio.personas.PersonaObservable;
 import modelo.modeloDominio.personas.asociado.Asociado;
 import modelo.modeloDominio.util.Domicilio;
@@ -44,7 +43,7 @@ public class Operario extends PersonaObservable implements Runnable
         ArrayList<Asociado> asociados = this.ambulancia.getAsociados();
         for (Asociado asociado : asociados)
         {
-            System.out.println("Cantidad de solicitudes atendidas por asociado " + asociado.getDni() + ": " + asociado.getCantSolicitudesAtendidas() + "/" + asociado.getMaxCantSolicitudes());
+            // System.out.println("Cantidad de solicitudes atendidas por asociado " + asociado.getDni() + ": " + asociado.getCantSolicitudesAtendidas() + "/" + asociado.getMaxCantSolicitudes());
             if (asociado.getCantSolicitudesAtendidas() >= asociado.getMaxCantSolicitudes())
             {
                 this.ambulancia.setSimulacionActiva(false);
@@ -70,7 +69,6 @@ public class Operario extends PersonaObservable implements Runnable
                 Thread.currentThread().interrupt();
                 break;
             }
-            this.setEstado(new EstadoSimulacion("El operario " + this.getDni() + " solicita mantenimiento de la ambulancia.","Operario"));
             ambulancia.solicitarMantenimiento(this);
             try{
                 System.out.println("Mantenimiento realizado por operario " + this.getDni());
