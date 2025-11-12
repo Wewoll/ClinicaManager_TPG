@@ -63,6 +63,7 @@ public class DataAccessObject {
                     , resultado.getString("calle"), resultado.getInt("numero"), resultado.getString("ciudad"), resultado.getString("telefono"));
             asociadosDTO.add(aDTO);
         }
+        resultado.close();
         return asociadosDTO;
     }
 
@@ -83,6 +84,7 @@ public class DataAccessObject {
         AsociadoDTO aDTO = null;
         aDTO = this.CrearDTO(resultado.getInt("id"), resultado.getString("nombre"), resultado.getString("apellido"), resultado.getString("dni")
                 , resultado.getString("calle"), resultado.getInt("numero"), resultado.getString("ciudad"), resultado.getString("telefono"));
+        resultado.close();
         return aDTO;
     }
 
@@ -102,6 +104,7 @@ public class DataAccessObject {
                     , resultado.getString("calle"), resultado.getInt("numero"), resultado.getString("ciudad"), resultado.getString("telefono"));
             asociadosDTO.add(aDTO);
         }
+        resultado.close();
         return asociadosDTO;
     }
     /**
