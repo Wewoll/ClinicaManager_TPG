@@ -76,7 +76,7 @@ public class BaseDeDatos {
         ResultSet rs = null;
         PreparedStatement stmt = conexion.prepareStatement(consulta);
         stmt.setInt(1, id);
-        rs = stmt.executeQuery(consulta);
+        rs = stmt.executeQuery();
         return rs;
     }
 
@@ -99,7 +99,7 @@ public class BaseDeDatos {
         stmt.setInt(6, aDTO.getNumero());
         stmt.setString(7, aDTO.getCiudad());
         stmt.setString(8, aDTO.getTelefono());
-        stmt.executeUpdate(actualizacion);
+        stmt.executeUpdate();
     }
 
     /**
@@ -121,7 +121,7 @@ public class BaseDeDatos {
         stmt.setInt(6, aDTO.getNumero());
         stmt.setString(7, aDTO.getCiudad());
         stmt.setString(8, aDTO.getTelefono());
-        stmt.executeUpdate(insert);
+        stmt.executeUpdate();
 
     }
     /**
@@ -137,7 +137,7 @@ public class BaseDeDatos {
 
         PreparedStatement stmt = conexion.prepareStatement(delete);
         stmt.setInt(1, id);
-        stmt.executeUpdate(delete);
+        stmt.executeUpdate();
 
     }
 
