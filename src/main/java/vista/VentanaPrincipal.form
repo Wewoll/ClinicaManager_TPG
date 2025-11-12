@@ -220,6 +220,7 @@
                       <grid row="14" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
                     </constraints>
                     <properties>
+                      <actionCommand value="DAR_ALTA"/>
                       <text value="Dar de alta"/>
                     </properties>
                   </component>
@@ -254,6 +255,7 @@
                       <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
                     </constraints>
                     <properties>
+                      <actionCommand value="DAR_BAJA"/>
                       <text value="Dar de baja"/>
                     </properties>
                   </component>
@@ -364,6 +366,7 @@
                           <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
                         </constraints>
                         <properties>
+                          <actionCommand value="ACEPTAR"/>
                           <text value="Aceptar"/>
                         </properties>
                       </component>

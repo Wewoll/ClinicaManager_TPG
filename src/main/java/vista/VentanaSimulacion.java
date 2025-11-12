@@ -12,17 +12,18 @@ public class VentanaSimulacion extends JFrame implements IVistaSimulacion {
     private DefaultListModel<String> listModel;
 
     public VentanaSimulacion() {
-        listModel = new DefaultListModel();
-        list1.setModel(listModel);
-    }
-
-    @Override
-    public void iniciarSimulacion() {
         setContentPane(panelPrincipal);
         setTitle("Simulacion Ambulancia");
         setSize(600, 400);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
+        setVisible(false);
+        listModel = new DefaultListModel<String>();
+        list1.setModel(listModel);
+    }
+
+    @Override
+    public void iniciarSimulacion() {
         setVisible(true);
     }
 
