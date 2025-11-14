@@ -37,7 +37,17 @@ public class Controlador implements ActionListener {
             case IVistaPrincipal.DAR_BAJA: {
                 this.eliminarAsociado();
             }
+            case IVistaSimulacion.FINALIZAR_SIMULACION: {
+                this.finalizarSimulacion();
+                break;
+            }
         }
+    }
+
+    public void finalizarSimulacion()
+    {
+            System.out.println("aaa");
+            this.modelo.finalizarSimulacion();
     }
 
     public void iniciarSimulacion(){

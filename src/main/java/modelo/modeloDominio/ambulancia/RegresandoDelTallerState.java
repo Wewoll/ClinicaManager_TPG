@@ -27,6 +27,7 @@ public class RegresandoDelTallerState implements State{
 
     @Override
     public void RetornoClinica() {
+        this.ambulancia.notifyObservers(new NotificacionSimulacion("ℹ️ La ambulancia inicia retorno automatico a la clinica ", "INFO"));
         ambulancia.setState(new DisponibleState(this.ambulancia));
     }
 

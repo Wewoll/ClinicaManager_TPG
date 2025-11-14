@@ -6,7 +6,7 @@ public class TiempoMuerto
     {
         try
         {
-            Thread.sleep(Math.round(Math.random()*5000));
+            Thread.sleep(Math.round(Math.random()*8000));
         }
         catch (InterruptedException e)
         {

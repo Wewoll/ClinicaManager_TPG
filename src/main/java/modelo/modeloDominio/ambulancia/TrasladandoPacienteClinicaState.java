@@ -27,6 +27,7 @@ public class TrasladandoPacienteClinicaState implements State{
     public void RetornoClinica(){
         try{
             Thread.sleep(1000);
+            this.ambulancia.notifyObservers(new NotificacionSimulacion("La ambulancia incia retorno automatico", "INFO"));
             this.ambulancia.setState(new DisponibleState(this.ambulancia));
             this.ambulancia.setOcupado(false);
         }catch(Exception e){

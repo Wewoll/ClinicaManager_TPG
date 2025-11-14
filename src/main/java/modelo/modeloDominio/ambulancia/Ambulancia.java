@@ -60,7 +60,7 @@ public class Ambulancia extends Observable
             try {
                 // System.out.println("Ambulancia ocupada, esperando para solicitar mantenimiento...");
                 setChanged();
-                this.notifyObservers(new NotificacionSimulacion("Ambulancia ocupada, el operario "+ o.getNombre() + " espera para solicitar mantenimiento...","Operario"));
+                this.notifyObservers(new NotificacionSimulacion("❌ 🔧 Ambulancia ocupada, el operario "+ o.getNombre() + " espera para solicitar mantenimiento...","Operario"));
                 wait();
             } catch (InterruptedException e) {
                 Thread.currentThread().interrupt();
@@ -68,14 +68,14 @@ public class Ambulancia extends Observable
             }
         }
         setChanged();
-        this.notifyObservers(new NotificacionSimulacion(">> El operario " + o.getNombre() + " solicitó el mantenimiento de la ambulancia.","Operario"));
+        this.notifyObservers(new NotificacionSimulacion("🔧 El operario " + o.getNombre() + " solicitó el mantenimiento de la ambulancia.","Operario"));
         // System.out.println(">> Solicitando mantenimiento");
         estadoActual.SolicitudMantenimiento();
         notifyAll();
     }
     public synchronized void volviendoDelTaller() {
         // System.out.println(">> Volviendo del taller");
-        this.notifyObservers(new NotificacionSimulacion("<< La ambulancia vuelve del taller.","AMBULANCIA"));
+        this.notifyObservers(new NotificacionSimulacion("ℹ️ La ambulancia vuelve del taller.","AMBULANCIA"));
         estadoActual.SolicitudMantenimiento();
         notifyAll();
     }
@@ -83,7 +83,7 @@ public class Ambulancia extends Observable
         while (this.ocupado) {
             try {
                 setChanged();
-                this.notifyObservers(new NotificacionSimulacion("Ambulancia ocupada, el asociado "+ a.getNombre() + " espera para ser atendido a domicilio...","Asociado"));
+                this.notifyObservers(new NotificacionSimulacion("❌ 🏠 Ambulancia ocupada, el asociado "+ a.getNombre() + " espera para ser atendido a domicilio...","Asociado"));
                 // System.out.println("Ambulancia ocupada, esperando para atender domicilio...");
                 // System.out.println(this.getEstadoActual());
                 wait();
@@ -93,7 +93,7 @@ public class Ambulancia extends Observable
             }
         }
         setChanged();
-        this.notifyObservers(new NotificacionSimulacion(">> El asociado " + a.getNombre() + " es atendido domicilio.","Asociado"));
+        this.notifyObservers(new NotificacionSimulacion("🏠 El asociado " + a.getNombre() + " es atendido domicilio.","Asociado"));
         estadoActual.SolicitudDeAtencionDomicilio();
     }
     public synchronized void trasladarALaClinica(Asociado a)
@@ -101,7 +101,7 @@ public class Ambulancia extends Observable
         while (this.ocupado) {
             try {
                 setChanged();
-                this.notifyObservers(new NotificacionSimulacion("Ambulancia ocupada, el asociado "+ a.getNombre() + " espera para ser trasladado a la clinica...","Asociado"));
+                this.notifyObservers(new NotificacionSimulacion("❌ 🚑 Ambulancia ocupada, el asociado "+ a.getNombre() + " espera para ser trasladado a la clinica...","Asociado"));
                 // System.out.println(this.getEstadoActual());
                 wait();
             } catch (InterruptedException e) {
@@ -110,14 +110,14 @@ public class Ambulancia extends Observable
             }
         }
         setChanged();
-        this.notifyObservers(new NotificacionSimulacion(">> El asociado " + a.getNombre() + " es trasladado a la clinica.","Asociado"));
+        this.notifyObservers(new NotificacionSimulacion("🚑  El asociado " + a.getNombre() + " es trasladado a la clinica.","Asociado"));
         // System.out.println(">> Trasladando a la clinica");
         this.estadoActual.SolicitudDeTraslado();
     }
 
     public synchronized void retornoAutomatico(RetornoAutomatico retornoAutomatico)  {
         setChanged();
-        this.notifyObservers(new NotificacionSimulacion("La ambulancia incia retorno automatico", "INFO"));
+        // el notify observers esta dentro del estado, ya que puede ser que no se pueda hacer el retorno automatico
         estadoActual.RetornoClinica();
         notifyAll();
     }
@@ -125,7 +125,6 @@ public class Ambulancia extends Observable
     public synchronized void regresarSinPaciente()  {
         // System.out.println("<< Regresando sin paciente");
         setChanged();
-        this.notifyObservers(new NotificacionSimulacion("<< La ambulancia regresa sin paciente a la clinica.","AMBULANCIA"));
         estadoActual.RetornoClinica();
         notifyAll();
     }

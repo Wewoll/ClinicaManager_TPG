@@ -366,7 +366,9 @@ public class Clinica
             e.printStackTrace();
         }
     }
-
+    public void finalizarSimulacion(){
+        this.ambulancia.setSimulacionActiva(false);
+    }
     /**
      * Guarda un nuevo asociado en la base de datos.
      * <b>Pre</b>: Los datos del asociado no deben ser nulos.

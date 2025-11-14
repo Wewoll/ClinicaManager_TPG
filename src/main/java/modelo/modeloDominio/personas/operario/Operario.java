@@ -5,6 +5,7 @@ import modelo.modeloDominio.ambulancia.Ambulancia;
 import modelo.modeloDominio.personas.Persona;
 import modelo.modeloDominio.personas.asociado.Asociado;
 import modelo.modeloDominio.util.Domicilio;
+import modelo.modeloDominio.util.TiempoMuerto;
 
 import java.util.ArrayList;
 
@@ -50,7 +51,6 @@ public class Operario extends Persona implements Runnable
                 return;
             }
         }
-        this.ambulancia.setSimulacionActiva(true);
     }
 
     /**
@@ -62,18 +62,9 @@ public class Operario extends Persona implements Runnable
     public void run() {
         // pedir mantenimiento de ambulancias
         while(this.ambulancia.isSimulacionActiva()){
-            try {
-                long tiempoEspera = (long)(Math.random() * 5000 + 5000); // entre 5 y 10 segundos
-                Thread.sleep(tiempoEspera); // espera 10 segundos antes de solicitar mantenimiento
-            } catch (InterruptedException e) {
-                Thread.currentThread().interrupt();
-                break;
-            }
+            TiempoMuerto.esperar();
             ambulancia.solicitarMantenimiento(this);
-            try{
-                // System.out.println("Mantenimiento realizado por operario " + this.getDni());
-                Thread.sleep(5000);
-            } catch (InterruptedException e) {}
+            TiempoMuerto.esperar();
             ambulancia.volviendoDelTaller();
             terminaronAsociados();
         }
