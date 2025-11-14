@@ -9,7 +9,6 @@ import persistencia.AsociadoDTO;
 
 public class Asociado extends Persona implements Runnable
 {
-    private int id;
     private int maxCantSolicitudes;
     private Ambulancia ambulancia;
     private int cantSolicitudesAtendidas;
@@ -35,14 +34,6 @@ public class Asociado extends Persona implements Runnable
         this.maxCantSolicitudes = Integer.MAX_VALUE;
         this.cantSolicitudesAtendidas = 0;
         this.ambulancia = null;
-    }
-    public int getId()
-    {
-        return id;
-    }
-    public void setId(int id)
-    {
-        this.id = id;
     }
 
     public int getCantSolicitudesAtendidas()

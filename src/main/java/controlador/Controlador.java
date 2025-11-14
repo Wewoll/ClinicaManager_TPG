@@ -9,6 +9,7 @@ import vista.datosAsociadoDTOIncorrectoException;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 public class Controlador implements ActionListener {
     private Clinica modelo;
@@ -21,6 +22,12 @@ public class Controlador implements ActionListener {
         this.vistaPrincipal.setActionListener(this);
         this.vistaSimulacion = vistaSimulacion;
         this.vistaSimulacion.setActionListener(this);
+        try {
+            this.actualizarListaAsociados();
+        }
+        catch (SQLException e) {
+            this.vistaPrincipal.mostrarMensaje("Fallo", "No se pudo cargar la lista de asociados.");
+        }
     }
 
     @Override
@@ -47,7 +54,6 @@ public class Controlador implements ActionListener {
 
     public void finalizarSimulacion()
     {
-            System.out.println("aaa");
             this.modelo.finalizarSimulacion();
     }
 
@@ -68,7 +74,7 @@ public class Controlador implements ActionListener {
                 this.modelo.guardarNuevoAsociado(datos);
                 this.vistaPrincipal.mostrarMensaje("Exito", "Asociado guardado correctamente.");
                 this.vistaPrincipal.limpiarFormularioAlta();
-                //this.vistaPrincipal.actualizarListaAsociados();
+                this.actualizarListaAsociados();
             }
             catch (SQLException e) {
                 this.vistaPrincipal.mostrarMensaje("Fallo", "No se pudo guardar al asociado.");
@@ -81,16 +87,27 @@ public class Controlador implements ActionListener {
     }
 
     public void eliminarAsociado() {
-        String dni = this.vistaPrincipal.getDNI();
+        try{
+            String dni = this.vistaPrincipal.getDNI();
+            try {
+                this.modelo.eliminarAsociado(dni);
+                this.vistaPrincipal.mostrarMensaje("Exito", "Asociado eliminado correctamente.");
+                this.vistaPrincipal.limpiarFormularioBaja();
+                this.actualizarListaAsociados();
+            }
+            catch (SQLException e) {
+                this.vistaPrincipal.mostrarMensaje("Fallo", "No se pudo eliminar al asociado.");
+            }
+        }
+        catch(datosAsociadoDTOIncorrectoException e){
+            this.vistaPrincipal.mostrarMensaje("Fallo", "DNI del asociado incorrecto.");
+            return;
+        }
+    }
 
-        try {
-            this.modelo.eliminarAsociado(dni);
-            this.vistaPrincipal.mostrarMensaje("Exito", "Asociado eliminado correctamente.");
-            this.vistaPrincipal.limpiarFormularioBaja();
-            //this.vistaPrincipal.actualizarListaAsociados();
-        }
-        catch (SQLException e) {
-            this.vistaPrincipal.mostrarMensaje("Fallo", "No se pudo eliminar al asociado.");
-        }
+    public void actualizarListaAsociados() throws SQLException {
+        // TODO: Hacer que se traigan todos los asociados desde la base de datos
+        //ArrayList<AsociadoDTO> asociadosDTO = this.modelo.getAsociadosDTO();
+        //this.vistaPrincipal.actualizarListaAsociados(asociadosDTO);
     }
 }

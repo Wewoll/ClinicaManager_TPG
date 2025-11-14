@@ -379,6 +379,7 @@ public class Clinica
     public void guardarNuevoAsociado(AsociadoDTO datos) throws SQLException {
         assert datos != null : "El asociado no puede ser nulo";
         Asociado asociado = new Asociado(datos);
+        asociados.add(asociado);
         dao.guardar(asociado);
     }
 
@@ -391,9 +392,10 @@ public class Clinica
      */
     public void eliminarAsociado(String dni) throws SQLException{
         assert dni != null : "El asociado no puede ser nulo";
+        System.out.println("Buscando asociado con DNI: " + dni);
         for (Asociado a: asociados){
             if (a.getDni().equals(dni)){
-                dao.eliminar(a.getId());
+                dao.eliminar(a.getDni());
                 asociados.remove(a);
                 break;
             }

@@ -15,7 +15,6 @@ public class AsociadoDTO implements Serializable {
     private String calle;
     private int numero;
     private String telefono;
-    private int id;
 
     /** Constructor por defecto de la clase AsociadoDTO.
      * <b>post:</b> se crea una instancia de AsociadoDTO a inicializar.
@@ -94,13 +93,6 @@ public class AsociadoDTO implements Serializable {
     public void setTelefono(String telefono) {
         assert telefono != null;
         this.telefono = telefono;
-    }
-    public int getId() {
-        return id;
-    }
-    public void setId(int id) {
-        assert id >= 0;
-        this.id = id;
     }
 
 }

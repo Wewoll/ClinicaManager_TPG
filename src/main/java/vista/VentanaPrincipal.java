@@ -1,7 +1,6 @@
 package vista;
 
 import javax.swing.*;
-import javax.swing.border.LineBorder;
 import javax.swing.border.TitledBorder;
 import javax.swing.plaf.FontUIResource;
 import javax.swing.text.StyleContext;
@@ -10,6 +9,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 import controlador.Controlador;
+import modelo.modeloDominio.personas.asociado.Asociado;
 import persistencia.AsociadoDTO;
 
 import java.util.ArrayList;
@@ -18,18 +18,18 @@ import java.util.Locale;
 public class VentanaPrincipal extends JFrame implements IVistaPrincipal {
     private JTabbedPane pestañas;
     private JPanel altaAsociado;
-    private JTextField textField1;
-    private JTextField textField2;
-    private JTextField textField3;
-    private JTextField textField4;
-    private JTextField textField5;
-    private JTextField textField6;
-    private JTextField textField7;
+    private JTextField Nombre_Alta;
+    private JTextField Apellido_Baja;
+    private JTextField DNI_Alta;
+    private JTextField Ciudad_Alta;
+    private JTextField Calle_Alta;
+    private JTextField Numero_Alta;
+    private JTextField Telefono_Alta;
     private JPanel bajaAsociado;
     private JPanel listaAsociado;
     private JPanel panelPrincipal;
     private JButton darDeAltaButton;
-    private JTextField textField8;
+    private JTextField DNI_Baja;
     private JButton darDeBajaButton;
     private JList listaAsociados;
     private JButton aceptarConfiguracionButton;
@@ -63,24 +63,24 @@ public class VentanaPrincipal extends JFrame implements IVistaPrincipal {
 
     @Override
     public AsociadoDTO getNuevoAsociado() throws datosAsociadoDTOIncorrectoException {
-        String nombre = textField1.getText();
-        String apellido = textField2.getText();
-        String dni = textField3.getText();
-        String ciudad = textField4.getText();
-        String calle = textField5.getText();
-        String numero = textField6.getText();
-        String telefono = textField7.getText();
+        String nombre = Nombre_Alta.getText();
+        String apellido = Apellido_Baja.getText();
+        String dni = DNI_Alta.getText();
+        String ciudad = Ciudad_Alta.getText();
+        String calle = Calle_Alta.getText();
+        String numero = Numero_Alta.getText();
+        String telefono = Telefono_Alta.getText();
 
-        if(nombre.isEmpty() || apellido.isEmpty() || dni.isEmpty() || ciudad.isEmpty() || calle.isEmpty() || telefono.isEmpty()) {
+        if (nombre.isEmpty() || apellido.isEmpty() || dni.isEmpty() || ciudad.isEmpty() || calle.isEmpty() || telefono.isEmpty()) {
             throw new datosAsociadoDTOIncorrectoException("Debe completar todos los campos.");
         }
 
         int numeroReal = Integer.parseInt(numero);
-        if(numeroReal <= 0) {
+        if (numeroReal <= 0) {
             throw new datosAsociadoDTOIncorrectoException("El numero de la calle debe ser un valor positivo.");
         }
 
-        if(telefono.startsWith("-")) {
+        if (telefono.startsWith("-")) {
             throw new datosAsociadoDTOIncorrectoException("El telefono no puede ser un valor negativo.");
         }
         return new AsociadoDTO(nombre, apellido, dni, ciudad, calle, numeroReal, telefono);
@@ -89,11 +89,11 @@ public class VentanaPrincipal extends JFrame implements IVistaPrincipal {
     @Override
     public int getCantAsociados() {
         if (cantAsociados.getText().isEmpty()) {
-           throw new datosSimulacionIncorrectosException("La cantidad de asociados no puede estar vacia.");
+            throw new datosSimulacionIncorrectosException("La cantidad de asociados no puede estar vacia.");
         }
 
         int cant = Integer.parseInt(cantAsociados.getText());
-        if(cant <= 0)
+        if (cant <= 0)
             throw new datosSimulacionIncorrectosException("La cantidad de asociados debe ser un valor positivo.");
         return cant;
     }
@@ -101,12 +101,12 @@ public class VentanaPrincipal extends JFrame implements IVistaPrincipal {
 
     @Override
     public int getCantSolicitudes() {
-        if( cantSolicitudes.getText().isEmpty()) {
+        if (cantSolicitudes.getText().isEmpty()) {
             throw new datosSimulacionIncorrectosException("La cantidad de solicitudes no puede estar vacia.");
         }
 
         int cant = Integer.parseInt(cantSolicitudes.getText());
-        if(cant <= 0)
+        if (cant <= 0)
             throw new datosSimulacionIncorrectosException("La cantidad de solicitudes debe ser un valor positivo.");
         return cant;
     }
@@ -118,31 +118,40 @@ public class VentanaPrincipal extends JFrame implements IVistaPrincipal {
 
     @Override
     public void limpiarFormularioAlta() {
-        textField1.setText("");
-        textField2.setText("");
-        textField3.setText("");
-        textField4.setText("");
-        textField5.setText("");
-        textField6.setText("");
-        textField7.setText("");
+        Nombre_Alta.setText("");
+        Apellido_Baja.setText("");
+        DNI_Alta.setText("");
+        Ciudad_Alta.setText("");
+        Calle_Alta.setText("");
+        Numero_Alta.setText("");
+        Telefono_Alta.setText("");
     }
 
     @Override
     public void limpiarFormularioBaja() {
-        textField8.setText("");
+        DNI_Baja.setText("");
     }
 
     @Override
-    public void actualizarListaAsociados(ArrayList<String> asociados) {
+    public void actualizarListaAsociados(ArrayList<AsociadoDTO> asociados) {
         this.listaModel.clear();
-        for (String asociado : asociados) {
-            this.listaModel.addElement(asociado);
+        String aux;
+        for (AsociadoDTO a : asociados) {
+            aux = "Nombre: " + a.getNombre() + ", Apellido: " + a.getApellido() + ", DNI: " + a.getDni();
+            this.listaModel.addElement(aux);
         }
     }
 
     @Override
-    public String getDNI() {
-        return textField8.getText();
+    public String getDNI() throws datosAsociadoDTOIncorrectoException {
+        if (DNI_Baja.getText().isEmpty()) {
+            throw new datosAsociadoDTOIncorrectoException("El campo DNI no puede estar vacio.");
+        }
+
+        if(Integer.parseInt(DNI_Baja.getText()) <= 0)
+            throw new datosAsociadoDTOIncorrectoException("El DNI debe ser un valor positivo.");
+
+        return DNI_Baja.getText();
     }
 
 
@@ -244,7 +253,7 @@ public class VentanaPrincipal extends JFrame implements IVistaPrincipal {
         listaAsociado.add(scroll, BorderLayout.CENTER);
 
         // Hacer que los textFields se vean más modernos (si existen)
-        JTextField[] fields = {textField1, textField2, textField3, textField4, textField5, textField6, textField7, textField8, cantAsociados, cantSolicitudes};
+        JTextField[] fields = {Nombre_Alta, Apellido_Baja, DNI_Alta, Ciudad_Alta, Calle_Alta, Numero_Alta, Telefono_Alta, DNI_Baja, cantAsociados, cantSolicitudes};
         for (JTextField tf : fields) {
             if (tf == null) continue;
             tf.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, bordePanel));
@@ -286,56 +295,56 @@ public class VentanaPrincipal extends JFrame implements IVistaPrincipal {
         final JLabel label1 = new JLabel();
         label1.setText("Nombre");
         panel2.add(label1, new com.intellij.uiDesigner.core.GridConstraints(0, 0, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_WEST, com.intellij.uiDesigner.core.GridConstraints.FILL_NONE, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
-        textField1 = new JTextField();
-        panel2.add(textField1, new com.intellij.uiDesigner.core.GridConstraints(1, 0, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_WEST, com.intellij.uiDesigner.core.GridConstraints.FILL_HORIZONTAL, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_WANT_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(150, -1), null, 0, false));
+        Nombre_Alta = new JTextField();
+        panel2.add(Nombre_Alta, new com.intellij.uiDesigner.core.GridConstraints(1, 0, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_WEST, com.intellij.uiDesigner.core.GridConstraints.FILL_HORIZONTAL, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_WANT_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(150, -1), null, 0, false));
         final JPanel panel3 = new JPanel();
         panel3.setLayout(new com.intellij.uiDesigner.core.GridLayoutManager(2, 1, new Insets(0, 0, 0, 0), -1, -1));
         altaAsociado.add(panel3, new com.intellij.uiDesigner.core.GridConstraints(2, 0, 2, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_BOTH, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
         final JLabel label2 = new JLabel();
         label2.setText("Apellido");
         panel3.add(label2, new com.intellij.uiDesigner.core.GridConstraints(0, 0, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_WEST, com.intellij.uiDesigner.core.GridConstraints.FILL_NONE, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
-        textField2 = new JTextField();
-        panel3.add(textField2, new com.intellij.uiDesigner.core.GridConstraints(1, 0, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_WEST, com.intellij.uiDesigner.core.GridConstraints.FILL_HORIZONTAL, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_WANT_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(150, -1), null, 0, false));
+        Apellido_Baja = new JTextField();
+        panel3.add(Apellido_Baja, new com.intellij.uiDesigner.core.GridConstraints(1, 0, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_WEST, com.intellij.uiDesigner.core.GridConstraints.FILL_HORIZONTAL, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_WANT_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(150, -1), null, 0, false));
         final JPanel panel4 = new JPanel();
         panel4.setLayout(new com.intellij.uiDesigner.core.GridLayoutManager(2, 1, new Insets(0, 0, 0, 0), -1, -1));
         altaAsociado.add(panel4, new com.intellij.uiDesigner.core.GridConstraints(4, 0, 2, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_BOTH, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
         final JLabel label3 = new JLabel();
         label3.setText("DNI");
         panel4.add(label3, new com.intellij.uiDesigner.core.GridConstraints(0, 0, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_WEST, com.intellij.uiDesigner.core.GridConstraints.FILL_NONE, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
-        textField3 = new JTextField();
-        panel4.add(textField3, new com.intellij.uiDesigner.core.GridConstraints(1, 0, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_WEST, com.intellij.uiDesigner.core.GridConstraints.FILL_HORIZONTAL, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_WANT_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(150, -1), null, 0, false));
+        DNI_Alta = new JTextField();
+        panel4.add(DNI_Alta, new com.intellij.uiDesigner.core.GridConstraints(1, 0, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_WEST, com.intellij.uiDesigner.core.GridConstraints.FILL_HORIZONTAL, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_WANT_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(150, -1), null, 0, false));
         final JPanel panel5 = new JPanel();
         panel5.setLayout(new com.intellij.uiDesigner.core.GridLayoutManager(2, 1, new Insets(0, 0, 0, 0), -1, -1));
         altaAsociado.add(panel5, new com.intellij.uiDesigner.core.GridConstraints(6, 0, 2, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_BOTH, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
         final JLabel label4 = new JLabel();
         label4.setText("Ciudad");
         panel5.add(label4, new com.intellij.uiDesigner.core.GridConstraints(0, 0, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_WEST, com.intellij.uiDesigner.core.GridConstraints.FILL_NONE, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
-        textField4 = new JTextField();
-        panel5.add(textField4, new com.intellij.uiDesigner.core.GridConstraints(1, 0, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_WEST, com.intellij.uiDesigner.core.GridConstraints.FILL_HORIZONTAL, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_WANT_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(150, -1), null, 0, false));
+        Ciudad_Alta = new JTextField();
+        panel5.add(Ciudad_Alta, new com.intellij.uiDesigner.core.GridConstraints(1, 0, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_WEST, com.intellij.uiDesigner.core.GridConstraints.FILL_HORIZONTAL, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_WANT_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(150, -1), null, 0, false));
         final JPanel panel6 = new JPanel();
         panel6.setLayout(new com.intellij.uiDesigner.core.GridLayoutManager(2, 1, new Insets(0, 0, 0, 0), -1, -1));
         altaAsociado.add(panel6, new com.intellij.uiDesigner.core.GridConstraints(8, 0, 2, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_BOTH, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
         final JLabel label5 = new JLabel();
         label5.setText("Calle");
         panel6.add(label5, new com.intellij.uiDesigner.core.GridConstraints(0, 0, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_WEST, com.intellij.uiDesigner.core.GridConstraints.FILL_NONE, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
-        textField5 = new JTextField();
-        panel6.add(textField5, new com.intellij.uiDesigner.core.GridConstraints(1, 0, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_WEST, com.intellij.uiDesigner.core.GridConstraints.FILL_HORIZONTAL, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_WANT_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(150, -1), null, 0, false));
+        Calle_Alta = new JTextField();
+        panel6.add(Calle_Alta, new com.intellij.uiDesigner.core.GridConstraints(1, 0, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_WEST, com.intellij.uiDesigner.core.GridConstraints.FILL_HORIZONTAL, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_WANT_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(150, -1), null, 0, false));
         final JPanel panel7 = new JPanel();
         panel7.setLayout(new com.intellij.uiDesigner.core.GridLayoutManager(2, 1, new Insets(0, 0, 0, 0), -1, -1));
         altaAsociado.add(panel7, new com.intellij.uiDesigner.core.GridConstraints(10, 0, 2, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_BOTH, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
         final JLabel label6 = new JLabel();
         label6.setText("Numero");
         panel7.add(label6, new com.intellij.uiDesigner.core.GridConstraints(0, 0, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_WEST, com.intellij.uiDesigner.core.GridConstraints.FILL_NONE, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
-        textField6 = new JTextField();
-        panel7.add(textField6, new com.intellij.uiDesigner.core.GridConstraints(1, 0, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_WEST, com.intellij.uiDesigner.core.GridConstraints.FILL_HORIZONTAL, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_WANT_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(150, -1), null, 0, false));
+        Numero_Alta = new JTextField();
+        panel7.add(Numero_Alta, new com.intellij.uiDesigner.core.GridConstraints(1, 0, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_WEST, com.intellij.uiDesigner.core.GridConstraints.FILL_HORIZONTAL, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_WANT_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(150, -1), null, 0, false));
         final JPanel panel8 = new JPanel();
         panel8.setLayout(new com.intellij.uiDesigner.core.GridLayoutManager(2, 1, new Insets(0, 0, 0, 0), -1, -1));
         altaAsociado.add(panel8, new com.intellij.uiDesigner.core.GridConstraints(12, 0, 2, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_BOTH, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
         final JLabel label7 = new JLabel();
         label7.setText("Telefono");
         panel8.add(label7, new com.intellij.uiDesigner.core.GridConstraints(0, 0, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_WEST, com.intellij.uiDesigner.core.GridConstraints.FILL_NONE, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
-        textField7 = new JTextField();
-        panel8.add(textField7, new com.intellij.uiDesigner.core.GridConstraints(1, 0, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_WEST, com.intellij.uiDesigner.core.GridConstraints.FILL_HORIZONTAL, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_WANT_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(150, -1), null, 0, false));
+        Telefono_Alta = new JTextField();
+        panel8.add(Telefono_Alta, new com.intellij.uiDesigner.core.GridConstraints(1, 0, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_WEST, com.intellij.uiDesigner.core.GridConstraints.FILL_HORIZONTAL, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_WANT_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(150, -1), null, 0, false));
         darDeAltaButton = new JButton();
         darDeAltaButton.setActionCommand("DAR_ALTA");
         darDeAltaButton.setText("Dar de alta");
@@ -347,8 +356,8 @@ public class VentanaPrincipal extends JFrame implements IVistaPrincipal {
         final JLabel label8 = new JLabel();
         label8.setText("DNI");
         bajaAsociado.add(label8, new com.intellij.uiDesigner.core.GridConstraints(0, 0, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_WEST, com.intellij.uiDesigner.core.GridConstraints.FILL_NONE, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
-        textField8 = new JTextField();
-        bajaAsociado.add(textField8, new com.intellij.uiDesigner.core.GridConstraints(1, 0, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_WEST, com.intellij.uiDesigner.core.GridConstraints.FILL_HORIZONTAL, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_WANT_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(150, -1), null, 0, false));
+        DNI_Baja = new JTextField();
+        bajaAsociado.add(DNI_Baja, new com.intellij.uiDesigner.core.GridConstraints(1, 0, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_WEST, com.intellij.uiDesigner.core.GridConstraints.FILL_HORIZONTAL, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_WANT_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(150, -1), null, 0, false));
         darDeBajaButton = new JButton();
         darDeBajaButton.setActionCommand("DAR_BAJA");
         darDeBajaButton.setText("Dar de baja");

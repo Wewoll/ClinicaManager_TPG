@@ -2,6 +2,7 @@ package vista;
 
 
 import controlador.Controlador;
+import modelo.modeloDominio.personas.asociado.Asociado;
 import persistencia.AsociadoDTO;
 
 import java.util.ArrayList;
@@ -14,9 +15,9 @@ public interface IVistaPrincipal {
     public AsociadoDTO getNuevoAsociado() throws datosAsociadoDTOIncorrectoException;
     public void limpiarFormularioAlta();
     public void limpiarFormularioBaja();
-    public void actualizarListaAsociados(ArrayList<String> asociados);
+    public void actualizarListaAsociados(ArrayList<AsociadoDTO> asociados);
     public int getCantAsociados();
     public int getCantSolicitudes();
     void mostrarMensaje(String exito, String s);
-    public String getDNI();
+    public String getDNI() throws datosAsociadoDTOIncorrectoException;
 }

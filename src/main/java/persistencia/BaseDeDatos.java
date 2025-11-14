@@ -92,7 +92,6 @@ public class BaseDeDatos {
         assert  actualizacion != null;
         assert aDTO != null;
         PreparedStatement stmt = conexion.prepareStatement(actualizacion);
-        stmt.setInt(1, aDTO.getId());
         stmt.setString(2, aDTO.getNombre());
         stmt.setString(3, aDTO.getApellido());
         stmt.setString(4, aDTO.getDni());
@@ -114,15 +113,15 @@ public class BaseDeDatos {
     public void ejecutarInsert(String insert, AsociadoDTO aDTO)throws SQLException {
         assert   insert != null;
         assert aDTO != null;
+
         PreparedStatement stmt = conexion.prepareStatement(insert);
-        stmt.setInt(1, aDTO.getId());
-        stmt.setString(2, aDTO.getNombre());
-        stmt.setString(3, aDTO.getApellido());
-        stmt.setString(4, aDTO.getDni());
-        stmt.setString(5, aDTO.getCalle());
-        stmt.setInt(6, aDTO.getNumero());
-        stmt.setString(7, aDTO.getCiudad());
-        stmt.setString(8, aDTO.getTelefono());
+        stmt.setString(1, aDTO.getNombre());
+        stmt.setString(2, aDTO.getApellido());
+        stmt.setString(3, aDTO.getDni());
+        stmt.setString(4, aDTO.getCalle());
+        stmt.setInt(5, aDTO.getNumero());
+        stmt.setString(6, aDTO.getCiudad());
+        stmt.setString(7, aDTO.getTelefono());
         stmt.executeUpdate();
         stmt.close();
     }
@@ -133,12 +132,12 @@ public class BaseDeDatos {
      * @param delete La sentencia DELETE SQL a ejecutar.
      * @throws SQLException Si ocurre un error al ejecutar la eliminación.
      */
-    public void ejecutarDelete(String delete, int id) throws SQLException{
+    public void ejecutarDelete(String delete, String dni) throws SQLException{
         assert   delete != null;
-        assert id != -1;
+        assert dni != null;
 
         PreparedStatement stmt = conexion.prepareStatement(delete);
-        stmt.setInt(1, id);
+        stmt.setString(1, dni);
         stmt.executeUpdate();
         stmt.close();
     }

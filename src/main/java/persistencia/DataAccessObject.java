@@ -4,6 +4,8 @@ import modelo.modeloDominio.personas.asociado.Asociado;
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.Objects;
+
 /**
  * Clase DataAccessObject que maneja la persistencia de objetos Asociado en la base de datos.
  * Contiene métodos para guardar, cargar, eliminar y actualizar asociados.
@@ -32,7 +34,7 @@ public class DataAccessObject {
 
         AsociadoDTO aDTO = CrearDTO(asociado);
 
-        String query = "INSERT INTO Asociados VALUES (?,?,?,?,?,?,?,?);";
+        String query = "INSERT INTO Asociados(nombre, apellido, DNI, calle, numero, ciudad, telefono) VALUES (?, ?, ?, ?, ?, ?, ?);";
 
         bd.ejecutarInsert(query,aDTO);
     }
@@ -111,14 +113,13 @@ public class DataAccessObject {
      * Elimina un objeto Asociado de la base de datos por su ID.
      * <b>pre:</b> id debe ser mayor que 0.
      * <b>post:</b> se elimina el asociado de la base de datos.
-     * @param id El ID del asociado a eliminar.
      * @throws SQLException Si ocurre un error al interactuar con la base de datos.
      */
-    public void eliminar(int id) throws SQLException{
-        assert id > 0 : "El id debe ser mayor que 0";
-        String query = "DELETE FROM Asociados WHERE id = ? ;";
+    public void eliminar(String dni) throws SQLException{
+        assert !Objects.equals(dni, "") : "El DNI no puede ser nulo";
+        String query = "DELETE FROM Asociados WHERE dni = ? ;";
 
-        bd.ejecutarDelete(query, id);
+        bd.ejecutarDelete(query, dni);
 
     }
     /**
@@ -145,7 +146,6 @@ public class DataAccessObject {
     public AsociadoDTO CrearDTO(Asociado asociado) {
         assert asociado != null : "El asociado no puede ser nulo";
         AsociadoDTO aDTO = new AsociadoDTO();
-        aDTO.setId(asociado.getId());
         aDTO.setNombre(asociado.getNombre());
         aDTO.setApellido(asociado.getApellido());
         aDTO.setDni(asociado.getDni());
@@ -172,7 +172,6 @@ public class DataAccessObject {
     public AsociadoDTO CrearDTO(int id, String nombre, String apellido, String dni, String calle, int numero, String ciudad, String telefono) {
 
         AsociadoDTO aDTO = new AsociadoDTO();
-        aDTO.setId(id);
         aDTO.setNombre(nombre);
         aDTO.setApellido(apellido);
         aDTO.setDni(dni);
