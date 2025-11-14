@@ -62,29 +62,53 @@ public class VentanaPrincipal extends JFrame implements IVistaPrincipal {
     }
 
     @Override
-    public AsociadoDTO getNuevoAsociado() {
+    public AsociadoDTO getNuevoAsociado() throws datosAsociadoDTOIncorrectoException {
         String nombre = textField1.getText();
         String apellido = textField2.getText();
         String dni = textField3.getText();
         String ciudad = textField4.getText();
         String calle = textField5.getText();
-        int numero = Integer.parseInt(textField6.getText());
+        String numero = textField6.getText();
         String telefono = textField7.getText();
 
-        return new AsociadoDTO(nombre, apellido, dni, ciudad, calle, numero, telefono);
+        if(nombre.isEmpty() || apellido.isEmpty() || dni.isEmpty() || ciudad.isEmpty() || calle.isEmpty() || telefono.isEmpty()) {
+            throw new datosAsociadoDTOIncorrectoException("Debe completar todos los campos.");
+        }
+
+        int numeroReal = Integer.parseInt(numero);
+        if(numeroReal <= 0) {
+            throw new datosAsociadoDTOIncorrectoException("El numero de la calle debe ser un valor positivo.");
+        }
+
+        if(telefono.startsWith("-")) {
+            throw new datosAsociadoDTOIncorrectoException("El telefono no puede ser un valor negativo.");
+        }
+        return new AsociadoDTO(nombre, apellido, dni, ciudad, calle, numeroReal, telefono);
     }
 
     @Override
     public int getCantAsociados() {
-        // TODO: Validar cantidades negativas o incorrectas
-        return Integer.parseInt(cantAsociados.getText());
+        if (cantAsociados.getText().isEmpty()) {
+           throw new datosSimulacionIncorrectosException("La cantidad de asociados no puede estar vacia.");
+        }
+
+        int cant = Integer.parseInt(cantAsociados.getText());
+        if(cant <= 0)
+            throw new datosSimulacionIncorrectosException("La cantidad de asociados debe ser un valor positivo.");
+        return cant;
     }
 
 
     @Override
     public int getCantSolicitudes() {
-        // TODO: Validar cantidades negativas o incorrectas
-        return Integer.parseInt(cantSolicitudes.getText());
+        if( cantSolicitudes.getText().isEmpty()) {
+            throw new datosSimulacionIncorrectosException("La cantidad de solicitudes no puede estar vacia.");
+        }
+
+        int cant = Integer.parseInt(cantSolicitudes.getText());
+        if(cant <= 0)
+            throw new datosSimulacionIncorrectosException("La cantidad de solicitudes debe ser un valor positivo.");
+        return cant;
     }
 
     @Override

@@ -4,6 +4,7 @@ import modelo.modeloDominio.clinica.Clinica;
 import persistencia.AsociadoDTO;
 import vista.IVistaPrincipal;
 import vista.IVistaSimulacion;
+import vista.datosAsociadoDTOIncorrectoException;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -55,22 +56,27 @@ public class Controlador implements ActionListener {
             this.modelo.iniciarSimulacion(this.vistaPrincipal.getCantAsociados(), this.vistaPrincipal.getCantSolicitudes(),this.vistaSimulacion);
             this.vistaSimulacion.iniciarSimulacion();
         }
-        catch (InterruptedException e) {
+        catch (Exception e) {
             this.vistaPrincipal.mostrarMensaje("Fallo", "No se pudo iniciar la simulacion.");
         }
     }
 
     public void guardarAsociado() {
-        AsociadoDTO datos = this.vistaPrincipal.getNuevoAsociado();
-
-        try {
-            this.modelo.guardarNuevoAsociado(datos);
-            this.vistaPrincipal.mostrarMensaje("Exito", "Asociado guardado correctamente.");
-            this.vistaPrincipal.limpiarFormularioAlta();
-            //this.vistaPrincipal.actualizarListaAsociados();
+        try{
+            AsociadoDTO datos = this.vistaPrincipal.getNuevoAsociado();
+            try {
+                this.modelo.guardarNuevoAsociado(datos);
+                this.vistaPrincipal.mostrarMensaje("Exito", "Asociado guardado correctamente.");
+                this.vistaPrincipal.limpiarFormularioAlta();
+                //this.vistaPrincipal.actualizarListaAsociados();
+            }
+            catch (SQLException e) {
+                this.vistaPrincipal.mostrarMensaje("Fallo", "No se pudo guardar al asociado.");
+            }
         }
-        catch (SQLException e) {
-            this.vistaPrincipal.mostrarMensaje("Fallo", "No se pudo guardar al asociado.");
+        catch(datosAsociadoDTOIncorrectoException e){
+            this.vistaPrincipal.mostrarMensaje("Fallo", "Datos del asociado incorrectos.");
+            return;
         }
     }
 
