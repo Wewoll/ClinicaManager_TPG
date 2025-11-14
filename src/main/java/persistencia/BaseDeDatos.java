@@ -72,11 +72,14 @@ public class BaseDeDatos {
      */
     public ResultSet ejecutarConsulta(String consulta, int id) throws SQLException{
         assert consulta != null;
-        assert id != -1;
         ResultSet rs = null;
         PreparedStatement stmt = conexion.prepareStatement(consulta);
+        if (id != -1) {
         stmt.setInt(1, id);
+        }
         rs = stmt.executeQuery();
+        
+       
         // stmt.close();
         return rs;
     }
