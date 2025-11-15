@@ -1,7 +1,7 @@
 package app;
 
 import vista.IVistaPrincipal;
-import vista.IVistaSimulacion;
+import vista.IVistaSimulacion;  
 import vista.VentanaPrincipal;
 
 import modelo.modeloDominio.clinica.Clinica;

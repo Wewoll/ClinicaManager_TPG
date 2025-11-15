@@ -39,7 +39,7 @@ public class VentanaPrincipal extends JFrame implements IVistaPrincipal {
         inicializarComponentes();
         setContentPane(panelPrincipal);
         setTitle("Gestion de Asociados");
-        setSize(800, 690);
+        setSize(1000, 800);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
         darDeAltaButton.setActionCommand(DAR_ALTA);
@@ -64,8 +64,12 @@ public class VentanaPrincipal extends JFrame implements IVistaPrincipal {
     }
 
     private void crearPestanaGestionAsociados() {
-        JPanel panelGestion = new JPanel(new GridLayout(2, 2, 10, 10));
+        // Usar GridLayout con 1 fila y 2 columnas, pero dar más peso a la lista
+        JPanel panelGestion = new JPanel(new GridLayout(1, 2, 10, 10));
         panelGestion.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+
+        // Panel izquierdo: Alta y Baja
+        JPanel panelIzquierdo = new JPanel(new GridLayout(2, 1, 10, 10));
 
         // Panel de Alta Asociado
         altaAsociado = crearPanelAltaAsociado();
@@ -73,14 +77,15 @@ public class VentanaPrincipal extends JFrame implements IVistaPrincipal {
         // Panel de Baja Asociado
         bajaAsociado = crearPanelBajaAsociado();
 
+        panelIzquierdo.add(altaAsociado);
+        panelIzquierdo.add(bajaAsociado);
+
         // Panel de Lista Asociados
         listaAsociado = crearPanelListaAsociados();
 
-        // Organizar en el layout
-        panelGestion.add(altaAsociado);
+        // Organizar en el layout - La lista ocupará más espacio naturalmente
+        panelGestion.add(panelIzquierdo);
         panelGestion.add(listaAsociado);
-        panelGestion.add(bajaAsociado);
-        panelGestion.add(new JPanel()); // Espacio vacío para completar la cuadrícula
 
         pestañas.addTab("Gestion de Asociados", panelGestion);
     }
@@ -119,21 +124,26 @@ public class VentanaPrincipal extends JFrame implements IVistaPrincipal {
                 TitledBorder.DEFAULT_JUSTIFICATION,
                 TitledBorder.DEFAULT_POSITION
         ));
+        panel.setPreferredSize(new Dimension(200, 100)); // Panel completo más pequeño
 
-        JPanel contenido = new JPanel(new BorderLayout(5, 10));
-        contenido.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+        JPanel contenido = new JPanel(new BorderLayout(5, 5));
+        contenido.setBorder(BorderFactory.createEmptyBorder(8, 8, 8, 8));
 
         // Etiqueta
         JLabel etiqueta = new JLabel("DNI");
+        etiqueta.setFont(new Font("Segoe UI", Font.BOLD, 12)); // Etiqueta más pequeña
         contenido.add(etiqueta, BorderLayout.NORTH);
 
-        // Campo DNI
-        DNI_Baja = new JTextField();
+        // Campo DNI MÁS CHICO
+        DNI_Baja = new JTextField(8); // Solo 8 caracteres de ancho
+        DNI_Baja.setPreferredSize(new Dimension(100, 25)); // Compacto
         contenido.add(DNI_Baja, BorderLayout.CENTER);
 
-        // Botón Dar de Baja
+        // Botón Dar de Baja más compacto
         darDeBajaButton = new JButton("Dar de baja");
         darDeBajaButton.setActionCommand("DAR_BAJA");
+        darDeBajaButton.setFont(new Font("Segoe UI", Font.PLAIN, 12)); // Texto más pequeño
+        darDeBajaButton.setPreferredSize(new Dimension(110, 28));
         contenido.add(darDeBajaButton, BorderLayout.SOUTH);
 
         panel.add(contenido, BorderLayout.CENTER);
@@ -151,6 +161,7 @@ public class VentanaPrincipal extends JFrame implements IVistaPrincipal {
 
         listaAsociados = new JList<>();
         JScrollPane scrollPane = new JScrollPane(listaAsociados);
+        scrollPane.setPreferredSize(new Dimension(400, 600)); // Más alto
         panel.add(scrollPane, BorderLayout.CENTER);
 
         return panel;
@@ -210,7 +221,6 @@ public class VentanaPrincipal extends JFrame implements IVistaPrincipal {
         panel.add(etiqueta, BorderLayout.NORTH);
         panel.add(campoTexto, BorderLayout.CENTER);
 
-        campoTexto.setPreferredSize(new Dimension(150, 26));
         return panel;
     }
 
