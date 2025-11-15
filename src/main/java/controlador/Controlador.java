@@ -80,7 +80,7 @@ public class Controlador implements ActionListener {
                 this.vistaPrincipal.mostrarMensaje("Fallo", "No se pudo guardar al asociado.");
             }
         }
-        catch(datosAsociadoDTOIncorrectoException e){
+        catch(Exception e){
             this.vistaPrincipal.mostrarMensaje("Fallo", "Datos del asociado incorrectos.");
             return;
         }
@@ -99,7 +99,7 @@ public class Controlador implements ActionListener {
                 this.vistaPrincipal.mostrarMensaje("Fallo", "No se pudo eliminar al asociado.");
             }
         }
-        catch(datosAsociadoDTOIncorrectoException e){
+        catch(Exception e){
             this.vistaPrincipal.mostrarMensaje("Fallo", "DNI del asociado incorrecto.");
             return;
         }

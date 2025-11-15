@@ -4,8 +4,9 @@ import controlador.Controlador;
 import modelo.modeloAplicacion.NotificacionSimulacion;
 
 public interface IVistaSimulacion {
-    public static final String FINALIZAR_SIMULACION = "Finalizar";
+    public static final String FINALIZAR_SIMULACION = "FINALIZAR";
     void iniciarSimulacion();
     void setActionListener(Controlador controlador);
     void actualizarEstadoSimulacion(NotificacionSimulacion estado);
+    void FinalizarSimulacion();
 }
