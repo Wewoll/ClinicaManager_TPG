@@ -16,8 +16,8 @@ public interface IVistaPrincipal {
     public void limpiarFormularioAlta();
     public void limpiarFormularioBaja();
     public void actualizarListaAsociados(ArrayList<AsociadoDTO> asociados);
-    public int getCantAsociados();
-    public int getCantSolicitudes();
+    public int getCantAsociados() throws datosSimulacionIncorrectosException;
+    public int getCantSolicitudes() throws datosSimulacionIncorrectosException;
     void mostrarMensaje(String exito, String s);
     public String getDNI() throws datosAsociadoDTOIncorrectoException;
 }

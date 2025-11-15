@@ -209,6 +209,8 @@ public class VentanaPrincipal extends JFrame implements IVistaPrincipal {
         JLabel etiqueta = new JLabel(textoEtiqueta);
         panel.add(etiqueta, BorderLayout.NORTH);
         panel.add(campoTexto, BorderLayout.CENTER);
+
+        campoTexto.setPreferredSize(new Dimension(150, 26));
         return panel;
     }
 
@@ -355,7 +357,7 @@ public class VentanaPrincipal extends JFrame implements IVistaPrincipal {
         }
 
     @Override
-    public int getCantAsociados() {
+    public int getCantAsociados() throws datosSimulacionIncorrectosException {
         if (cantAsociados.getText().isEmpty()) {
             throw new datosSimulacionIncorrectosException("La cantidad de asociados no puede estar vacia.");
         }
@@ -367,7 +369,7 @@ public class VentanaPrincipal extends JFrame implements IVistaPrincipal {
     }
 
     @Override
-    public int getCantSolicitudes() {
+    public int getCantSolicitudes() throws datosSimulacionIncorrectosException {
         if (cantSolicitudes.getText().isEmpty()) {
             throw new datosSimulacionIncorrectosException("La cantidad de solicitudes no puede estar vacia.");
         }
@@ -419,18 +421,5 @@ public class VentanaPrincipal extends JFrame implements IVistaPrincipal {
             throw new datosAsociadoDTOIncorrectoException("El DNI debe ser un valor positivo.");
 
         return DNI_Baja.getText();
-    }
-
-    // Clases de excepción (debes tenerlas definidas en tu proyecto)
-    public static class datosAsociadoDTOIncorrectoException extends RuntimeException {
-        public datosAsociadoDTOIncorrectoException(String message) {
-            super(message);
-        }
-    }
-
-    public static class datosSimulacionIncorrectosException extends RuntimeException {
-        public datosSimulacionIncorrectosException(String message) {
-            super(message);
-        }
     }
 }
