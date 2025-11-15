@@ -414,4 +414,9 @@ public class Clinica
         assert datos != null : "El asociado no puede ser nulo";
         return new Asociado(datos.getNombre(), datos.getApellido(), datos.getDni(), datos.getTelefono(), new Domicilio(datos.getCalle(),datos.getNumero(),datos.getCiudad()));
     }
+
+    public ArrayList<AsociadoDTO> getAsociadosDTO() throws SQLException {
+        ArrayList<AsociadoDTO> asociadosDTO = dao.cargarBD();
+        return asociadosDTO;
+    }
 }
