@@ -6,6 +6,7 @@ import vista.IVistaPrincipal;
 import vista.IVistaSimulacion;
 import vista.datosAsociadoDTOIncorrectoException;
 
+import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
@@ -35,12 +36,15 @@ public class Controlador implements ActionListener {
         this.vistaPrincipal.setActionListener(this);
         this.vistaSimulacion = vistaSimulacion;
         this.vistaSimulacion.setActionListener(this);
-        try {
-            this.actualizarListaAsociados();
-        }
-        catch (SQLException e) {
-            this.vistaPrincipal.mostrarMensaje("Fallo", "No se pudo cargar la lista de asociados.");
-        }
+
+        // Cargar asociados después de que todo esté inicializado
+        SwingUtilities.invokeLater(() -> {
+            try {
+                this.actualizarListaAsociados();
+            } catch (SQLException e) {
+                this.vistaPrincipal.mostrarMensaje("Fallo", "No se pudo cargar la lista de asociados.");
+            }
+        });
     }
 
     /**
@@ -62,6 +66,7 @@ public class Controlador implements ActionListener {
             }
             case IVistaPrincipal.DAR_BAJA: {
                 this.eliminarAsociado();
+                break;
             }
             case IVistaSimulacion.FINALIZAR_SIMULACION: {
                 this.finalizarSimulacion();
@@ -129,13 +134,12 @@ public class Controlador implements ActionListener {
                 this.vistaPrincipal.limpiarFormularioBaja();
                 this.actualizarListaAsociados();
             }
-            catch (SQLException e) {
+            catch (Exception e) {
                 this.vistaPrincipal.mostrarMensaje("Fallo", "No se pudo eliminar al asociado.");
             }
         }
         catch(datosAsociadoDTOIncorrectoException e){
             this.vistaPrincipal.mostrarMensaje("Fallo", "DNI del asociado incorrecto.");
-            return;
         }
     }
 
@@ -146,7 +150,12 @@ public class Controlador implements ActionListener {
      */
     public void actualizarListaAsociados() throws SQLException {
         // TODO: Hacer que se traigan todos los asociados desde la base de datos
-        ArrayList<AsociadoDTO> asociadosDTO = this.modelo.getAsociadosDTO();
-        this.vistaPrincipal.actualizarListaAsociados(asociadosDTO);
+        try{
+            ArrayList<AsociadoDTO> asociadosDTO = this.modelo.getAsociadosDTO();
+            this.vistaPrincipal.actualizarListaAsociados(asociadosDTO);
+        }
+        catch (SQLException e) {
+            throw new SQLException("No se pudieron cargar los asociados desde la base de datos.");
+        }
     }
 }

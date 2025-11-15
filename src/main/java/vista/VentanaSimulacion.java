@@ -5,6 +5,7 @@ import modelo.modeloAplicacion.NotificacionSimulacion;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.image.BufferedImage;
 
 public class VentanaSimulacion extends JFrame implements IVistaSimulacion {
     private JPanel panelPrincipal;
@@ -50,7 +51,11 @@ public class VentanaSimulacion extends JFrame implements IVistaSimulacion {
         // Panel para el icono de ambulancia (arriba)
         JPanel panelIcono = new JPanel(new FlowLayout(FlowLayout.CENTER));
         panelIcono.setBorder(BorderFactory.createEmptyBorder(20, 10, 20, 10));
-        iconoAmbulanciaLabel = new JLabel("Icono de la Ambulancia");
+        iconoAmbulanciaLabel = new JLabel();
+
+        // Cargar y configurar la imagen de la ambulancia
+        cargarImagenAmbulancia();
+
         panelIcono.add(iconoAmbulanciaLabel);
         panelDerecho.add(panelIcono, BorderLayout.CENTER);
 
@@ -60,6 +65,98 @@ public class VentanaSimulacion extends JFrame implements IVistaSimulacion {
         finalizarButton = new JButton("Finalizar");
         panelBoton.add(finalizarButton);
         panelDerecho.add(panelBoton, BorderLayout.SOUTH);
+    }
+
+    private void cargarImagenAmbulancia() {
+        try {
+            // Opción 1: Cargar imagen desde archivo (ruta relativa)
+            ImageIcon icono = new ImageIcon("src/main/java/vista/Imagenes/Ambulancia.png");
+
+            // Verificar si la imagen se cargó correctamente
+            if (icono.getIconWidth() == -1) {
+                throw new Exception("No se pudo encontrar la imagen en la ruta especificada");
+            }
+
+            // Escalar la imagen manteniendo la relación de aspecto
+            Image imagen = icono.getImage();
+            int nuevoAncho = 120;
+            int nuevoAlto = 120;
+
+            // Calcular dimensiones manteniendo proporción
+            int anchoOriginal = icono.getIconWidth();
+            int altoOriginal = icono.getIconHeight();
+
+            // Escalar manteniendo relación de aspecto
+            if (anchoOriginal > altoOriginal) {
+                nuevoAlto = (nuevoAncho * altoOriginal) / anchoOriginal;
+            } else {
+                nuevoAncho = (nuevoAlto * anchoOriginal) / altoOriginal;
+            }
+
+            Image imagenEscalada = imagen.getScaledInstance(nuevoAncho, nuevoAlto, Image.SCALE_SMOOTH);
+            iconoAmbulanciaLabel.setIcon(new ImageIcon(imagenEscalada));
+            iconoAmbulanciaLabel.setText(""); // Eliminar el texto
+
+            // Centrar la imagen
+            iconoAmbulanciaLabel.setHorizontalAlignment(SwingConstants.CENTER);
+            iconoAmbulanciaLabel.setVerticalAlignment(SwingConstants.CENTER);
+
+        } catch (Exception e) {
+            System.err.println("Error al cargar la imagen de la ambulancia: " + e.getMessage());
+            System.err.println("Ruta intentada: Imagenes/Ambulancia.png");
+            System.err.println("Directorio de trabajo: " + System.getProperty("user.dir"));
+
+            // En caso de error, mostrar texto como fallback
+            iconoAmbulanciaLabel.setText("🚑 Ambulancia");
+            iconoAmbulanciaLabel.setFont(new Font("Segoe UI", Font.BOLD, 16));
+            iconoAmbulanciaLabel.setIcon(null); // Asegurarse de que no hay icono
+        }
+    }
+
+    private ImageIcon crearIconoAmbulanciaPlaceholder() {
+        // Crear una imagen simple como placeholder
+        int width = 120;
+        int height = 120;
+        BufferedImage imagen = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
+        Graphics2D g2d = imagen.createGraphics();
+
+        // Configurar calidad de renderizado
+        g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+
+        // Fondo blanco
+        g2d.setColor(Color.WHITE);
+        g2d.fillRect(0, 0, width, height);
+
+        // Cuerpo de la ambulancia (rojo)
+        g2d.setColor(Color.RED);
+        g2d.fillRoundRect(20, 40, 80, 40, 10, 10);
+
+        // Cabina (azul)
+        g2d.setColor(Color.BLUE);
+        g2d.fillRect(20, 30, 30, 30);
+
+        // Ventanas (azul claro)
+        g2d.setColor(new Color(173, 216, 230));
+        g2d.fillRect(25, 35, 20, 15);
+
+        // Luces (amarillo)
+        g2d.setColor(Color.YELLOW);
+        g2d.fillOval(15, 45, 10, 10); // Luz delantera
+        g2d.fillOval(95, 45, 10, 10); // Luz trasera
+
+        // Cruz (blanca)
+        g2d.setColor(Color.WHITE);
+        g2d.fillRect(55, 45, 10, 30); // Línea vertical
+        g2d.fillRect(45, 55, 30, 10); // Línea horizontal
+
+        // Ruedas (negras)
+        g2d.setColor(Color.BLACK);
+        g2d.fillOval(25, 75, 15, 15);
+        g2d.fillOval(70, 75, 15, 15);
+
+        g2d.dispose();
+
+        return new ImageIcon(imagen);
     }
 
     private void aplicarEstilos() {
@@ -78,13 +175,14 @@ public class VentanaSimulacion extends JFrame implements IVistaSimulacion {
         list1.setSelectionBackground(new Color(70, 130, 180, 80));
         list1.setSelectionForeground(Color.BLACK);
 
-        // Estilo del label del icono
+        // Estilo del label del icono (ahora con imagen)
         iconoAmbulanciaLabel.setFont(new Font("Segoe UI", Font.BOLD, 14));
         iconoAmbulanciaLabel.setForeground(new Color(50, 50, 50));
         iconoAmbulanciaLabel.setBorder(BorderFactory.createCompoundBorder(
                 BorderFactory.createLineBorder(new Color(200, 200, 200)),
                 BorderFactory.createEmptyBorder(10, 20, 10, 20)
         ));
+        iconoAmbulanciaLabel.setHorizontalAlignment(SwingConstants.CENTER);
 
         // Estilo del botón Finalizar
         if (finalizarButton != null) {
@@ -170,16 +268,6 @@ public class VentanaSimulacion extends JFrame implements IVistaSimulacion {
         finalizarButton.setEnabled(false);
         finalizarButton.setText("Finalizado");
         finalizarButton.setBackground(Color.GRAY);
-
-        // Opcional: cerrar la ventana después de un tiempo
-        /*
-        Timer timer = new Timer(3000, e -> {
-            setVisible(false);
-            dispose();
-        });
-        timer.setRepeats(false);
-        timer.start();
-        */
     }
 
     // Método para limpiar la lista

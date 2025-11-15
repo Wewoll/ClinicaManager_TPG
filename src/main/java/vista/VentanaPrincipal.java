@@ -416,7 +416,7 @@ public class VentanaPrincipal extends JFrame implements IVistaPrincipal {
         this.listaModel.clear();
         String aux;
         for (AsociadoDTO a : asociados) {
-            aux =  a.getNombre() + a.getApellido() + ", DNI: " + a.getDni();
+            aux =  a.getNombre() + " " + a.getApellido() + ", DNI: " + a.getDni();
             this.listaModel.addElement(aux);
         }
     }
