@@ -415,6 +415,13 @@ public class Clinica
         return new Asociado(datos.getNombre(), datos.getApellido(), datos.getDni(), datos.getTelefono(), new Domicilio(datos.getCalle(),datos.getNumero(),datos.getCiudad()));
     }
 
+    /**
+     * Obtiene la lista de asociados en formato DTO desde la base de datos.
+     * <b>Post</b>: Se devuelve una lista de objetos AsociadoDTO con los datos de los asociados.
+     *
+     * @return Lista de objetos AsociadoDTO.
+     * @throws SQLException Si ocurre un error al acceder a la base de datos.
+     */
     public ArrayList<AsociadoDTO> getAsociadosDTO() throws SQLException {
         ArrayList<AsociadoDTO> asociadosDTO = dao.cargarBD();
         return asociadosDTO;
