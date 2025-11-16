@@ -30,17 +30,17 @@ public class BaseDeDatos {
      * @return La instancia única de BaseDeDatos.
      */
     public static BaseDeDatos getInstancia() {
-        if (instacia == null) {
-            instacia = new BaseDeDatos();
+        if (instancia == null) {
+            instancia = new BaseDeDatos();
         }
-        return instacia;
+        return instancia;
     }
 
     /**
      * Carga el driver JDBC de MySQL.
      * <b>post:</b> se carga el driver JDBC de MySQL.
      */
-    public static void cargarDriver() {
+    private void cargarDriver() {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
         } catch (ClassNotFoundException e) {
@@ -51,7 +51,7 @@ public class BaseDeDatos {
      * Abre la conexión a la base de datos.
      * <b>post:</b> se abre la conexión a la base de datos.
      */
-    public static void abrirConexion() {
+    private void abrirConexion() {
         try {
             conexion = DriverManager.getConnection(URL, USUARIO, CONTRASENA);
         } catch (SQLException e) {
@@ -63,7 +63,7 @@ public class BaseDeDatos {
      * <b>post:</b> se cierra la conexión a la base de datos.
      * @throws SQLException Si ocurre un error al cerrar la conexión.
      */
-    public static void cerrarConexion() throws SQLException {
+    public void cerrarConexion() throws SQLException {
         if (conexion != null) {
             conexion.close();
         }
@@ -72,7 +72,7 @@ public class BaseDeDatos {
      * Obtiene la conexión a la base de datos.
      * @return La conexión a la base de datos.
      */
-    public static Connection getConexion() {
+    public Connection getConexion() {
         return conexion;
     }
     /**

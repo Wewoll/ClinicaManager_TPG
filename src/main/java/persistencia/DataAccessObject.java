@@ -19,8 +19,7 @@ public class DataAccessObject {
      * <b>post:</b> se crea un objeto DataAccessObject con una instancia de BaseDeDatos.
      */
     public DataAccessObject() {
-        BaseDeDatos bd = bd.getInstacia();
-        this.bd = bd;
+        bd = BaseDeDatos.getInstancia();
     }
 
     /**
@@ -37,16 +36,17 @@ public class DataAccessObject {
 
         String query = "INSERT INTO Asociados(nombre, apellido, DNI, calle, numero, ciudad, telefono) VALUES (?, ?, ?, ?, ?, ?, ?);";
 
-        bd.ejecutarInsert(query,aDTO);
+        bd.ejecutarInsert(query, aDTO);
     }
 
     /**
      * Cierra la conexión con la base de datos.
      * @throws SQLException Si ocurre un error al cerrar la conexión.
      */
-    public void cerrarConexion() throws SQLException{
-        BaseDeDatos.cerrarConexion();
+    public void cerrarConexion() throws SQLException {
+        bd.cerrarConexion();
     }
+
     /**
      * Carga una lista de objetos Asociado desde la base de datos con un límite especificado.
      * <b>pre:</b> limite debe ser mayor que 0.
