@@ -26,7 +26,7 @@ public class TrasladandoPacienteClinicaState implements State{
     @Override
     public void SolicitudDeTraslado(){
         //todo observer observable (no puede atender solicitud)
-        // this.ambulancia.doNotifyObservers(new NotificacionSimulacion("La ambulancia no puede atender la solicitud de traslado porque se encuentra trasladando un paciente a la clínica.","AMBULANCIA"));
+        this.ambulancia.notifyObservers(new NotificacionSimulacion("La ambulancia no puede atender la solicitud de traslado porque se encuentra trasladando un paciente a la clínica.","AMBULANCIA"));
     }
     /**
      * Método que maneja la solicitud de atención a domicilio.
@@ -42,7 +42,7 @@ public class TrasladandoPacienteClinicaState implements State{
      */
     @Override
     public void SolicitudMantenimiento(){
-        // this.ambulancia.doNotifyObservers(new NotificacionSimulacion("La ambulancia no puede atender la solicitud de mantenimiento porque se encuentra trasladando un paciente a la clínica.","AMBULANCIA"));
+        this.ambulancia.notifyObservers(new NotificacionSimulacion("La ambulancia no puede atender la solicitud de mantenimiento porque se encuentra trasladando un paciente a la clínica.","AMBULANCIA"));
     }
     /**
      * Método que maneja el retorno a la clínica.

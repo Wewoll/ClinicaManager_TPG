@@ -24,7 +24,7 @@ public class AtendiendoEnDomicilioState implements State{
      */
     @Override
     public void SolicitudDeTraslado(){
-        // this.ambulancia.doNotifyObservers(new NotificacionSimulacion("❌ La ambulancia no puede atender la solicitud de traslado porque se encuentra atendiendo un paciente en domicilio.","AMBULANCIA"));
+        this.ambulancia.notifyObservers(new NotificacionSimulacion("❌ La ambulancia no puede atender la solicitud de traslado porque se encuentra atendiendo un paciente en domicilio.","AMBULANCIA"));
     }
 
     /**
@@ -41,7 +41,7 @@ public class AtendiendoEnDomicilioState implements State{
      */
     @Override
     public void SolicitudMantenimiento(){
-        // this.ambulancia.doNotifyObservers(new NotificacionSimulacion("❌ La ambulancia no puede atender la solicitud de mantenimiento porque se encuentra atendiendo un paciente en domicilio.","AMBULANCIA"));
+        this.ambulancia.notifyObservers(new NotificacionSimulacion("❌ La ambulancia no puede atender la solicitud de mantenimiento porque se encuentra atendiendo un paciente en domicilio.","AMBULANCIA"));
     }
     /**
      * Método que maneja el retorno a la clínica.

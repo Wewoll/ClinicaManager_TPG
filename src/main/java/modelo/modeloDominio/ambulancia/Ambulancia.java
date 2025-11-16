@@ -139,6 +139,7 @@ public class Ambulancia extends Observable {
         }
         this.setOcupado(true);
         // Cambiar estado primero
+        this.setChanged();
         estadoActual.SolicitudMantenimiento();
 
         // Notificar dentro del synchronized
@@ -191,6 +192,7 @@ public class Ambulancia extends Observable {
         }
         this.setOcupado(true);
         // Cambiar estado primero
+        this.setChanged();
         estadoActual.SolicitudDeAtencionDomicilio();
 
         // Notificar dentro del synchronized
@@ -224,6 +226,7 @@ public class Ambulancia extends Observable {
             return;
         }
         this.setOcupado(true);
+        this.setChanged();
         // Cambiar estado primero
         this.estadoActual.SolicitudDeTraslado();
 

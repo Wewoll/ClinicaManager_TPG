@@ -24,7 +24,7 @@ public class EnTallerState implements State{
      */
     @Override
     public void SolicitudDeTraslado() {
-       // this.ambulancia.doNotifyObservers(new NotificacionSimulacion("La ambulancia no puede atender la solicitud de traslado porque se encuentra en el taller.","AMBULANCIA"));
+       this.ambulancia.notifyObservers(new NotificacionSimulacion("La ambulancia no puede atender la solicitud de traslado porque se encuentra en el taller.","AMBULANCIA"));
     }
 
     /**

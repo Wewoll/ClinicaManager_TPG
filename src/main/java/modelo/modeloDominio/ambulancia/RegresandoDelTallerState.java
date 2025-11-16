@@ -25,7 +25,7 @@ public class RegresandoDelTallerState implements State{
      */
     @Override
     public void SolicitudDeTraslado() {
-        // this.ambulancia.doNotifyObservers(new NotificacionSimulacion("La ambulancia no puede atender la solicitud de traslado porque se encuentra regresando del taller.","AMBULANCIA"));
+        this.ambulancia.notifyObservers(new NotificacionSimulacion("La ambulancia no puede atender la solicitud de traslado porque se encuentra regresando del taller.","AMBULANCIA"));
     }
 
     /**
@@ -34,7 +34,7 @@ public class RegresandoDelTallerState implements State{
      */
     @Override
     public void SolicitudDeAtencionDomicilio() {
-        // this.ambulancia.doNotifyObservers(new NotificacionSimulacion("La ambulancia no puede atender la solicitud de traslado porque se encuentra regresando del taller.","AMBULANCIA"));
+        // this.ambulancia.notifyObservers(new NotificacionSimulacion("La ambulancia no puede atender la solicitud de traslado porque se encuentra regresando del taller.","AMBULANCIA"));
     }
 
     /**
@@ -43,7 +43,7 @@ public class RegresandoDelTallerState implements State{
      */
     @Override
     public void SolicitudMantenimiento() {
-        // this.ambulancia.doNotifyObservers(new NotificacionSimulacion("La ambulancia no puede atender la solicitud de mantenimiento porque se encuentra regresando del taller.","AMBULANCIA"));
+        this.ambulancia.notifyObservers(new NotificacionSimulacion("La ambulancia no puede atender la solicitud de mantenimiento porque se encuentra regresando del taller.","AMBULANCIA"));
     }
 
     /**
@@ -52,7 +52,7 @@ public class RegresandoDelTallerState implements State{
      */
     @Override
     public void RetornoClinica() {
-        // this.ambulancia.doNotifyObservers(new NotificacionSimulacion("La ambulancia inicia retorno a la clinica del taller", "INFO"));
+        // this.ambulancia.notifyObservers(new NotificacionSimulacion("La ambulancia inicia retorno a la clinica del taller", "INFO"));
 
         ambulancia.setState(new DisponibleState(this.ambulancia));
     }
