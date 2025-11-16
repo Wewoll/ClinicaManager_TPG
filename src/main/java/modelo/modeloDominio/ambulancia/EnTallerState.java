@@ -33,7 +33,7 @@ public class EnTallerState implements State{
      */
     @Override
     public void SolicitudDeAtencionDomicilio() {
-        this.ambulancia.notifyObservers(new NotificacionSimulacion("La ambulancia no puede atender la solicitud de traslado porque se encuentra en el taller.","AMBULANCIA"));
+        this.ambulancia.notifyObservers(new NotificacionSimulacion("La ambulancia no puede atender la solicitud de atencion a domicilio porque se encuentra en el taller.","AMBULANCIA"));
     }
 
     /**
@@ -51,6 +51,6 @@ public class EnTallerState implements State{
      */
     @Override
     public void RetornoClinica() {
-        this.ambulancia.notifyObservers(new NotificacionSimulacion("La ambulancia no puede atender la solicitud de traslado porque se encuentra en el taller.","AMBULANCIA"));
+        this.ambulancia.notifyObservers(new NotificacionSimulacion("La ambulancia no puede retornar a la clinica porque se encuentra en el taller.","AMBULANCIA"));
     }
 }

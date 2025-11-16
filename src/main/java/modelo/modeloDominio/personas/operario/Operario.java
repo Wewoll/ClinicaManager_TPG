@@ -44,13 +44,13 @@ public class Operario extends Persona implements Runnable
         ArrayList<Asociado> asociados = this.ambulancia.getAsociados();
         for (Asociado asociado : asociados)
         {
-            // System.out.println("Cantidad de solicitudes atendidas por asociado " + asociado.getDni() + ": " + asociado.getCantSolicitudesAtendidas() + "/" + asociado.getMaxCantSolicitudes());
-            if (asociado.getCantSolicitudesAtendidas() >= asociado.getMaxCantSolicitudes())
+            if (asociado.getCantSolicitudesAtendidas() < asociado.getMaxCantSolicitudes())
             {
-                this.ambulancia.setSimulacionActiva(false);
                 return;
             }
         }
+        this.ambulancia.setSimulacionActiva(false);
+        // this.ambulancia.notifyObservers(new NotificacionSimulacion("Todos los asociados han terminado sus solicitudes. La simulación se detendrá.","INFO"));
     }
 
     /**

@@ -42,7 +42,7 @@ public class RegresandoClinicaSinPacienteState implements State{
      */
     @Override
     public void SolicitudMantenimiento() {
-        this.ambulancia.notifyObservers(new NotificacionSimulacion("La ambulancia no puede atender la solicitud de mantenimiento porque se encuentra regresando a la clínica sin paciente.","AMBULANCIA"));
+        this.ambulancia.notifyObservers(new NotificacionSimulacion("La ambulancia no puede atender la solicitud de mantenimiento porque se encuentra regresando a la clínica sin paciente.","NO_AMBULANCIA"));
     }
 
     /**
@@ -51,7 +51,7 @@ public class RegresandoClinicaSinPacienteState implements State{
      */
     @Override
     public void RetornoClinica() {
-        this.ambulancia.notifyObservers(new NotificacionSimulacion("ℹ️ La ambulancia inicia retorno automatico a la clinica ", "INFO"));
+        this.ambulancia.notifyObservers(new NotificacionSimulacion("La ambulancia retorna a la clinica sin paciente", "INFO"));
         ambulancia.setState(new DisponibleState(this.ambulancia));
     }
 }

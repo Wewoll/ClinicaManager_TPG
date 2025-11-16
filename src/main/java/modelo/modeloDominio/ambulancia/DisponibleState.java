@@ -49,7 +49,6 @@ public class DisponibleState implements State{
      */
     @Override
     public void RetornoClinica(){
-        this.ambulancia.notifyObservers(new NotificacionSimulacion("ℹ️ La ambulancia ya esta en la clinica", "INFO"));
-
+        this.ambulancia.notifyObservers(new NotificacionSimulacion(" La ambulancia ya esta en la clinica", "INFO"));
     }
 }

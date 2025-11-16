@@ -56,6 +56,7 @@ public class Ambulancia extends Observable
      */
     public void setState(State nuevoEstado) {
         assert nuevoEstado != null;
+        System.out.println("Cambio de estado de ambulancia: " + this.estadoActual.getClass().getSimpleName() + " -> " + nuevoEstado.getClass().getSimpleName());
         this.estadoActual = nuevoEstado;
     }
 
@@ -71,7 +72,7 @@ public class Ambulancia extends Observable
      * Verifica si la ambulancia está ocupada.
      * @return true si la ambulancia está ocupada, false en caso contrario.
      */
-    public boolean isOcupado() {
+    public synchronized boolean isOcupado() {
         return ocupado;
     }
 
@@ -80,7 +81,7 @@ public class Ambulancia extends Observable
      * <b>post:</b> el estado de ocupado se actualiza al valor proporcionado.
      * @param ocupado true si la ambulancia está ocupada, false en caso contrario.
      */
-    public void setOcupado(boolean ocupado) {
+    public synchronized void setOcupado(boolean ocupado) {
         this.ocupado = ocupado;
     }
 
@@ -88,7 +89,7 @@ public class Ambulancia extends Observable
      * Verifica si la simulación está activa.
      * @return true si la simulación está activa, false en caso contrario.
      */
-    public boolean isSimulacionActiva()
+    public synchronized boolean isSimulacionActiva()
     {
         return isSimulacionActiva;
     }
@@ -97,7 +98,7 @@ public class Ambulancia extends Observable
      * <b>post:</b> el estado de la simulación se actualiza al valor proporcionado.
      * @param simulacionActiva true si la simulación está activa, false en caso contrario.
      */
-    public void setSimulacionActiva(boolean simulacionActiva)
+    public synchronized void setSimulacionActiva(boolean simulacionActiva)
     {
         isSimulacionActiva = simulacionActiva;
     }
@@ -111,29 +112,36 @@ public class Ambulancia extends Observable
      */
     public synchronized void solicitarMantenimiento(Operario o)  {
         assert  o != null;
-        while (this.ocupado) {
+        while (this.isOcupado() && this.isSimulacionActiva()) {
             try {
                 setChanged();
-                this.notifyObservers(new NotificacionSimulacion("❌ 🔧 Ambulancia ocupada, el operario "+ o.getNombre() + " espera para solicitar mantenimiento...","Operario"));
+                this.notifyObservers(new NotificacionSimulacion("❌ 🔧 Ambulancia ocupada, el operario "+ o.getNombre() + " espera para solicitar mantenimiento...","NO_AMBULANCIA"));
                 wait();
             } catch (InterruptedException e) {
                 Thread.currentThread().interrupt();
                 return; // Salir si el hilo es interrumpido
             }
         }
+        if (!isSimulacionActiva) {
+            this.notifyObservers(new NotificacionSimulacion("La simulación ha finalizado. El operario " + o.getNombre() + " no puede solicitar mantenimiento.","INFO"));
+            return; // Salir si la simulación ya no está activa
+        }
         setChanged();
-        this.notifyObservers(new NotificacionSimulacion("🔧 El operario " + o.getNombre() + " solicitó el mantenimiento de la ambulancia.","Operario"));
+        this.notifyObservers(new NotificacionSimulacion("🔧 El operario " + o.getNombre() + " solicitó el mantenimiento de la ambulancia.","OK"));
         estadoActual.SolicitudMantenimiento();
-        notifyAll();
+        // notifyAll();
+
+        this.setChanged(); //quiero mantener la flag activa en todos lados
     }
     /**
      * Indica que la ambulancia está volviendo del taller, función synchronized.
      * <b>post:</b> se notifica a los observadores que la ambulancia está volviendo del taller.
      */
     public synchronized void volviendoDelTaller() {
-        this.notifyObservers(new NotificacionSimulacion("ℹ️ La ambulancia vuelve del taller.","AMBULANCIA"));
+        this.notifyObservers(new NotificacionSimulacion("La ambulancia vuelve del taller.","INFO"));
         estadoActual.SolicitudMantenimiento();
         notifyAll();
+        this.setChanged();
     }
 
     /**
@@ -145,10 +153,10 @@ public class Ambulancia extends Observable
      */
     public synchronized void atenderDomicilio(Asociado a)  {
         assert   a != null;
-        while (this.ocupado) {
+        while (this.isOcupado()) {
             try {
                 setChanged();
-                this.notifyObservers(new NotificacionSimulacion("❌ 🏠 Ambulancia ocupada, el asociado "+ a.getNombre() + " espera para ser atendido a domicilio...","Asociado"));
+                this.notifyObservers(new NotificacionSimulacion("❌ 🏠 Ambulancia ocupada, el asociado "+ a.getNombre() + " espera para ser atendido a domicilio...","NO_AMBULANCIA"));
                 wait();
             } catch (InterruptedException e) {
                 Thread.currentThread().interrupt();
@@ -156,8 +164,9 @@ public class Ambulancia extends Observable
             }
         }
         setChanged();
-        this.notifyObservers(new NotificacionSimulacion("🏠 El asociado " + a.getNombre() + " es atendido domicilio.","Asociado"));
+        this.notifyObservers(new NotificacionSimulacion("🏠 El asociado " + a.getNombre() + " es atendido domicilio. ","OK"));
         estadoActual.SolicitudDeAtencionDomicilio();
+        this.setChanged();
     }
 
     /**
@@ -170,10 +179,10 @@ public class Ambulancia extends Observable
     public synchronized void trasladarALaClinica(Asociado a)
     {
         assert   a != null;
-        while (this.ocupado) {
+        while (this.isOcupado()) {
             try {
                 setChanged();
-                this.notifyObservers(new NotificacionSimulacion("❌ 🚑 Ambulancia ocupada, el asociado "+ a.getNombre() + " espera para ser trasladado a la clinica...","Asociado"));
+                this.notifyObservers(new NotificacionSimulacion("❌ 🚑 Ambulancia ocupada, el asociado "+ a.getNombre() + " espera para ser trasladado a la clinica...","NO_AMBULANCIA"));
                 wait();
             } catch (InterruptedException e) {
                 Thread.currentThread().interrupt();
@@ -181,8 +190,9 @@ public class Ambulancia extends Observable
             }
         }
         setChanged();
-        this.notifyObservers(new NotificacionSimulacion("🚑  El asociado " + a.getNombre() + " es trasladado a la clinica.","Asociado"));
+        this.notifyObservers(new NotificacionSimulacion("🚑  El asociado " + a.getNombre() + " es trasladado a la clinica  ","OK"));
         this.estadoActual.SolicitudDeTraslado();
+        this.setChanged();
     }
 
     /**
@@ -195,6 +205,7 @@ public class Ambulancia extends Observable
         // el notify observers esta dentro del estado, ya que puede ser que no se pueda hacer el retorno automatico
         estadoActual.RetornoClinica();
         notifyAll();
+        this.setChanged();
     }
 
     /**
@@ -205,5 +216,6 @@ public class Ambulancia extends Observable
         setChanged();
         estadoActual.RetornoClinica();
         notifyAll();
+        this.setChanged();
     }
 }

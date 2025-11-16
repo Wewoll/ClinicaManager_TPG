@@ -49,7 +49,7 @@ public class AtendiendoEnDomicilioState implements State{
      */
     @Override
     public void RetornoClinica(){
-        this.ambulancia.notifyObservers(new NotificacionSimulacion("ℹ️ La ambulancia inicia retorno automatico a la clinica sin paciente", "INFO"));
+        this.ambulancia.notifyObservers(new NotificacionSimulacion("La ambulancia retorna a la clinica sin paciente", "INFO"));
         ambulancia.setState(new RegresandoClinicaSinPacienteState(this.ambulancia));
     }
 }

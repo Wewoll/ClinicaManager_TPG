@@ -350,7 +350,7 @@ public class Clinica
             ArrayList<AsociadoDTO> asociadosDTOs= this.dao.cargarConLimite(cantAsociados);
             ObservadorSimulacion observador = new ObservadorSimulacion(this.ambulancia, vistaSimulacion);
             RetornoAutomatico retornoAutomatico = new RetornoAutomatico(this.ambulancia);
-            Operario operario = new Operario("Operario1", "ApellidoOp", "00000001", "555-0001", new Domicilio("Calle Op",1,"CiudadOp"), this.ambulancia);
+            Operario operario = new Operario("Jhon", "ApellidoOp", "00000001", "555-0001", new Domicilio("Calle Op",1,"CiudadOp"), this.ambulancia);
             // observador.agregarObservado(retornoAutomatico);
             for (AsociadoDTO aDTO: asociadosDTOs){
                 Asociado asociado = new Asociado(aDTO.getNombre(), aDTO.getApellido(), aDTO.getDni(), aDTO.getTelefono(), new Domicilio(aDTO.getCalle(), aDTO.getNumero(), aDTO.getCiudad()),  maxCantSolicitudesPorAsociado,this.ambulancia);

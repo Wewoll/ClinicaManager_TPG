@@ -31,13 +31,13 @@ public class RetornoAutomatico implements Runnable
         ArrayList<Asociado> asociados = this.ambulancia.getAsociados();
         for (Asociado asociado : asociados)
         {
-            if (asociado.getCantSolicitudesAtendidas() >= asociado.getMaxCantSolicitudes())
+            if (asociado.getCantSolicitudesAtendidas() < asociado.getMaxCantSolicitudes())
             {
-                this.ambulancia.setSimulacionActiva(false);
                 return;
             }
         }
-        // this.ambulancia.setSimulacionActiva(true);
+        this.ambulancia.setSimulacionActiva(false);
+        this.ambulancia.notifyObservers(new NotificacionSimulacion("Todos los asociados han terminado sus solicitudes. La simulación se detendrá.","INFO"));
     }
     /**
      * Método run que se ejecuta en el hilo.

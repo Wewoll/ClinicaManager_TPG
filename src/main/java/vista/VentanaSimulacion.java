@@ -4,14 +4,19 @@ import controlador.Controlador;
 import modelo.modeloAplicacion.NotificacionSimulacion;
 
 import javax.swing.*;
+import javax.swing.text.BadLocationException;
+import javax.swing.text.SimpleAttributeSet;
+import javax.swing.text.StyleConstants;
+import javax.swing.text.StyledDocument;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 
 public class VentanaSimulacion extends JFrame implements IVistaSimulacion {
     private JPanel panelPrincipal;
-    private JList<String> list1;
+    //private JList<String> list1;
+    private JTextPane logSimulacion;
     private JButton finalizarButton;
-    private DefaultListModel<String> listModel;
+    // private DefaultListModel<String> listModel;
     private JLabel iconoAmbulanciaLabel;
     private Controlador controlador;
 
@@ -24,8 +29,8 @@ public class VentanaSimulacion extends JFrame implements IVistaSimulacion {
         setLocationRelativeTo(null);
         setVisible(false);
 
-        listModel = new DefaultListModel<>();
-        list1.setModel(listModel);
+//        listModel = new DefaultListModel<>();
+//        list1.setModel(listModel);
 
         // Configurar el botón
         finalizarButton.setActionCommand(FINALIZAR_SIMULACION);
@@ -39,8 +44,10 @@ public class VentanaSimulacion extends JFrame implements IVistaSimulacion {
         panelPrincipal.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
 
         // Lista de notificaciones (izquierda)
-        list1 = new JList<>();
-        JScrollPane scrollPane = new JScrollPane(list1);
+        this.logSimulacion = new JTextPane();
+        this.logSimulacion.setEditable(false);
+        this.logSimulacion.setFont(new Font("Monospaced", Font.PLAIN, 12)); // O la fuente que quieras
+        JScrollPane scrollPane = new JScrollPane(this.logSimulacion);
         scrollPane.setPreferredSize(new Dimension(400, 0));
         panelPrincipal.add(scrollPane, BorderLayout.CENTER);
 
@@ -170,10 +177,10 @@ public class VentanaSimulacion extends JFrame implements IVistaSimulacion {
         panelPrincipal.setBackground(fondoPrincipal);
 
         // Estilo de la lista
-        list1.setFont(new Font("Segoe UI", Font.PLAIN, 12));
-        list1.setBackground(new Color(250, 250, 250));
-        list1.setSelectionBackground(new Color(70, 130, 180, 80));
-        list1.setSelectionForeground(Color.BLACK);
+        this.logSimulacion.setFont(new Font("Segoe UI", Font.PLAIN, 12));
+        this.logSimulacion.setBackground(new Color(250, 250, 250));
+        // this.logSimulacion.setSelectionBackground(new Color(70, 130, 180, 80));
+        // this.logSimulacion.setSelectionForeground(Color.BLACK);
 
         // Estilo del label del icono (ahora con imagen)
         iconoAmbulanciaLabel.setFont(new Font("Segoe UI", Font.BOLD, 14));
@@ -223,7 +230,7 @@ public class VentanaSimulacion extends JFrame implements IVistaSimulacion {
     @Override
     public void iniciarSimulacion() {
         // Limpiar la lista al iniciar nueva simulación
-        listModel.clear();
+        //listModel.clear();
         setVisible(true);
         // Llevar la ventana al frente
         toFront();
@@ -244,25 +251,52 @@ public class VentanaSimulacion extends JFrame implements IVistaSimulacion {
     @Override
     public void actualizarEstadoSimulacion(NotificacionSimulacion estado) {
         // Agregar el mensaje a la lista
-        listModel.addElement(estado.getMensaje());
+        // 1. Decide el color basado en la notificación
+        Color colorParaEsteMensaje = Color.BLACK; // Color por defecto
 
-        // Auto-scroll al final de la lista
-        int lastIndex = listModel.getSize() - 1;
-        if (lastIndex >= 0) {
-            list1.ensureIndexIsVisible(lastIndex);
+        switch (estado.getTipo())
+        {
+            case "INFO":
+                colorParaEsteMensaje = Color.BLUE;
+                break;
+            case "NO_AMBULANCIA":
+                colorParaEsteMensaje = Color.ORANGE.darker();
+                break;
+            case "OK":
+                colorParaEsteMensaje = new Color(0, 128, 0); // Verde
+                break;
         }
 
-        // Forzar actualización de la interfaz
-        list1.repaint();
 
-        // Debug opcional
-        System.out.println("Simulación: " + estado.getMensaje());
+        // 3. Llama al método de ayuda
+        agregarTextoConColor(estado.getMensaje(), colorParaEsteMensaje);
+
     }
+    /**
+     * Método de ayuda para añadir texto coloreado al final del JTextPane.
+     * (Pon esto en tu clase de la ventana)
+     */
+    private void agregarTextoConColor(String texto, Color color)
+    {
+        StyledDocument doc = this.logSimulacion.getStyledDocument();
+        SimpleAttributeSet estilo = new SimpleAttributeSet();
+        StyleConstants.setForeground(estilo, color);
+
+        try {
+            doc.insertString(doc.getLength(), texto + "\n", estilo);
+            // Auto-scroll
+            this.logSimulacion.setCaretPosition(doc.getLength());
+
+        } catch (BadLocationException e) {
+            e.printStackTrace();
+        }
+    }
+
 
     @Override
     public void FinalizarSimulacion() {
         // Agregar mensaje final
-        listModel.addElement("=== SIMULACIÓN FINALIZADA ===");
+        //listModel.addElement("=== SIMULACIÓN FINALIZADA ===");
 
         // Deshabilitar el botón o cambiar su texto
         finalizarButton.setEnabled(false);
@@ -271,20 +305,20 @@ public class VentanaSimulacion extends JFrame implements IVistaSimulacion {
     }
 
     // Método para limpiar la lista
-    public void limpiarLista() {
-        listModel.clear();
-    }
-
-    // Método para obtener el modelo (útil para testing)
-    public DefaultListModel<String> getListModel() {
-        return listModel;
-    }
+//    public void limpiarLista() {
+//        listModel.clear();
+//    }
+//
+//    // Método para obtener el modelo (útil para testing)
+//    public DefaultListModel<String> getListModel() {
+//        return listModel;
+//    }
 
     // Método para debug
     public void mostrarEstado() {
         System.out.println("VentanaSimulacion estado:");
         System.out.println("Visible: " + isVisible());
-        System.out.println("Elementos en lista: " + listModel.getSize());
+        //System.out.println("Elementos en lista: " + listModel.getSize());
         System.out.println("Botón Finalizar - Habilitado: " + finalizarButton.isEnabled() +
                 ", Comando: " + finalizarButton.getActionCommand());
         System.out.println("Controlador: " + (controlador != null ? "Presente" : "Null"));

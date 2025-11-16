@@ -126,6 +126,8 @@ public class Asociado extends Persona implements Runnable
             TiempoMuerto.esperar();
             this.cantSolicitudesAtendidas++;
         }
+        this.ambulancia.notifyObservers(new NotificacionSimulacion("✅ El asociado " + this.getNombre() + " ha finalizado sus solicitudes. ( "+ this.cantSolicitudesAtendidas + "/"+ this.maxCantSolicitudes +" )","ASOCIADO"));
+        System.out.println("El asociado " + this.getNombre() + " ha finalizado sus solicitudes. ( "+ this.cantSolicitudesAtendidas + "/"+ this.maxCantSolicitudes +" )");
     }
 
     /**
