@@ -6,7 +6,10 @@ import modelo.modeloDominio.personas.asociado.Asociado;
 import persistencia.AsociadoDTO;
 
 import java.util.ArrayList;
-
+/**
+ * Interfaz que define los métodos para la vista principal de la aplicación.
+ * Contiene métodos para gestionar asociados y actualizar la interfaz de usuario.
+ */
 public interface IVistaPrincipal {
     public static final String ACEPTAR = "ACEPTAR";
     public static final String DAR_ALTA = "DAR_ALTA";

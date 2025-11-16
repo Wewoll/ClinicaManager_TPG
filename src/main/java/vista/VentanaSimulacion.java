@@ -11,15 +11,22 @@ import javax.swing.text.StyledDocument;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 
+/**
+ * Ventana para la simulación de ambulancias.
+ * Muestra notificaciones en una lista y permite finalizar la simulación.
+ * Implementa la interfaz IVistaSimulacion.
+ */
 public class VentanaSimulacion extends JFrame implements IVistaSimulacion {
     private JPanel panelPrincipal;
-    //private JList<String> list1;
     private JTextPane logSimulacion;
     private JButton finalizarButton;
-    // private DefaultListModel<String> listModel;
     private JLabel iconoAmbulanciaLabel;
     private Controlador controlador;
 
+    /**
+     * Constructor de la ventana de simulación.
+     * <b>post:</b> se crea una ventana con lista de notificaciones, botón de finalizar y estilo aplicado.
+     */
     public VentanaSimulacion() {
         inicializarComponentes();
         setContentPane(panelPrincipal);
@@ -28,16 +35,15 @@ public class VentanaSimulacion extends JFrame implements IVistaSimulacion {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
         setVisible(false);
-
-//        listModel = new DefaultListModel<>();
-//        list1.setModel(listModel);
-
         // Configurar el botón
         finalizarButton.setActionCommand(FINALIZAR_SIMULACION);
-
         aplicarEstilos();
     }
 
+    /**
+     * Inicializa los componentes de la ventana.
+     * <b>post:</b> se crean y configuran los componentes gráficos de la ventana.
+     */
     private void inicializarComponentes() {
         // Panel principal con BorderLayout
         panelPrincipal = new JPanel(new BorderLayout(10, 10));
@@ -74,9 +80,12 @@ public class VentanaSimulacion extends JFrame implements IVistaSimulacion {
         panelDerecho.add(panelBoton, BorderLayout.SOUTH);
     }
 
+    /**
+     * Carga la imagen de la ambulancia y la configura en el JLabel.
+     * <b>post:</b> se carga y muestra la imagen de la ambulancia en el JLabel correspondiente.
+     */
     private void cargarImagenAmbulancia() {
         try {
-            // Opción 1: Cargar imagen desde archivo (ruta relativa)
             ImageIcon icono = new ImageIcon("src/main/java/vista/Imagenes/Ambulancia.png");
 
             // Verificar si la imagen se cargó correctamente
@@ -120,52 +129,10 @@ public class VentanaSimulacion extends JFrame implements IVistaSimulacion {
         }
     }
 
-    private ImageIcon crearIconoAmbulanciaPlaceholder() {
-        // Crear una imagen simple como placeholder
-        int width = 120;
-        int height = 120;
-        BufferedImage imagen = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
-        Graphics2D g2d = imagen.createGraphics();
-
-        // Configurar calidad de renderizado
-        g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-
-        // Fondo blanco
-        g2d.setColor(Color.WHITE);
-        g2d.fillRect(0, 0, width, height);
-
-        // Cuerpo de la ambulancia (rojo)
-        g2d.setColor(Color.RED);
-        g2d.fillRoundRect(20, 40, 80, 40, 10, 10);
-
-        // Cabina (azul)
-        g2d.setColor(Color.BLUE);
-        g2d.fillRect(20, 30, 30, 30);
-
-        // Ventanas (azul claro)
-        g2d.setColor(new Color(173, 216, 230));
-        g2d.fillRect(25, 35, 20, 15);
-
-        // Luces (amarillo)
-        g2d.setColor(Color.YELLOW);
-        g2d.fillOval(15, 45, 10, 10); // Luz delantera
-        g2d.fillOval(95, 45, 10, 10); // Luz trasera
-
-        // Cruz (blanca)
-        g2d.setColor(Color.WHITE);
-        g2d.fillRect(55, 45, 10, 30); // Línea vertical
-        g2d.fillRect(45, 55, 30, 10); // Línea horizontal
-
-        // Ruedas (negras)
-        g2d.setColor(Color.BLACK);
-        g2d.fillOval(25, 75, 15, 15);
-        g2d.fillOval(70, 75, 15, 15);
-
-        g2d.dispose();
-
-        return new ImageIcon(imagen);
-    }
-
+    /**
+     * Aplica estilos personalizados a los componentes de la ventana.
+     * <b>post:</b> se aplican colores, fuentes y efectos visuales a los componentes.
+     */
     private void aplicarEstilos() {
         // Paleta de colores
         Color fondoPrincipal = new Color(245, 247, 250);
@@ -227,6 +194,10 @@ public class VentanaSimulacion extends JFrame implements IVistaSimulacion {
         }
     }
 
+    /**
+     * Inicia la simulación mostrando la ventana.
+     * <b>post:</b> se muestra la ventana de simulación y se limpia la lista de notificaciones.
+     */
     @Override
     public void iniciarSimulacion() {
         // Limpiar la lista al iniciar nueva simulación
@@ -237,8 +208,14 @@ public class VentanaSimulacion extends JFrame implements IVistaSimulacion {
         requestFocus();
     }
 
+    /**
+     * Configura el ActionListener para los botones de la ventana.
+     * <b>post:</b> se asigna el controlador como listener para los eventos de los botones.
+     * @param controlador El controlador que manejará los eventos.
+     */
     @Override
     public void setActionListener(Controlador controlador) {
+        assert controlador != null;
         this.controlador = controlador;
         this.finalizarButton.addActionListener(controlador);
 
@@ -248,8 +225,14 @@ public class VentanaSimulacion extends JFrame implements IVistaSimulacion {
         });
     }
 
+    /**
+     * Actualiza el estado de la simulación mostrando una notificación en la lista.
+     * <b>post:</b> se añade una notificación a la lista con el color correspondiente.
+     * @param estado La notificación de la simulación a mostrar.
+     */
     @Override
     public void actualizarEstadoSimulacion(NotificacionSimulacion estado) {
+        assert  estado != null;
         // Agregar el mensaje a la lista
         // 1. Decide el color basado en la notificación
         Color colorParaEsteMensaje = Color.BLACK; // Color por defecto
@@ -272,9 +255,12 @@ public class VentanaSimulacion extends JFrame implements IVistaSimulacion {
         agregarTextoConColor(estado.getMensaje(), colorParaEsteMensaje);
 
     }
+
     /**
-     * Método de ayuda para añadir texto coloreado al final del JTextPane.
-     * (Pon esto en tu clase de la ventana)
+     * Agrega texto al JTextPane con un color específico.
+     * <b>post:</b> se añade el texto al JTextPane con el color indicado.
+     * @param texto El texto a agregar.
+     * @param color El color del texto.
      */
     private void agregarTextoConColor(String texto, Color color)
     {
@@ -292,7 +278,10 @@ public class VentanaSimulacion extends JFrame implements IVistaSimulacion {
         }
     }
 
-
+    /**
+     * Finaliza la simulación deshabilitando el botón y mostrando un mensaje final.
+     * <b>post:</b> se deshabilita el botón de finalizar y se actualiza su texto.
+     */
     @Override
     public void FinalizarSimulacion() {
         // Agregar mensaje final
@@ -302,25 +291,5 @@ public class VentanaSimulacion extends JFrame implements IVistaSimulacion {
         finalizarButton.setEnabled(false);
         finalizarButton.setText("Finalizado");
         finalizarButton.setBackground(Color.GRAY);
-    }
-
-    // Método para limpiar la lista
-//    public void limpiarLista() {
-//        listModel.clear();
-//    }
-//
-//    // Método para obtener el modelo (útil para testing)
-//    public DefaultListModel<String> getListModel() {
-//        return listModel;
-//    }
-
-    // Método para debug
-    public void mostrarEstado() {
-        System.out.println("VentanaSimulacion estado:");
-        System.out.println("Visible: " + isVisible());
-        //System.out.println("Elementos en lista: " + listModel.getSize());
-        System.out.println("Botón Finalizar - Habilitado: " + finalizarButton.isEnabled() +
-                ", Comando: " + finalizarButton.getActionCommand());
-        System.out.println("Controlador: " + (controlador != null ? "Presente" : "Null"));
     }
 }

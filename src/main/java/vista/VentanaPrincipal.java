@@ -10,7 +10,11 @@ import java.util.ArrayList;
 import controlador.Controlador;
 import modelo.modeloDominio.personas.asociado.Asociado;
 import persistencia.AsociadoDTO;
-
+/**
+ * Clase VentanaPrincipal que implementa la interfaz IVistaPrincipal.
+ * Representa la ventana principal de la aplicación con pestañas para la gestión de asociados y simulación.
+ * Contiene formularios para dar de alta y baja asociados, así como una lista para mostrar los asociados existentes.
+ */
 public class VentanaPrincipal extends JFrame implements IVistaPrincipal {
     private JTabbedPane pestañas;
     private JPanel altaAsociado;
@@ -35,6 +39,9 @@ public class VentanaPrincipal extends JFrame implements IVistaPrincipal {
 
     private DefaultListModel<String> listaModel;
 
+    /** Constructor de la clase VentanaPrincipal.
+     * <b>post:</b> se crea la ventana principal con todos sus componentes inicializados y estilizados.
+     */
     public VentanaPrincipal() {
         inicializarComponentes();
         setContentPane(panelPrincipal);
@@ -50,6 +57,10 @@ public class VentanaPrincipal extends JFrame implements IVistaPrincipal {
         aplicarEstilos();
     }
 
+    /**
+     * Método para inicializar los componentes de la interfaz gráfica.
+     * Crea el panel principal, las pestañas y los formularios necesarios.
+     */
     private void inicializarComponentes() {
         // Panel principal
         panelPrincipal = new JPanel(new BorderLayout());
@@ -63,6 +74,10 @@ public class VentanaPrincipal extends JFrame implements IVistaPrincipal {
         crearPestanaSimulacion();
     }
 
+    /**
+     * Método para crear la pestaña de gestión de asociados.
+     * Contiene formularios para dar de alta y baja asociados, así como una lista para mostrar los asociados existentes.
+     */
     private void crearPestanaGestionAsociados() {
         // Usar GridLayout con 1 fila y 2 columnas, pero dar más peso a la lista
         JPanel panelGestion = new JPanel(new GridLayout(1, 2, 10, 10));
@@ -90,6 +105,10 @@ public class VentanaPrincipal extends JFrame implements IVistaPrincipal {
         pestañas.addTab("Gestion de Asociados", panelGestion);
     }
 
+    /**
+     * Método para crear el panel de alta de asociado.
+     * @return El panel de alta de asociado.
+     */
     private JPanel crearPanelAltaAsociado() {
         JPanel panel = new JPanel(new GridLayout(8, 1, 5, 5));
         panel.setBorder(BorderFactory.createTitledBorder(
@@ -116,6 +135,10 @@ public class VentanaPrincipal extends JFrame implements IVistaPrincipal {
         return panel;
     }
 
+    /**
+     * Método para crear el panel de baja de asociado.
+     * @return El panel de baja de asociado.
+     */
     private JPanel crearPanelBajaAsociado() {
         JPanel panel = new JPanel(new BorderLayout(5, 5));
         panel.setBorder(BorderFactory.createTitledBorder(
@@ -150,6 +173,10 @@ public class VentanaPrincipal extends JFrame implements IVistaPrincipal {
         return panel;
     }
 
+    /**
+     * Método para crear el panel de lista de asociados.
+     * @return El panel de lista de asociados.
+     */
     private JPanel crearPanelListaAsociados() {
         JPanel panel = new JPanel(new BorderLayout());
         panel.setBorder(BorderFactory.createTitledBorder(
@@ -167,6 +194,10 @@ public class VentanaPrincipal extends JFrame implements IVistaPrincipal {
         return panel;
     }
 
+    /**
+     * Método para crear la pestaña de simulación.
+     * Contiene un formulario para configurar la simulación.
+     */
     private void crearPestanaSimulacion() {
         JPanel panelSimulacion = new JPanel(new BorderLayout());
         panelSimulacion.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
@@ -214,7 +245,12 @@ public class VentanaPrincipal extends JFrame implements IVistaPrincipal {
         panelSimulacion.add(panelConfiguracion, BorderLayout.CENTER);
         pestañas.addTab("Simulacion", panelSimulacion);
     }
-
+    /**
+     * Método para crear un campo de texto con su etiqueta correspondiente.
+     * @param textoEtiqueta El texto de la etiqueta.
+     * @param campoTexto El campo de texto asociado.
+     * @return Un panel que contiene la etiqueta y el campo de texto.
+     */
     private JPanel crearCampoConEtiqueta(String textoEtiqueta, JTextField campoTexto) {
         JPanel panel = new JPanel(new BorderLayout(5, 2));
         JLabel etiqueta = new JLabel(textoEtiqueta);
@@ -224,7 +260,10 @@ public class VentanaPrincipal extends JFrame implements IVistaPrincipal {
         return panel;
     }
 
-    // Método para aplicar estilo a los componentes
+    /**
+     * Método para aplicar estilos personalizados a los componentes de la interfaz gráfica.
+     * Mejora la apariencia visual de la aplicación.
+     */
     private void aplicarEstilos() {
         // Paleta de colores
         Color fondoPrincipal = new Color(245, 247, 250);
@@ -333,39 +372,53 @@ public class VentanaPrincipal extends JFrame implements IVistaPrincipal {
         }
     }
 
-    // Los métodos de la interfaz IVistaPrincipal se mantienen igual
+    /**
+     * Método para asignar el ActionListener a los botones de la interfaz gráfica.
+     * @param controlador El controlador que manejará los eventos de los botones.
+     */
     @Override
     public void setActionListener(Controlador controlador) {
+        assert controlador != null;
         this.darDeAltaButton.addActionListener(controlador);
         this.darDeBajaButton.addActionListener(controlador);
         this.aceptarConfiguracionButton.addActionListener(controlador);
     }
 
-        @Override
-        public AsociadoDTO getNuevoAsociado() throws datosAsociadoDTOIncorrectoException {
-            String nombre = Nombre_Alta.getText();
-            String apellido = Apellido_Alta.getText();
-            String dni = DNI_Alta.getText();
-            String ciudad = Ciudad_Alta.getText();
-            String calle = Calle_Alta.getText();
-            String numero = Numero_Alta.getText();
-            String telefono = Telefono_Alta.getText();
+    /**
+     * Método para obtener los datos del nuevo asociado desde el formulario de alta.
+     * @return Un objeto AsociadoDTO con los datos del nuevo asociado.
+     * @throws datosAsociadoDTOIncorrectoException Si los datos ingresados son incorrectos.
+     */
+    @Override
+    public AsociadoDTO getNuevoAsociado() throws datosAsociadoDTOIncorrectoException {
+        String nombre = Nombre_Alta.getText();
+        String apellido = Apellido_Alta.getText();
+        String dni = DNI_Alta.getText();
+        String ciudad = Ciudad_Alta.getText();
+        String calle = Calle_Alta.getText();
+        String numero = Numero_Alta.getText();
+        String telefono = Telefono_Alta.getText();
 
-            if (nombre.isEmpty() || apellido.isEmpty() || dni.isEmpty() || ciudad.isEmpty() || calle.isEmpty() || telefono.isEmpty()) {
-                throw new datosAsociadoDTOIncorrectoException("Debe completar todos los campos.");
-            }
-
-            int numeroReal = Integer.parseInt(numero);
-            if (numeroReal <= 0) {
-                throw new datosAsociadoDTOIncorrectoException("El numero de la calle debe ser un valor positivo.");
-            }
-
-            if (telefono.startsWith("-")) {
-                throw new datosAsociadoDTOIncorrectoException("El telefono no puede ser un valor negativo.");
-            }
-            return new AsociadoDTO(nombre, apellido, dni, ciudad, calle, numeroReal, telefono);
+        if (nombre.isEmpty() || apellido.isEmpty() || dni.isEmpty() || ciudad.isEmpty() || calle.isEmpty() || telefono.isEmpty()) {
+            throw new datosAsociadoDTOIncorrectoException("Debe completar todos los campos.");
         }
 
+        int numeroReal = Integer.parseInt(numero);
+        if (numeroReal <= 0) {
+            throw new datosAsociadoDTOIncorrectoException("El numero de la calle debe ser un valor positivo.");
+        }
+
+        if (telefono.startsWith("-")) {
+            throw new datosAsociadoDTOIncorrectoException("El telefono no puede ser un valor negativo.");
+        }
+        return new AsociadoDTO(nombre, apellido, dni, ciudad, calle, numeroReal, telefono);
+    }
+
+    /**
+     * Método para obtener la cantidad de asociados desde el formulario de configuración.
+     * @return La cantidad de asociados ingresada.
+     * @throws datosSimulacionIncorrectosException Si los datos ingresados son incorrectos.
+     */
     @Override
     public int getCantAsociados() throws datosSimulacionIncorrectosException {
         if (cantAsociados.getText().isEmpty()) {
@@ -378,6 +431,11 @@ public class VentanaPrincipal extends JFrame implements IVistaPrincipal {
         return cant;
     }
 
+    /**
+     * Método para obtener la cantidad de solicitudes desde el formulario de configuración.
+     * @return La cantidad de solicitudes ingresada.
+     * @throws datosSimulacionIncorrectosException Si los datos ingresados son incorrectos.
+     */
     @Override
     public int getCantSolicitudes() throws datosSimulacionIncorrectosException {
         if (cantSolicitudes.getText().isEmpty()) {
@@ -390,11 +448,20 @@ public class VentanaPrincipal extends JFrame implements IVistaPrincipal {
         return cant;
     }
 
+    /**
+     * Método para mostrar un mensaje emergente en la interfaz gráfica.
+     * @param titulo El título del mensaje.
+     * @param mensaje El contenido del mensaje.
+     */
     @Override
     public void mostrarMensaje(String titulo, String mensaje) {
         JOptionPane.showMessageDialog(this, mensaje, titulo, JOptionPane.INFORMATION_MESSAGE);
     }
 
+    /**
+     * Método para limpiar el formulario de alta de asociado.
+     * Resetea todos los campos del formulario a valores vacíos.
+     */
     @Override
     public void limpiarFormularioAlta() {
         Nombre_Alta.setText("");
@@ -406,13 +473,22 @@ public class VentanaPrincipal extends JFrame implements IVistaPrincipal {
         Telefono_Alta.setText("");
     }
 
+    /**
+     * Método para limpiar el formulario de baja de asociado.
+     * Resetea el campo DNI del formulario a un valor vacío.
+     */
     @Override
     public void limpiarFormularioBaja() {
         DNI_Baja.setText("");
     }
 
+    /**
+     * Método para actualizar la lista de asociados mostrada en la interfaz gráfica.
+     * @param asociados La lista de asociados a mostrar.
+     */
     @Override
     public void actualizarListaAsociados(ArrayList<AsociadoDTO> asociados) {
+        assert asociados != null;
         this.listaModel.clear();
         String aux;
         for (AsociadoDTO a : asociados) {
@@ -421,6 +497,11 @@ public class VentanaPrincipal extends JFrame implements IVistaPrincipal {
         }
     }
 
+    /**
+     * Método para obtener el DNI ingresado en el formulario de baja de asociado.
+     * @return El DNI ingresado.
+     * @throws datosAsociadoDTOIncorrectoException Si el DNI ingresado es incorrecto.
+     */
     @Override
     public String getDNI() throws datosAsociadoDTOIncorrectoException {
         if (DNI_Baja.getText().isEmpty()) {
