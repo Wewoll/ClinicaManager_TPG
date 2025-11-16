@@ -8,7 +8,8 @@ import java.sql.*;
  * Tiene como atributos la URL de la base de datos, el usuario y la contraseña.
  */
 public class BaseDeDatos {
-    private static Connection conexion;
+    private static BaseDeDatos instancia;
+    private Connection conexion;
     private static final String URL = "jdbc:mysql://localhost:3306/?useSSL=false&serverTimezone=UTC";
     private static final String USUARIO = "progra_c";
     private static final String CONTRASENA = "progra_c";
@@ -17,12 +18,24 @@ public class BaseDeDatos {
      * Constructor de la clase BaseDeDatos.
      * <b>post:</b> se crea una instancia de BaseDeDatos y se abre la conexión a la base de datos.
      */
-    public BaseDeDatos() {
+    private BaseDeDatos() {
         conexion = null;
         cargarDriver();
         abrirConexion();
         iniciarBD();
     }
+    /**
+     * Obtiene la instancia única de la clase BaseDeDatos (patrón Singleton).
+     * <b>post:</b> se devuelve la instancia única de BaseDeDatos.
+     * @return La instancia única de BaseDeDatos.
+     */
+    public static BaseDeDatos getInstancia() {
+        if (instacia == null) {
+            instacia = new BaseDeDatos();
+        }
+        return instacia;
+    }
+
     /**
      * Carga el driver JDBC de MySQL.
      * <b>post:</b> se carga el driver JDBC de MySQL.

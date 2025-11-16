@@ -19,7 +19,8 @@ public class DataAccessObject {
      * <b>post:</b> se crea un objeto DataAccessObject con una instancia de BaseDeDatos.
      */
     public DataAccessObject() {
-        this.bd = new BaseDeDatos();
+        BaseDeDatos bd = bd.getInstacia();
+        this.bd = bd;
     }
 
     /**
