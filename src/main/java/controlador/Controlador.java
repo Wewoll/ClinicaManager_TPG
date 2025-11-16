@@ -82,6 +82,7 @@ public class Controlador implements ActionListener {
     public void finalizarSimulacion()
     {
             this.modelo.finalizarSimulacion();
+            this.vistaSimulacion.FinalizarSimulacion();
     }
 
     /**

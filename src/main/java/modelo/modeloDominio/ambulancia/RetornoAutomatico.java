@@ -1,64 +1,44 @@
 package modelo.modeloDominio.ambulancia;
 
-import modelo.modeloAplicacion.NotificacionSimulacion;
-import modelo.modeloDominio.personas.asociado.Asociado;
-
-import java.util.ArrayList;
 /**
  * Clase RetornoAutomatico que implementa Runnable para manejar el retorno automático de una ambulancia.
- * Contiene un atributo para la ambulancia asociada y define el comportamiento del hilo para verificar si los asociados han terminado sus solicitudes.
+ * Este hilo periódicamente intenta retornar la ambulancia a la clínica si está en otro lugar.
  */
-public class RetornoAutomatico implements Runnable
-{
+public class RetornoAutomatico implements Runnable {
     private Ambulancia ambulancia;
+    private static final long INTERVALO_RETORNO = 10000; // 10 segundos
 
     /**
      * Constructor de la clase RetornoAutomatico.
-     * <b>post:</b> se crea una instancia de RetornoAutomatico asociada a la ambulancia proporcionada.
      * @param ambulancia La ambulancia asociada a este retorno automático.
      */
-    public RetornoAutomatico(Ambulancia ambulancia)
-    {
+    public RetornoAutomatico(Ambulancia ambulancia) {
         this.ambulancia = ambulancia;
     }
 
     /**
-     * Método privado que verifica si todos los asociados han terminado sus solicitudes.
-     * Si algún asociado ha alcanzado su máximo de solicitudes atendidas, se desactiva la simulación de la ambulancia.
-     */
-    private void terminaronAsociados()
-    {
-        ArrayList<Asociado> asociados = this.ambulancia.getAsociados();
-        for (Asociado asociado : asociados)
-        {
-            if (asociado.getCantSolicitudesAtendidas() < asociado.getMaxCantSolicitudes())
-            {
-                return;
-            }
-        }
-        this.ambulancia.setSimulacionActiva(false);
-        this.ambulancia.notifyObservers(new NotificacionSimulacion("Todos los asociados han terminado sus solicitudes. La simulación se detendrá.","INFO"));
-    }
-    /**
      * Método run que se ejecuta en el hilo.
-     * Verifica periódicamente si los asociados han terminado sus solicitudes y, si la simulación está activa, inicia el retorno automático de la ambulancia.
+     * Periódicamente intenta retornar la ambulancia a la clínica mientras la simulación esté activa.
      */
     @Override
-    public void run()
-    {
-        while (ambulancia.isSimulacionActiva())
-        {
-            terminaronAsociados();
-            try
-            {
-                Thread.sleep(10000); // Espera 10 segundos antes de iniciar el mantenimiento
-            } catch (InterruptedException e)
-            {
+    public void run() {
+        while (ambulancia.isSimulacionActiva()) {
+            try {
+                Thread.sleep(INTERVALO_RETORNO);
+            } catch (InterruptedException e) {
                 Thread.currentThread().interrupt();
-                return; // Salir si el hilo es interrumpido
+                return; // Salir limpiamente si el hilo es interrumpido
             }
+
+            // Verificar nuevamente después del sleep
+            if (!ambulancia.isSimulacionActiva()) {
+                break;
+            }
+
+            // Intentar retorno automático
+            // El método retornoAutomatico en Ambulancia debe verificar
+            // si es apropiado hacer el retorno según el estado actual
             ambulancia.retornoAutomatico(this);
         }
     }
 }
-

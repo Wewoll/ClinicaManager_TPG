@@ -17,7 +17,7 @@ public class DisponibleState implements State{
      */
     public DisponibleState(Ambulancia ambulancia) {
         this.ambulancia = ambulancia;
-        this.ambulancia.setOcupado(false);
+        // this.ambulancia.setOcupado(false);
     }
     /**
      * Método que maneja la solicitud de traslado.
@@ -49,6 +49,6 @@ public class DisponibleState implements State{
      */
     @Override
     public void RetornoClinica(){
-        this.ambulancia.notifyObservers(new NotificacionSimulacion(" La ambulancia ya esta en la clinica", "INFO"));
+        //this.ambulancia.doNotifyObservers(new NotificacionSimulacion(" La ambulancia ya esta en la clinica", "INFO"));
     }
 }

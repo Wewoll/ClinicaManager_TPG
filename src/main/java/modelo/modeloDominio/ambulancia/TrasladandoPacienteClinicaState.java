@@ -16,7 +16,7 @@ public class TrasladandoPacienteClinicaState implements State{
      */
     public TrasladandoPacienteClinicaState(Ambulancia ambulancia) {
         this.ambulancia = ambulancia;
-        this.ambulancia.setOcupado(true);
+        // this.ambulancia.setOcupado(true);
     }
 
     /**
@@ -26,7 +26,7 @@ public class TrasladandoPacienteClinicaState implements State{
     @Override
     public void SolicitudDeTraslado(){
         //todo observer observable (no puede atender solicitud)
-        this.ambulancia.notifyObservers(new NotificacionSimulacion("La ambulancia no puede atender la solicitud de traslado porque se encuentra trasladando un paciente a la clínica.","AMBULANCIA"));
+        // this.ambulancia.doNotifyObservers(new NotificacionSimulacion("La ambulancia no puede atender la solicitud de traslado porque se encuentra trasladando un paciente a la clínica.","AMBULANCIA"));
     }
     /**
      * Método que maneja la solicitud de atención a domicilio.
@@ -34,7 +34,7 @@ public class TrasladandoPacienteClinicaState implements State{
      */
     @Override
     public void SolicitudDeAtencionDomicilio(){
-        this.ambulancia.notifyObservers(new NotificacionSimulacion("La ambulancia no puede atender la solicitud de atención a domicilio porque se encuentra trasladando un paciente a la clínica.","AMBULANCIA"));
+        // this.ambulancia.doNotifyObservers(new NotificacionSimulacion("La ambulancia no puede atender la solicitud de atención a domicilio porque se encuentra trasladando un paciente a la clínica.","AMBULANCIA"));
     }
     /**
      * Método que maneja la solicitud de mantenimiento.
@@ -42,7 +42,7 @@ public class TrasladandoPacienteClinicaState implements State{
      */
     @Override
     public void SolicitudMantenimiento(){
-        this.ambulancia.notifyObservers(new NotificacionSimulacion("La ambulancia no puede atender la solicitud de mantenimiento porque se encuentra trasladando un paciente a la clínica.","AMBULANCIA"));
+        // this.ambulancia.doNotifyObservers(new NotificacionSimulacion("La ambulancia no puede atender la solicitud de mantenimiento porque se encuentra trasladando un paciente a la clínica.","AMBULANCIA"));
     }
     /**
      * Método que maneja el retorno a la clínica.
@@ -52,9 +52,9 @@ public class TrasladandoPacienteClinicaState implements State{
     public void RetornoClinica(){
         try{
             Thread.sleep(1000);
-            this.ambulancia.notifyObservers(new NotificacionSimulacion("La ambulancia retorna a la clinica", "INFO"));
+            // this.ambulancia.doNotifyObservers(new NotificacionSimulacion("La ambulancia retorna a la clinica", "INFO"));
             this.ambulancia.setState(new DisponibleState(this.ambulancia));
-            this.ambulancia.setOcupado(false);
+            // this.ambulancia.setOcupado(false);
         }catch(Exception e){
 
         }

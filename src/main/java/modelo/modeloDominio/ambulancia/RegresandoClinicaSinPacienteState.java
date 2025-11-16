@@ -16,7 +16,7 @@ public class RegresandoClinicaSinPacienteState implements State{
      */
     public RegresandoClinicaSinPacienteState(Ambulancia ambulancia) {
         this.ambulancia = ambulancia;
-        this.ambulancia.setOcupado(false);
+        // this.ambulancia.setOcupado(false);
     }
 
     /**
@@ -42,7 +42,7 @@ public class RegresandoClinicaSinPacienteState implements State{
      */
     @Override
     public void SolicitudMantenimiento() {
-        this.ambulancia.notifyObservers(new NotificacionSimulacion("La ambulancia no puede atender la solicitud de mantenimiento porque se encuentra regresando a la clínica sin paciente.","NO_AMBULANCIA"));
+        // this.ambulancia.doNotifyObservers(new NotificacionSimulacion("La ambulancia no puede atender la solicitud de mantenimiento porque se encuentra regresando a la clínica sin paciente.","NO_AMBULANCIA"));
     }
 
     /**
@@ -51,7 +51,7 @@ public class RegresandoClinicaSinPacienteState implements State{
      */
     @Override
     public void RetornoClinica() {
-        this.ambulancia.notifyObservers(new NotificacionSimulacion("La ambulancia retorna a la clinica sin paciente", "INFO"));
+        // // this.ambulancia.doNotifyObservers(new NotificacionSimulacion("La ambulancia retorna a la clinica sin paciente", "INFO"));
         ambulancia.setState(new DisponibleState(this.ambulancia));
     }
 }

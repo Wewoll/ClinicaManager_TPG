@@ -16,7 +16,7 @@ public class AtendiendoEnDomicilioState implements State{
      */
     public AtendiendoEnDomicilioState(Ambulancia ambulancia) {
         this.ambulancia = ambulancia;
-        this.ambulancia.setOcupado(true);
+        // this.ambulancia.setOcupado(true);
     }
     /**
      * Método que maneja la solicitud de traslado.
@@ -24,7 +24,7 @@ public class AtendiendoEnDomicilioState implements State{
      */
     @Override
     public void SolicitudDeTraslado(){
-        this.ambulancia.notifyObservers(new NotificacionSimulacion("❌ La ambulancia no puede atender la solicitud de traslado porque se encuentra atendiendo un paciente en domicilio.","AMBULANCIA"));
+        // this.ambulancia.doNotifyObservers(new NotificacionSimulacion("❌ La ambulancia no puede atender la solicitud de traslado porque se encuentra atendiendo un paciente en domicilio.","AMBULANCIA"));
     }
 
     /**
@@ -33,7 +33,7 @@ public class AtendiendoEnDomicilioState implements State{
      */
     @Override
     public void SolicitudDeAtencionDomicilio(){
-        this.ambulancia.notifyObservers(new NotificacionSimulacion("❌ La ambulancia no puede atender la solicitud de atención a domicilio porque se encuentra atendiendo un paciente en domicilio.","AMBULANCIA"));
+        // // this.ambulancia.doNotifyObservers(new NotificacionSimulacion("❌ La ambulancia no puede atender la solicitud de atención a domicilio porque se encuentra atendiendo un paciente en domicilio.","AMBULANCIA"));
     }
     /**
      * Método que maneja la solicitud de mantenimiento.
@@ -41,7 +41,7 @@ public class AtendiendoEnDomicilioState implements State{
      */
     @Override
     public void SolicitudMantenimiento(){
-        this.ambulancia.notifyObservers(new NotificacionSimulacion("❌ La ambulancia no puede atender la solicitud de mantenimiento porque se encuentra atendiendo un paciente en domicilio.","AMBULANCIA"));
+        // this.ambulancia.doNotifyObservers(new NotificacionSimulacion("❌ La ambulancia no puede atender la solicitud de mantenimiento porque se encuentra atendiendo un paciente en domicilio.","AMBULANCIA"));
     }
     /**
      * Método que maneja el retorno a la clínica.
@@ -49,7 +49,7 @@ public class AtendiendoEnDomicilioState implements State{
      */
     @Override
     public void RetornoClinica(){
-        this.ambulancia.notifyObservers(new NotificacionSimulacion("La ambulancia retorna a la clinica sin paciente", "INFO"));
+        // // this.ambulancia.doNotifyObservers(new NotificacionSimulacion("La ambulancia retorna a la clinica sin paciente", "INFO"));
         ambulancia.setState(new RegresandoClinicaSinPacienteState(this.ambulancia));
     }
 }

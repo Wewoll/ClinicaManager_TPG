@@ -2,7 +2,7 @@ package modelo.modeloDominio.personas.operario;
 
 import modelo.modeloAplicacion.NotificacionSimulacion;
 import modelo.modeloDominio.ambulancia.Ambulancia;
-import modelo.modeloDominio.personas.Persona;
+import modelo.modeloDominio.personas.PersonaObservable;
 import modelo.modeloDominio.personas.asociado.Asociado;
 import modelo.modeloDominio.util.Domicilio;
 import modelo.modeloDominio.util.TiempoMuerto;
@@ -11,65 +11,52 @@ import java.util.ArrayList;
 
 /**
  * Clase Operario que representa a un operario encargado del mantenimiento de ambulancias.
- * Hereda de PersonaObservable e implementa Runnable para permitir la ejecución en un hilo separado.
  */
-public class Operario extends Persona implements Runnable
-{
+public class Operario extends PersonaObservable implements Runnable {
     private Ambulancia ambulancia;
 
     /**
      * Constructor parametrizado de la clase Operario.
-     * <b>pre:</b> los parámetros no deben ser nulos.
-     * <b>post:</b> se crea una instancia de Operario con los valores proporcionados.
-     * @param nombre
-     * @param apellido
-     * @param dni
-     * @param telefono
-     * @param domicilio
-     * @param ambulancia
      */
-    public Operario(String nombre, String apellido, String dni, String telefono, Domicilio domicilio, Ambulancia ambulancia)
-    {
-        super(nombre, apellido,  dni, domicilio, telefono);
+    public Operario(String nombre, String apellido, String dni, String telefono,
+                    Domicilio domicilio, Ambulancia ambulancia) {
+        super(nombre, apellido, dni, domicilio, telefono);
         this.ambulancia = ambulancia;
     }
 
-    /**
-     * Método privado que verifica si los asociados han terminado de atender sus solicitudes.
-     * Si algún asociado ha alcanzado su máximo de solicitudes atendidas, se desactiva la simulación.
-     * <b>post:</b> se actualiza el estado de la simulación en la ambulancia.
-     */
-    private void terminaronAsociados()
-    {
-        ArrayList<Asociado> asociados = this.ambulancia.getAsociados();
-        for (Asociado asociado : asociados)
-        {
-            if (asociado.getCantSolicitudesAtendidas() < asociado.getMaxCantSolicitudes())
-            {
-                return;
-            }
-        }
-        this.ambulancia.setSimulacionActiva(false);
-        // this.ambulancia.notifyObservers(new NotificacionSimulacion("Todos los asociados han terminado sus solicitudes. La simulación se detendrá.","INFO"));
-    }
+
 
     /**
      * Método run que ejecuta la lógica del operario en un hilo separado.
-     * El operario solicita mantenimiento de la ambulancia cada cierto tiempo mientras la simulación esté activa.
-     * <b>post:</b> el operario solicita mantenimiento de la ambulancia periódicamente.
      */
     @Override
     public void run() {
-        // pedir mantenimiento de ambulancias
-        while(this.ambulancia.isSimulacionActiva()){
+        while (this.ambulancia.isSimulacionActiva()) {
             TiempoMuerto.esperar();
+
+            // Verificar de nuevo antes de solicitar mantenimiento
+            if (!this.ambulancia.isSimulacionActiva()) {
+                break;
+            }
+
             ambulancia.solicitarMantenimiento(this);
+
+            // Si la simulación terminó durante el mantenimiento, salir
+            if (!this.ambulancia.isSimulacionActiva()) {
+                break;
+            }
+
             TiempoMuerto.esperar();
             ambulancia.volviendoDelTaller();
-            terminaronAsociados();
+
+            // Verificar si todos los asociados terminaron
+            this.ambulancia.verificarYFinalizarSimulacion();
         }
 
+        // Notificar que el operario finalizó
+        this.setChanged();
+        this.notifyObservers(new NotificacionSimulacion(
+                "👷 El operario " + this.getNombre() + " " + this.getApellido() +
+                        " ha finalizado su trabajo.", "INFO"));
     }
-
-
 }

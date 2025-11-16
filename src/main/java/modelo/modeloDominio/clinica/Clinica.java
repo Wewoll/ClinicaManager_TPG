@@ -1,5 +1,6 @@
 package modelo.modeloDominio.clinica;
 
+import modelo.modeloAplicacion.NotificacionSimulacion;
 import modelo.modeloAplicacion.ObservadorSimulacion;
 import modelo.modeloDominio.ambulancia.Ambulancia;
 import modelo.modeloDominio.ambulancia.RetornoAutomatico;
@@ -355,6 +356,8 @@ public class Clinica
             for (AsociadoDTO aDTO: asociadosDTOs){
                 Asociado asociado = new Asociado(aDTO.getNombre(), aDTO.getApellido(), aDTO.getDni(), aDTO.getTelefono(), new Domicilio(aDTO.getCalle(), aDTO.getNumero(), aDTO.getCiudad()),  maxCantSolicitudesPorAsociado,this.ambulancia);
                 this.asociados.add(asociado);
+                observador.agregarObservado(asociado);
+                this.ambulancia.agregarAsociado(asociado);
                 Thread hiloAsociado = new Thread(asociado);
                 hiloAsociado.start();
             }
