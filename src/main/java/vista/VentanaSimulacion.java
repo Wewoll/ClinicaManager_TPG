@@ -221,7 +221,7 @@ public class VentanaSimulacion extends JFrame implements IVistaSimulacion {
 
         // También agregar listener para Enter en el botón
         finalizarButton.addActionListener(e -> {
-            System.out.println("Botón Finalizar presionado - Comando: " + e.getActionCommand());
+            // System.out.println("Botón Finalizar presionado - Comando: " + e.getActionCommand());
         });
     }
 

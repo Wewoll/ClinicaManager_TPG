@@ -20,7 +20,7 @@ import modelo.modeloDominio.util.Excepciones.*;
 import persistencia.AsociadoDTO;
 import persistencia.DataAccessObject;
 import vista.IVistaSimulacion;
-import vista.VistaAsociadoDTO;
+
 
 import java.sql.SQLException;
 import java.time.LocalDate;
@@ -413,7 +413,7 @@ public class Clinica
      * @param datos Datos del asociado a crear.
      * @return Objeto Asociado creado.
      */
-    public Asociado crearAsociado(VistaAsociadoDTO datos){
+    public Asociado crearAsociado(AsociadoDTO datos){
         assert datos != null : "El asociado no puede ser nulo";
         return new Asociado(datos.getNombre(), datos.getApellido(), datos.getDni(), datos.getTelefono(), new Domicilio(datos.getCalle(),datos.getNumero(),datos.getCiudad()));
     }

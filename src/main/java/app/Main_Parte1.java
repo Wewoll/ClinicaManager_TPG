@@ -13,7 +13,7 @@ import modelo.modeloDominio.util.Excepciones.*;
 
 import java.time.LocalDate;
 
-public class Main
+public class Main_Parte1
 {
     public static void main(String[] args)
     {

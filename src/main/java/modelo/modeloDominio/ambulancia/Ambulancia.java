@@ -90,15 +90,15 @@ public class Ambulancia extends Observable {
         }
     }
 
-    public synchronized boolean verificarYFinalizarSimulacion() {
+    public synchronized void verificarYFinalizarSimulacion() {
         if (!isSimulacionActiva) {
-            return true; // Ya está finalizada
+            return; // Ya está finalizada
         }
 
         // Verificar si todos los asociados terminaron
         for (Asociado asociado : asociados) {
             if (asociado.getCantSolicitudesAtendidas() < asociado.getMaxCantSolicitudes()) {
-                return false; // Todavía hay asociados activos
+                return; // Todavía hay asociados activos
             }
         }
 
@@ -110,7 +110,6 @@ public class Ambulancia extends Observable {
                 "✅ Todos los asociados completaron sus solicitudes. La simulación finalizará.", "INFO"));
 
         notifyAll(); // Despertar a todos los hilos esperando
-        return true;
     }
 
     /**

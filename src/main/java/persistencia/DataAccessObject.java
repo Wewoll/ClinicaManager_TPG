@@ -103,8 +103,9 @@ public class DataAccessObject {
         ResultSet resultado = bd.ejecutarConsulta(query, -1);
         ArrayList<AsociadoDTO> asociadosDTO = new ArrayList<>();
         while (resultado.next()) {
-            AsociadoDTO aDTO = this.CrearDTO(resultado.getInt("id"), resultado.getString("nombre"), resultado.getString("apellido"), resultado.getString("dni")
-                    , resultado.getString("calle"), resultado.getInt("numero"), resultado.getString("ciudad"), resultado.getString("telefono"));
+            AsociadoDTO aDTO = this.CrearDTO(resultado.getInt("id"), resultado.getString("nombre"), resultado.getString("apellido"),
+                    resultado.getString("dni"), resultado.getString("calle"), resultado.getInt("numero"),
+                    resultado.getString("ciudad"), resultado.getString("telefono"));
             asociadosDTO.add(aDTO);
         }
         resultado.close();

@@ -8,7 +8,8 @@ import modelo.modeloDominio.clinica.Clinica;
 import controlador.Controlador;
 import vista.VentanaSimulacion;
 
-public class Prueba {
+public class Main_Parte2
+{
     public static void main(String[] args) {
         IVistaPrincipal vistaPrincipal = new VentanaPrincipal();
         IVistaSimulacion vistaSimulacion = new VentanaSimulacion();
