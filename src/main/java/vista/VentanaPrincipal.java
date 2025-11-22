@@ -511,6 +511,7 @@ public class VentanaPrincipal extends JFrame implements IVistaPrincipal {
         if(Integer.parseInt(DNI_Baja.getText()) <= 0)
             throw new datosAsociadoDTOIncorrectoException("El DNI debe ser un valor positivo.");
 
+        
         return DNI_Baja.getText();
     }
 }

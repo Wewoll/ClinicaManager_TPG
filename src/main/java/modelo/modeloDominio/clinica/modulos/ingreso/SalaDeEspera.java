@@ -56,10 +56,11 @@ public class SalaDeEspera
      * <b>pre:</b> paciente no debe ser nulo.
      * <b>post:</b> se saca el paciente de la sala de espera si existe en el patio o en la sala privada.
      *
-     * @param p Paciente a sacar de la sala de espera.
+     * @param p es paciente a sacar de la sala de espera.
+     * @param contadorNroOrden es el numero de orden actual del sistema.
      * @return true si el paciente fue sacado, false si no estaba en la sala de espera.
      */
-    public boolean sacarPaciente(Paciente p)
+    public boolean sacarPaciente(Paciente p, int contadorNroOrden)
     {
         assert  p != null : "El paciente no puede ser nulo";
         boolean res = this.patio.sacarPaciente(p);
@@ -72,6 +73,9 @@ public class SalaDeEspera
                 res = true;
             }
         }
-        return res;
+        if(res && contadorNroOrden == p.getNroOrden())
+            return true;
+        else
+            return false;
     }
 }

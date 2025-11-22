@@ -51,6 +51,8 @@ public class Clinica
     private ArrayList<Asociado> asociados;
     private Ambulancia ambulancia;
     private DataAccessObject dao;
+    private static int sigNroOrdenAsignado;
+    private static int contadorNroOrden;
     /**
      * Constructor privado para el patrón Singleton
      *
@@ -94,6 +96,8 @@ public class Clinica
             instancia.asociados = new ArrayList<>();
             instancia.ambulancia = new Ambulancia();
             instancia.dao = new DataAccessObject();
+            sigNroOrdenAsignado = 0;
+            contadorNroOrden = 1;
         }
         return instancia;
     }
@@ -150,7 +154,8 @@ public class Clinica
     /**
      * Ingresa un paciente a la clínica.
      * En caso de que el paciente no esté registrado, lanza una excepción PacienteNoRegistradoException.
-     * Si el paciente está registrado, se procede a ingresarlo al sistema de ingreso
+     * Si el paciente está registrado, se procede a ingresarlo al sistema de ingreso y se
+     * le asigna una fecha de ingreso y un número de orden.
      *
      * @param paciente El paciente a ingresar.
      * @param fecha   La fecha de ingreso del paciente.
@@ -163,6 +168,7 @@ public class Clinica
         assert  fecha != null: "El fecha no puede ser nulo";
         if (pacientesRegistrados.containsKey(paciente.getNroHistoriaMedica())){
             paciente.setFechaIngreso(fecha);
+            paciente.setNroOrden(sigNroOrdenAsignado++);
             this.sistemaDeIngreso.ingresaPaciente(paciente);
         }
         else
@@ -231,7 +237,7 @@ public class Clinica
         assert medico != null: "El medico no puede ser nulo";
         assert  paciente != null: "El paciente no puede ser nulo";
 
-        if (this.sistemaDeIngreso.sacarPacienteSalaDeEspera(paciente))
+        if (this.sistemaDeIngreso.sacarPacienteSalaDeEspera(paciente, contadorNroOrden))
         {
             listaAtencion.add(paciente);
         } else

@@ -28,13 +28,13 @@ public class SistemaIngreso
 
     /**
      * Metodo publico boolean para sacar un paciente de la sala de espera.
-     * <b>pre:</b> paciente no debe ser nulo.
+     * <b>pre:</b> paciente no debe ser nulo y contadorNroOrden debe ser mayor a 0.
      * <b>post:</b> se saca el paciente de la sala de espera si existe en el patio o en la sala privada.
      * @param p Paciente a sacar de la sala de espera.
      * @return true si el paciente fue sacado, false si no estaba en la sala de espera.
      */
-    public boolean sacarPacienteSalaDeEspera(Paciente p){
+    public boolean sacarPacienteSalaDeEspera(Paciente p, int contadorNroOrden){
         assert  p != null : "La paciente no puede ser nulo";
-        return salaDeEspera.sacarPaciente(p);
+        return salaDeEspera.sacarPaciente(p, contadorNroOrden);
     }
 }
