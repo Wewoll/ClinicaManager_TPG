@@ -12,7 +12,6 @@ public abstract class Persona {
     private String dni;
     private Domicilio domicilio;
     private String telefono;
-    private int nroOrden;
 
     /**
      * Constructor de Persona
@@ -112,24 +111,5 @@ public abstract class Persona {
     public void setTelefono(String telefono) {
         assert telefono != null;
         this.telefono = telefono;
-    }
-
-
-    /**
-     *  Metodo publico int para preguntar cual es el numero de orden de la persona.
-     * @return nroOrden de la persona
-     */
-    public int getNroOrden() {
-        return nroOrden;
-    }
-
-    /**
-     * Metodo publico void para setear el numero de orden de la persona.
-     * <b>pre:</b> nroOrden no debe ser negativo.
-     * <b>post:</b> se setea el numero de orden de la persona.
-     * @param nroOrden
-     */
-    public void setNroOrden(int nroOrden) {
-        this.nroOrden = nroOrden;
     }
 }

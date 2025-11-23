@@ -8,7 +8,7 @@ import modelo.modeloDominio.personas.medico.Medico;
  * Contiene un atributo encapsulado de tipo Medico.
  * Implementa los métodos de la interfaz IMedico.
  */
-public abstract class DecoratorPosgrado implements IMedico {
+public abstract class   DecoratorPosgrado implements IMedico {
     Medico encapsulado;
 
     /**

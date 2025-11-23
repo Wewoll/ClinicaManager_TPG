@@ -16,6 +16,7 @@ public abstract class Paciente extends Persona
     private Habitacion habitacion;
     private boolean internado;
     private LocalDate fechaIngreso;
+    private int nroOrden;
 
     /**
      * Constructor de Paciente
@@ -167,6 +168,24 @@ public abstract class Paciente extends Persona
      * @return true si el paciente tiene prioridad con un paciente nino, false en caso contrario.
      */
     public abstract boolean prioridadConNino();
+
+    /**
+     *  Metodo publico int para preguntar cual es el numero de orden del paciente
+     * @return nroOrden de la persona
+     */
+    public int getNroOrden() {
+        return nroOrden;
+    }
+
+    /**
+     * Metodo publico void para setear el numero de orden del paciente
+     * <b>pre:</b> nroOrden no debe ser negativo.
+     * <b>post:</b> se setea el numero de orden de la persona.
+     * @param nroOrden
+     */
+    public void setNroOrden(int nroOrden) {
+        this.nroOrden = nroOrden;
+    }
 
     /**
      * Metodo toString sobreescrito para representar al paciente.
